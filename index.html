@@ -3,375 +3,568 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#0b1220">
+<meta name="theme-color" content="#ffffff">
 <title>Mi Día — Luis Pablo</title>
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#0b1220; --card:#141d30; --card2:#1a2540; --line:#243352;
-  --txt:#eef2f9; --dim:#8c9ab5; --lima:#c9f24b; --naranja:#ff9d5c; --azul:#5cb8ff;
-  --rojo:#ff6b6b; --ok:#4ade80;
+  --verde:#3fa63f; --verde2:#7dc242; --verdeOsc:#1e7a2e;
+  --azul:#1c8fd6; --azul2:#39b7f0; --azulOsc:#0f6cb4;
+  --bg:#f3f7fb; --card:#ffffff; --line:#e3eaf2;
+  --txt:#333a44; --dim:#7b8794;
+  --grad:linear-gradient(135deg,#7dc242,#3fa63f 40%,#1c8fd6 75%,#39b7f0);
+  --gradV:linear-gradient(135deg,#7dc242,#3fa63f);
+  --gradA:linear-gradient(135deg,#39b7f0,#1c8fd6);
+  --amar:#f5b03e; --rojo:#e8604c;
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;font-size:15px;
-  min-height:100vh;padding-bottom:84px;max-width:520px;margin:0 auto}
-h1,h2,h3,.sg{font-family:'Space Grotesk',sans-serif}
-header{padding:22px 18px 8px}
-header .fecha{color:var(--dim);font-size:13px;text-transform:capitalize}
-header h1{font-size:26px;letter-spacing:-.5px}
-header h1 em{font-style:normal;color:var(--lima)}
+  min-height:100vh;padding-bottom:88px;max-width:520px;margin:0 auto}
+h1,h2,h3{font-family:'Poppins',sans-serif}
+header{padding:20px 18px 6px;display:flex;align-items:center;gap:12px}
+header .logo{width:46px;height:46px;border-radius:50%;background:var(--grad);display:flex;
+  align-items:center;justify-content:center;font-size:23px;box-shadow:0 4px 12px rgba(28,143,214,.25)}
+header .fecha{color:var(--dim);font-size:12.5px;text-transform:capitalize}
+header h1{font-size:23px;letter-spacing:-.4px;line-height:1.15}
+header h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 .pag{display:none;padding:0 14px}
 .pag.activa{display:block;animation:ap .25s ease}
 @keyframes ap{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin:12px 0}
-.card h2{font-size:17px;margin-bottom:10px}
-.card h3{font-size:14px;color:var(--lima);margin:14px 0 6px;text-transform:uppercase;letter-spacing:.6px}
-.tag{display:inline-block;font-size:11px;font-weight:600;padding:3px 9px;border-radius:99px;
-  background:rgba(201,242,75,.12);color:var(--lima);margin-bottom:6px}
-.tag.nar{background:rgba(255,157,92,.12);color:var(--naranja)}
-.tag.az{background:rgba(92,184,255,.12);color:var(--azul)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin:12px 0;
+  box-shadow:0 2px 10px rgba(51,58,68,.05)}
+.card h2{font-size:17px;margin-bottom:8px}
+.card h3{font-size:13.5px;margin:16px 0 6px;text-transform:uppercase;letter-spacing:.6px;
+  background:var(--gradV);-webkit-background-clip:text;background-clip:text;color:transparent}
+.tag{display:inline-block;font-size:11px;font-weight:600;padding:3px 10px;border-radius:99px;
+  background:rgba(63,166,63,.12);color:var(--verdeOsc);margin-bottom:6px}
+.tag.az{background:rgba(28,143,214,.1);color:var(--azulOsc)}
+.tag.nar{background:rgba(245,176,62,.15);color:#b57912}
 /* AHORA */
-.ahora{background:linear-gradient(135deg,#18233d,#12203a);border:1px solid #2c3f66}
-.ahora .lbl{font-size:11px;letter-spacing:1.5px;color:var(--lima);font-weight:600}
-.ahora .act{font-size:20px;font-family:'Space Grotesk';margin:4px 0 2px}
-.ahora .hor{color:var(--dim);font-size:13px}
-.ahora .sig{margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);color:var(--dim);font-size:13px}
-.ahora .sig b{color:var(--txt);font-weight:600}
+.ahora{background:var(--grad);color:#fff;border:none}
+.ahora .lbl{font-size:11px;letter-spacing:1.5px;font-weight:700;opacity:.9}
+.ahora .act{font-size:19px;font-family:'Poppins';font-weight:600;margin:3px 0 2px}
+.ahora .hor{font-size:13px;opacity:.9}
+.ahora .sig{margin-top:10px;padding-top:9px;border-top:1px dashed rgba(255,255,255,.4);font-size:13px;opacity:.95}
 /* progreso */
-.prog{display:flex;align-items:center;gap:12px}
-.prog .barra{flex:1;height:8px;background:var(--card2);border-radius:99px;overflow:hidden}
-.prog .barra i{display:block;height:100%;background:linear-gradient(90deg,var(--lima),#8fdc3f);border-radius:99px;transition:width .3s}
-.prog span{font-size:13px;color:var(--dim);white-space:nowrap}
+.prog{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+.prog .barra{flex:1;height:10px;background:#e9eff5;border-radius:99px;overflow:hidden}
+.prog .barra i{display:block;height:100%;background:var(--grad);border-radius:99px;transition:width .3s}
+.prog span{font-size:13px;color:var(--dim);white-space:nowrap;font-weight:600}
+.pct{font-family:'Poppins';font-weight:700;font-size:26px;background:var(--grad);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
 /* checklist */
-.chk{display:flex;align-items:flex-start;gap:11px;padding:10px 4px;border-bottom:1px solid rgba(36,51,82,.5);cursor:pointer}
+.chk{display:flex;align-items:flex-start;gap:11px;padding:10px 4px;border-bottom:1px solid #eef3f8;cursor:pointer}
 .chk:last-child{border-bottom:none}
-.chk .box{width:22px;height:22px;min-width:22px;border-radius:7px;border:2px solid var(--line);
-  display:flex;align-items:center;justify-content:center;font-size:13px;color:#0b1220;margin-top:1px;transition:.15s}
-.chk.hecho .box{background:var(--lima);border-color:var(--lima)}
+.chk .emo{font-size:19px;width:26px;text-align:center;margin-top:1px}
+.chk .box{width:23px;height:23px;min-width:23px;border-radius:8px;border:2px solid #cfd9e3;
+  display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;margin-top:1px;transition:.15s}
+.chk.hecho .box{background:var(--gradV);border-color:var(--verde)}
 .chk .tx{flex:1}
-.chk .tx .h{font-size:12px;color:var(--dim);font-variant-numeric:tabular-nums}
+.chk .tx .h{font-size:11.5px;color:var(--azulOsc);font-weight:600;font-variant-numeric:tabular-nums}
 .chk.hecho .tx{opacity:.45;text-decoration:line-through}
-.chk.actual{background:rgba(201,242,75,.06);border-radius:10px;margin:0 -6px;padding:10px}
+.chk.actual{background:rgba(125,194,66,.1);border-radius:12px;margin:0 -6px;padding:10px}
+.chk.soloVer{cursor:default}
+.chk.soloVer .box{display:none}
 /* nav */
 nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;
-  background:rgba(13,19,33,.96);backdrop-filter:blur(12px);border-top:1px solid var(--line);
-  display:flex;z-index:50;padding-bottom:env(safe-area-inset-bottom)}
-nav button{flex:1;background:none;border:none;color:var(--dim);padding:10px 0 8px;font-size:10.5px;
-  font-family:'Inter';font-weight:600;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px}
-nav button .ic{font-size:21px;line-height:1}
-nav button.on{color:var(--lima)}
+  background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-top:1px solid var(--line);
+  display:flex;z-index:50;padding-bottom:env(safe-area-inset-bottom);box-shadow:0 -4px 16px rgba(51,58,68,.06)}
+nav button{flex:1;background:none;border:none;color:var(--dim);padding:9px 0 7px;font-size:10px;
+  font-family:'Inter';font-weight:600;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px}
+nav button .ic{font-size:21px;line-height:1;filter:grayscale(1);opacity:.55}
+nav button.on{color:var(--azulOsc)}
+nav button.on .ic{filter:none;opacity:1}
 /* chips */
 .chips{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 8px;scrollbar-width:none}
 .chips::-webkit-scrollbar{display:none}
-.chips button{background:var(--card);border:1px solid var(--line);color:var(--dim);padding:8px 14px;
-  border-radius:99px;font-size:13px;font-weight:600;white-space:nowrap;cursor:pointer;font-family:'Space Grotesk'}
-.chips button.on{background:var(--lima);color:#0b1220;border-color:var(--lima)}
+.chips button{background:#fff;border:1.5px solid var(--line);color:var(--dim);padding:8px 14px;
+  border-radius:99px;font-size:13px;font-weight:600;white-space:nowrap;cursor:pointer;font-family:'Poppins'}
+.chips button.on{background:var(--grad);color:#fff;border-color:transparent}
 /* ejercicio */
-.ej{border:1px solid var(--line);border-radius:13px;padding:12px;margin:9px 0;background:var(--card2)}
+.ej{border:1px solid var(--line);border-radius:14px;padding:12px;margin:9px 0;background:#fbfdff}
 .ej .top{display:flex;align-items:flex-start;gap:10px;cursor:pointer}
 .ej .nom{flex:1;font-weight:600;font-size:14.5px}
-.ej .ser{font-size:12.5px;color:var(--naranja);font-weight:600;white-space:nowrap;font-variant-numeric:tabular-nums}
+.ej .ser{font-size:12.5px;color:var(--verdeOsc);font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums}
 .ej.hecho .nom{opacity:.4;text-decoration:line-through}
-.ej.hecho .box{background:var(--lima);border-color:var(--lima)}
-.ej .box{width:21px;height:21px;min-width:21px;border-radius:6px;border:2px solid var(--line);
-  display:flex;align-items:center;justify-content:center;font-size:12px;color:#0b1220}
+.ej.hecho .box{background:var(--gradV);border-color:var(--verde)}
+.ej .box{width:22px;height:22px;min-width:22px;border-radius:7px;border:2px solid #cfd9e3;
+  display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff}
 .ej details{margin-top:8px}
 .ej summary{font-size:12px;color:var(--azul);cursor:pointer;font-weight:600;list-style:none}
 .ej summary::before{content:'▸ '}
 .ej details[open] summary::before{content:'▾ '}
 .ej details p{font-size:13px;color:var(--dim);line-height:1.55;margin-top:5px}
-.ej .disco summary{color:var(--naranja)}
-.nota{font-size:13px;color:var(--dim);line-height:1.6;background:var(--card2);
-  border-left:3px solid var(--naranja);border-radius:0 10px 10px 0;padding:10px 12px;margin:10px 0}
+.ej .disco summary{color:#b57912}
+.nota{font-size:13px;color:#5d6a77;line-height:1.6;background:#fff;border:1px solid var(--line);
+  border-left:4px solid var(--amar);border-radius:0 12px 12px 0;padding:10px 12px;margin:10px 0}
 .nota b{color:var(--txt)}
-.nota.verde{border-left-color:var(--lima)}
+.nota.verde{border-left-color:var(--verde)}
 .nota.azul{border-left-color:var(--azul)}
 /* comidas */
-.receta{padding:11px 4px;border-bottom:1px solid rgba(36,51,82,.5)}
+.receta{display:flex;gap:10px;padding:11px 4px;border-bottom:1px solid #eef3f8}
 .receta:last-child{border:none}
+.receta .emo{font-size:22px}
 .receta b{font-size:14.5px}
 .receta p{font-size:13px;color:var(--dim);margin-top:2px}
-.compra .chk .tx{font-size:14px}
-.btn{display:block;width:100%;background:var(--card2);border:1px solid var(--line);color:var(--txt);
-  padding:12px;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Space Grotesk';margin-top:10px}
-.btn.lima{background:var(--lima);color:#0b1220;border-color:var(--lima)}
+.btn{display:block;width:100%;background:#fff;border:1.5px solid var(--line);color:var(--txt);
+  padding:12px;border-radius:13px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Poppins';margin-top:10px}
+.btn.grad{background:var(--grad);color:#fff;border:none}
 a{color:var(--azul)}
-.horario-tabla .chk{cursor:default}
-.subt{color:var(--dim);font-size:13px;margin:2px 0 8px}
-.toast{position:fixed;bottom:96px;left:50%;transform:translateX(-50%);background:var(--card2);
-  border:1px solid var(--line);color:var(--txt);padding:10px 18px;border-radius:99px;font-size:13px;
-  z-index:99;opacity:0;transition:.3s;pointer-events:none;white-space:nowrap}
+.subt{color:var(--dim);font-size:13px;margin:2px 0 8px;line-height:1.5}
+.toast{position:fixed;bottom:96px;left:50%;transform:translateX(-50%);background:var(--txt);
+  color:#fff;padding:10px 18px;border-radius:99px;font-size:13px;
+  z-index:99;opacity:0;transition:.3s;pointer-events:none;white-space:nowrap;box-shadow:0 6px 20px rgba(0,0,0,.2)}
 .toast.ver{opacity:1}
+/* calendario */
+.calNav{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.calNav b{font-family:'Poppins';font-size:16px;text-transform:capitalize}
+.calNav button{background:#fff;border:1.5px solid var(--line);border-radius:10px;width:34px;height:34px;
+  font-size:16px;cursor:pointer;color:var(--azulOsc)}
+.calGrid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+.calGrid .dow{text-align:center;font-size:10.5px;font-weight:700;color:var(--dim);padding:4px 0}
+.calDia{aspect-ratio:1;border-radius:10px;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;font-size:12.5px;font-weight:600;background:#eef3f8;color:var(--dim)}
+.calDia small{font-size:8.5px;font-weight:700;margin-top:1px}
+.calDia.vacio{background:transparent}
+.calDia.hoy{outline:2.5px solid var(--azul);outline-offset:1px}
+.calDia.p100{background:var(--gradV);color:#fff}
+.calDia.p75{background:#a5d977;color:#1e4d12}
+.calDia.p50{background:#bfe3f7;color:#0f5586}
+.calDia.p25{background:#fde3b0;color:#8a5c0a}
+.calDia.p1{background:#f9cfc7;color:#93321f}
+.leyenda{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;font-size:11px;color:var(--dim)}
+.leyenda span{display:flex;align-items:center;gap:4px}
+.leyenda i{width:12px;height:12px;border-radius:4px;display:inline-block}
+/* semana */
+.semRow{display:flex;gap:6px;justify-content:space-between}
+.semDia{flex:1;text-align:center;padding:8px 2px;border-radius:11px;background:#eef3f8}
+.semDia .d{font-size:10.5px;font-weight:700;color:var(--dim)}
+.semDia .p{font-size:12.5px;font-weight:700;font-family:'Poppins';margin-top:2px}
+/* mejora mensual */
+.mesBar{margin:9px 0}
+.mesBar .lbl{display:flex;justify-content:space-between;font-size:12.5px;font-weight:600;margin-bottom:4px}
+.mesBar .lbl span:last-child{color:var(--azulOsc)}
+.mesBar .barra{height:14px;background:#e9eff5;border-radius:99px;overflow:hidden}
+.mesBar .barra i{display:block;height:100%;background:var(--grad);border-radius:99px}
 </style>
 </head>
 <body>
 
 <header>
-  <div class="fecha" id="fechaHoy"></div>
-  <h1 id="saludo">Mi <em>Día</em></h1>
+  <div class="logo">⚡</div>
+  <div>
+    <div class="fecha" id="fechaHoy"></div>
+    <h1>Mi <em>Día</em></h1>
+  </div>
 </header>
 
-<!-- ============ HOY ============ -->
-<div class="pag activa" id="pag-hoy">
+<!-- ============ RUTINA DIARIA ============ -->
+<div class="pag activa" id="pag-rutina">
   <div class="card ahora" id="cardAhora"></div>
-  <div class="card" id="cardBanner" style="display:none"></div>
+  <div class="chips" id="chipsRutina"></div>
   <div class="card">
-    <h2>Checklist de hoy</h2>
-    <div class="prog" style="margin-bottom:8px">
-      <div class="barra"><i id="progBar" style="width:0%"></i></div>
-      <span id="progTxt">0/0</span>
-    </div>
-    <div id="listaHoy"></div>
+    <div class="prog"><div class="barra"><i id="progBar" style="width:0%"></i></div><span id="progTxt">0%</span></div>
+    <div class="subt" id="subtRutina"></div>
+    <div id="contRutina"></div>
   </div>
-  <div class="card">
-    <h2>Entreno de hoy</h2>
-    <div id="resumenEntreno"></div>
-    <button class="btn lima" onclick="irEntrenoHoy()">Ver rutina completa →</button>
-  </div>
-</div>
-
-<!-- ============ HORARIO ============ -->
-<div class="pag" id="pag-horario">
-  <div class="card">
-    <span class="tag">Lunes a jueves — día tipo con doble entreno</span>
-    <h2>Mañana</h2>
-    <div class="horario-tabla" id="tablaManana"></div>
-    <h2 style="margin-top:16px">Tarde / Noche</h2>
-    <div class="horario-tabla" id="tablaTarde"></div>
-  </div>
-  <div class="nota verde"><b>Nota sobre el sueño:</b> con esta versión duermes 8h00 (10:00pm–6:00am), 10 minutos menos que antes por el espacio de lectura a las 6:00am. Es un margen justo, no hay de sobra — conviene ser estricto con la hora de dormir (10:00pm) y no correrla más tarde.</div>
-  <div class="nota"><b>Excepción viernes (torneo Futeca Cayalá):</b> ese día no hay tareas de entreno personal ni entreno de equipo. El bloque de 4:40–8:00pm se reemplaza por el torneo. Ajusta comida e hidratación según los horarios de los partidos ese día.</div>
-  <div class="nota azul"><b>Días de partido de liga</b> (domingo o a veces viernes): revisa con más cuidado el snack pre-partido y la hidratación — no es lo mismo que un día de entreno normal.</div>
-</div>
-
-<!-- ============ ENTRENO ============ -->
-<div class="pag" id="pag-entreno">
-  <div class="chips" id="chipsDias"></div>
-  <div id="contEntreno"></div>
-  <div class="card">
-    <h2>Descansos de referencia</h2>
-    <div class="subt">Entre series y ejercicios:</div>
-    <div class="nota verde" style="margin:6px 0">• <b>Fuerza</b> (mancuernas o peso corporal): 60 segundos<br>• <b>Core</b> (plancha, dead bug, etc.): 30–45 segundos<br>• <b>Pliometría y sprints</b>: 60–90 segundos<br>• <b>Técnica y movilidad</b>: descanso libre</div>
-    <div class="nota azul"><b>Técnica de balón fuera de estos bloques:</b> martes, jueves y sábado — un rato practicando técnica libre. Lunes, miércoles y viernes — 10 min de toques a la pared y control orientado.</div>
-    <div class="nota"><b>Movilidad de referencia</b> (video guardado): <a href="https://vm.tiktok.com/ZMBtjWAcw/" target="_blank" rel="noopener">ver en TikTok</a></div>
-  </div>
-  <div class="card">
-    <h2>Entrenamiento cognitivo <span class="tag az" style="margin-left:4px">estilo Olise</span></h2>
-    <div class="subt">Visión periférica y toma de decisión. No es tiempo extra — se integra dentro de los 10–15 min de técnica que ya tienes programados martes, jueves y sábado. Entrena: velocidad de procesamiento, visión periférica, toma de decisión bajo presión y ejecución técnica simultánea (dual-task).</div>
-    <div class="ej"><div class="top" style="cursor:default"><div class="nom">Nivel base (solo) — Toque y captura</div><div class="ser">3×1 min</div></div>
-      <details><summary>Cómo se hace</summary><p>Conduce el balón con los pies a ritmo medio. Al mismo tiempo, lanza una pelota pequeña (de tenis) hacia arriba con una mano y atrápala con la misma mano sin dejar de conducir. Enfoca la mirada en la pelota pequeña, no en el balón — el balón se controla por sensación de pie, no por la vista.</p></details></div>
-    <div class="ej"><div class="top" style="cursor:default"><div class="nom">Nivel intermedio (solo, con pared) — Pared + pelota</div><div class="ser">3×1 min</div></div>
-      <details><summary>Cómo se hace</summary><p>Frente a una pared, golpea el balón contra ella con el pie mientras lanzas y atrapas la pelota pequeña con la mano contraria al pie que golpea. Alterna el pie de golpeo cada 30 segundos.</p></details></div>
-    <div class="ej"><div class="top" style="cursor:default"><div class="nom">Nivel avanzado (con compañero) — Conducción + lanzamiento aleatorio</div><div class="ser">—</div></div>
-      <details><summary>Cómo se hace</summary><p>Un compañero te lanza la pelota pequeña en momentos aleatorios mientras conduces el balón en un espacio reducido evitando conos u obstáculos. Debes atrapar la pelota sin perder el control del balón ni chocar con los obstáculos. Esto simula la doble atención real de un partido: el balón y lo que pasa alrededor.</p></details></div>
-  </div>
-  <div class="card">
-    <h2>Rutina mental nocturna <span class="tag" style="margin-left:4px">9:30–9:45pm</span></h2>
-    <div class="subt">10–15 min, entre la cena y dormir. El objetivo es cortar el modo acelerado del día y entrenar la cabeza igual que el cuerpo.</div>
-    <div class="ej"><div class="top" style="cursor:default"><div class="nom">1. Respiración de caja</div><div class="ser">3 min</div></div>
-      <details><summary>Cómo se hace</summary><p>Inhala 4 segundos, sostén 4 segundos, exhala 4 segundos, sostén 4 segundos con los pulmones vacíos. Repite el ciclo durante 3 minutos.</p></details></div>
-    <div class="ej"><div class="top" style="cursor:default"><div class="nom">2. Visualización</div><div class="ser">5 min</div></div>
-      <details><summary>Cómo se hace</summary><p>Cierra los ojos y visualiza una jugada específica saliendo perfecta: un regate, un pase, una definición. Siente el movimiento como si ya estuviera pasando, no como un deseo.</p></details></div>
-    <div class="ej"><div class="top" style="cursor:default"><div class="nom">3. Registro breve</div><div class="ser">5 min</div></div>
-      <details><summary>Cómo se hace</summary><p>Escribe 1 cosa que hiciste bien hoy (en cancha o fuera) y 1 cosa concreta que vas a mejorar mañana. Dos líneas, no un diario largo. (Libreta o notas del teléfono.)</p></details></div>
-  </div>
-  <div class="nota"><b>Nota — días de torneo (ej. Futeca Cayalá):</b> los días que juegas torneo no haces la sesión personal de ese día ni gimnasio de equipo — vas directo al torneo. Si el torneo implica varios partidos seguidos, prioriza hidratación y algo de energía rápida (fruta, dátiles) entre partidos.</div>
+  <div id="notasRutina"></div>
 </div>
 
 <!-- ============ COMIDAS ============ -->
 <div class="pag" id="pag-comidas">
   <div class="card">
-    <span class="tag">5–10 min</span>
-    <h2>Desayunos rápidos</h2>
+    <span class="tag">⏱ 5–10 min</span>
+    <h2>🍳 Desayunos rápidos</h2>
     <div id="listaDesayunos"></div>
-    <div class="nota verde" style="margin-bottom:0">Rota entre estos cinco y ya tienes variedad toda la semana.</div>
+    <div class="nota verde" style="margin-bottom:0">🔁 Rota entre estos cinco y ya tienes variedad toda la semana.</div>
   </div>
   <div class="card">
-    <span class="tag nar">colegio o entre comidas</span>
-    <h2>Ideas de refacción</h2>
+    <span class="tag nar">🎒 colegio o entre comidas</span>
+    <h2>🍎 Ideas de refacción</h2>
     <div id="listaRefacciones"></div>
   </div>
   <div class="card">
-    <span class="tag az">poco tiempo, buena calidad</span>
-    <h2>Cenas rápidas</h2>
+    <span class="tag az">🌙 poco tiempo, buena calidad</span>
+    <h2>🥗 Cenas rápidas</h2>
     <div class="subt">La clave de la cena: proteína + algo ligero, sin freír mucho ni cocinar elaborado.</div>
     <div id="listaCenas"></div>
   </div>
   <div class="card compra">
-    <h2>Lista de compra</h2>
+    <h2>🛒 Lista de compra</h2>
     <div id="listaCompra"></div>
-    <button class="btn" onclick="resetCompra()">Reiniciar lista</button>
+    <button class="btn" onclick="resetCompra()">🔄 Reiniciar lista</button>
   </div>
 </div>
 
-<!-- ============ PERFIL/EXTRA en nav no: 4 tabs ============ -->
+<!-- ============ EJERCICIO ============ -->
+<div class="pag" id="pag-ejercicio">
+  <div class="chips" id="chipsDias"></div>
+  <div id="contEntreno"></div>
+  <div class="card">
+    <h2>⏸️ Descansos de referencia</h2>
+    <div class="nota verde" style="margin:6px 0">💪 <b>Fuerza</b> (mancuernas o peso corporal): 60 segundos<br>🧱 <b>Core</b> (plancha, dead bug, etc.): 30–45 segundos<br>⚡ <b>Pliometría y sprints</b>: 60–90 segundos<br>🤸 <b>Técnica y movilidad</b>: descanso libre</div>
+    <div class="nota azul">⚽ <b>Técnica de balón fuera de estos bloques:</b> martes, jueves y sábado — un rato practicando técnica libre. Lunes, miércoles y viernes — 10 min de toques a la pared y control orientado.</div>
+    <div class="nota">📹 <b>Movilidad de referencia</b> (video guardado): <a href="https://vm.tiktok.com/ZMBtjWAcw/" target="_blank" rel="noopener">ver en TikTok</a></div>
+  </div>
+  <div class="nota">🏆 <b>Nota — días de torneo (ej. Futeca Cayalá):</b> los días que juegas torneo no haces la sesión personal de ese día ni gimnasio de equipo — vas directo al torneo. Si el torneo implica varios partidos seguidos, prioriza hidratación y algo de energía rápida (fruta, dátiles) entre partidos.</div>
+</div>
+
+<!-- ============ MENTAL ============ -->
+<div class="pag" id="pag-mental">
+  <div class="card">
+    <span class="tag az">🎯 estilo Olise</span>
+    <h2>🧠 Entrenamiento cognitivo</h2>
+    <div class="subt"><b>Qué se entrena:</b> velocidad de procesamiento, visión periférica, toma de decisión bajo presión y ejecución técnica simultánea (dual-task).</div>
+    <div id="chkCognitivo"></div>
+    <h3>📆 Cuándo hacerlo</h3>
+    <div class="subt"><b>Frecuencia recomendada: 3–4 veces por semana.</b> Es suficiente repetición para generar adaptación real en velocidad de procesamiento, sin sumar carga mental a una semana que ya es físicamente exigente. Más de eso no acelera el progreso — la ganancia está en la consistencia, no en el volumen.</div>
+    <div class="nota verde">📌 <b>Días y momentos exactos:</b><br>• <b>Lunes:</b> 6:00–6:15pm, en el hueco después del primer entreno personal y antes de alistarte para el entreno de equipo (que ese día empieza a las 7:00).<br>• <b>Martes y jueves:</b> dentro de los minutos de técnica que ya tienes programados en el primer entreno — no es tiempo extra, es una variación de esos mismos minutos.<br>• <b>Sábado:</b> dentro del bloque de técnica de tu sesión de activación ligera.</div>
+    <div class="nota">⚠️ <b>Miércoles, viernes y domingo — mejor no meterlo ahí:</b> miércoles es tu día de tren superior sin bloque técnico, viernes ya tienes entreno de tiros a portería más tareas y bajo esperando, y domingo es tu único día real de recuperación. Sumar carga cognitiva en esos días resta más de lo que aporta.</div>
+    <h3>🎒 Qué necesitas</h3>
+    <div class="subt">🎾 Pelota de tenis (o una pelota pequeña similar de goma)<br>⚽ Balón de fútbol<br>🧱 Pared libre de obstáculos (para el nivel intermedio)<br>🔶 4–6 conos para el nivel avanzado (puedes sustituir con botellas o zapatos)<br>🤝 Un compañero de entrenamiento (opcional, solo para el nivel avanzado)</div>
+    <h3>🏃 Ejercicios</h3>
+    <div class="ej"><div class="top" style="cursor:default"><div class="nom">🟢 Nivel base (solo) — Toque y captura</div><div class="ser">3×1 min</div></div>
+      <details><summary>Cómo se hace</summary><p>Conduce el balón con los pies a ritmo medio. Al mismo tiempo, lanza una pelota pequeña (de tenis) hacia arriba con una mano y atrápala con la misma mano sin dejar de conducir. Enfoca la mirada en la pelota pequeña, no en el balón — el balón se controla por sensación de pie, no por la vista.</p></details></div>
+    <div class="ej"><div class="top" style="cursor:default"><div class="nom">🔵 Nivel intermedio (solo, con pared) — Pared + pelota</div><div class="ser">3×1 min</div></div>
+      <details><summary>Cómo se hace</summary><p>Frente a una pared, golpea el balón contra ella con el pie mientras lanzas y atrapas la pelota pequeña con la mano contraria al pie que golpea. Alterna el pie de golpeo cada 30 segundos.</p></details></div>
+    <div class="ej"><div class="top" style="cursor:default"><div class="nom">🟣 Nivel avanzado (con compañero) — Conducción + lanzamiento aleatorio</div><div class="ser">—</div></div>
+      <details><summary>Cómo se hace</summary><p>Un compañero te lanza la pelota pequeña en momentos aleatorios mientras conduces el balón en un espacio reducido evitando conos u obstáculos. Debes atrapar la pelota sin perder el control del balón ni chocar con los obstáculos. Esto simula la doble atención real de un partido: el balón y lo que pasa alrededor.</p></details></div>
+  </div>
+  <div class="card">
+    <span class="tag">🌙 9:10–9:25pm · entre la cena y dormir</span>
+    <h2>😴 Rutina mental nocturna</h2>
+    <div class="subt">10–15 min. El objetivo es cortar el modo acelerado del día y entrenar la cabeza igual que el cuerpo. Marca cada paso cuando lo hagas:</div>
+    <div id="chkMental"></div>
+  </div>
+</div>
+
+<!-- ============ CALENDARIO ============ -->
+<div class="pag" id="pag-calendario">
+  <div class="card" style="text-align:center">
+    <div class="subt" style="margin-bottom:2px">Progreso de hoy</div>
+    <div class="pct" id="pctHoy">0%</div>
+    <div class="subt" id="detHoy"></div>
+  </div>
+  <div class="card">
+    <h2>📆 Esta semana</h2>
+    <div class="semRow" id="semRow"></div>
+    <div class="subt" style="margin-top:8px">Cada día se reinicia el checklist, pero tu % queda guardado aquí. La semana empieza de nuevo cada lunes. 💪</div>
+  </div>
+  <div class="card">
+    <div class="calNav">
+      <button onclick="moverMes(-1)">‹</button>
+      <b id="calTitulo"></b>
+      <button onclick="moverMes(1)">›</button>
+    </div>
+    <div class="calGrid" id="calGrid"></div>
+    <div class="leyenda">
+      <span><i style="background:var(--verde)"></i>90–100%</span>
+      <span><i style="background:#a5d977"></i>70–89%</span>
+      <span><i style="background:#bfe3f7"></i>40–69%</span>
+      <span><i style="background:#fde3b0"></i>1–39%</span>
+      <span><i style="background:#eef3f8"></i>sin datos</span>
+    </div>
+  </div>
+  <div class="card">
+    <h2>📈 Mejora de mí mismo</h2>
+    <div class="subt">Promedio de cumplimiento por mes — aquí ves cómo vas mejorando con el tiempo.</div>
+    <div id="mejoraMeses"></div>
+  </div>
+</div>
+
 <nav>
-  <button data-pag="hoy" class="on"><span class="ic">⚡</span>Hoy</button>
-  <button data-pag="horario"><span class="ic">🕐</span>Horario</button>
-  <button data-pag="entreno"><span class="ic">🏋️</span>Entreno</button>
-  <button data-pag="comidas"><span class="ic">🍳</span>Comidas</button>
+  <button data-pag="rutina" class="on"><span class="ic">📋</span>Rutina</button>
+  <button data-pag="comidas"><span class="ic">🍽️</span>Comidas</button>
+  <button data-pag="ejercicio"><span class="ic">🏋️</span>Ejercicio</button>
+  <button data-pag="mental"><span class="ic">🧠</span>Mental</button>
+  <button data-pag="calendario"><span class="ic">📆</span>Calendario</button>
 </nav>
 <div class="toast" id="toast"></div>
 
 <script>
-/* ================= DATOS: HORARIO (lunes a jueves) ================= */
-const MANANA=[
- {hora:'6:00',t:'Levantarme',ini:360,fin:360},
- {hora:'6:00–6:10',t:'Leer libro',ini:360,fin:370},
- {hora:'6:10–6:15',t:'Meditar',ini:370,fin:375},
- {hora:'6:15–6:30',t:'Desayunar',ini:375,fin:390},
- {hora:'6:30–6:45',t:'Higiene (lavarme cara, cepillarme, cambiarme, perfume, crema)',ini:390,fin:405},
- {hora:'6:45–7:00',t:'Traslado al colegio',ini:405,fin:420},
- {hora:'7:00',t:'Llego al colegio',ini:420,fin:450},
- {hora:'7:30',t:'Empiezo clases',ini:450,fin:855}
-];
-const TARDE=[
- {hora:'2:15',t:'Salgo del colegio',ini:855,fin:870},
- {hora:'2:30–3:00',t:'Almuerzo',ini:870,fin:900},
- {hora:'3:00–4:00',t:'Tareas (bloque 1)',ini:900,fin:960},
- {hora:'4:00–4:10',t:'Snack pre-entreno: yogurt griego + miel',ini:960,fin:970},
- {hora:'4:10–4:40',t:'Transición / cambiarme / traslado a la cancha',ini:970,fin:1000},
- {hora:'4:40–6:30',t:'Primer entreno (personal — ver Entreno; martes/miércoles/jueves incluye gimnasio de equipo)',ini:1000,fin:1110,torneo:true},
- {hora:'6:30–8:00',t:'Segundo entreno (equipo: partido, táctica o técnico según el día)',ini:1110,fin:1200,torneo:true},
- {hora:'8:00',t:'Termina entreno',ini:1200,fin:1225},
- {hora:'8:25',t:'Llego a casa',ini:1225,fin:1240},
- {hora:'8:40–9:00',t:'Ceno y tomo kefir',ini:1240,fin:1260},
- {hora:'9:00–9:15',t:'Me baño',ini:1260,fin:1275},
- {hora:'9:15–9:30',t:'Termino tarea (bloque 2, si queda algo pendiente)',ini:1275,fin:1290},
- {hora:'9:30–9:45',t:'Rutina mental nocturna (respiración + visualización + registro breve)',ini:1290,fin:1305},
- {hora:'9:45–10:00',t:'Preparo todo para mañana / desconecto pantallas',ini:1305,fin:1320},
- {hora:'10:00',t:'Duermo',ini:1320,fin:1320}
-];
+/* ================= DATOS: RUTINA DIARIA (semana completa) ================= */
+/* item = [emoji, hora, texto, ini, fin] (minutos desde medianoche) */
+const MAN_LV=[
+ ['⏰','6:00','Levantarme',360,360],
+ ['📖','6:00–6:10','Leer libro',360,370],
+ ['🧘','6:10–6:15','Meditar',370,375],
+ ['🍳','6:15–6:30','Desayunar',375,390],
+ ['🪥','6:30–6:45','Higiene (lavarme cara, cepillarme, cambiarme, perfume, crema)',390,405],
+ ['🚌','6:45–7:00','Traslado al colegio',405,420],
+ ['🏫','7:00','Llego al colegio',420,450],
+ ['📚','7:30','Empiezo clases',450,855]];
+const TARDE_LUN=[
+ ['🎒','2:15','Salgo del colegio',855,870],
+ ['🍽️','2:30–3:00','Almuerzo',870,900],
+ ['✏️','3:00–4:00','Tareas (bloque 1)',900,960],
+ ['🥣','4:00–4:10','Snack pre-entreno: yogurt griego + miel',960,970],
+ ['👕','4:10–4:40','Transición / cambiarme / traslado a la cancha',970,1000],
+ ['⚽','4:40–6:00','Primer entreno (personal — ver Ejercicio)',1000,1080],
+ ['🧠','6:00–6:15','Entrenamiento cognitivo — visión periférica (ver Mental)',1080,1095],
+ ['💧','6:15–6:30','Descanso / hidratación',1095,1110],
+ ['👟','6:30–6:45','Cambiarme y alistarme para el entreno de equipo',1110,1125],
+ ['🚶','6:45','Salgo hacia el entreno',1125,1140],
+ ['🥅','7:00–8:00','Segundo entreno (equipo)',1140,1200],
+ ['✅','8:00','Termina entreno',1200,1225],
+ ['🏠','8:25','Llego a casa',1225,1225],
+ ['🥛','8:25–8:40','Ceno + kéfir',1225,1240],
+ ['🚿','8:40–8:55','Me baño',1240,1255],
+ ['📓','8:55–9:10','Termino tarea (bloque 2, si queda algo pendiente)',1255,1270],
+ ['🌙','9:10–9:25','Rutina mental nocturna (respiración + visualización + registro breve)',1270,1285],
+ ['🎒','9:25–9:40','Preparo todo para mañana / desconecto pantallas',1285,1300],
+ ['😌','9:40–10:00','Tiempo libre / relajarte',1300,1320],
+ ['😴','10:00','Duermo',1320,1320]];
+const TARDE_MJ=[
+ ['🎒','2:15','Salgo del colegio',855,870],
+ ['🍽️','2:30–3:00','Almuerzo',870,900],
+ ['✏️','3:00–4:00','Tareas (bloque 1)',900,960],
+ ['🥣','4:00–4:10','Snack pre-entreno: yogurt griego + miel',960,970],
+ ['👕','4:10–4:40','Transición / cambiarme / traslado a la cancha',970,1000],
+ ['⚽','4:40–6:00','Primer entreno (personal + gimnasio de equipo; martes y jueves incluye 10–15 min de entrenamiento cognitivo dentro del bloque de técnica)',1000,1080],
+ ['💧','6:00–6:30','Transición entre entrenos (hidratación; si sientes que te faltan piernas, fruta o dátiles)',1080,1110],
+ ['🥅','6:30–8:00','Segundo entreno (equipo: partido, táctica o técnico según el día)',1110,1200],
+ ['✅','8:00','Termina entreno',1200,1225],
+ ['🏠','8:25','Llego a casa',1225,1225],
+ ['🥛','8:25–8:40','Ceno + kéfir',1225,1240],
+ ['🚿','8:40–8:55','Me baño',1240,1255],
+ ['📓','8:55–9:10','Termino tarea (bloque 2, si queda algo pendiente)',1255,1270],
+ ['🌙','9:10–9:25','Rutina mental nocturna (respiración + visualización + registro breve)',1270,1285],
+ ['🎒','9:25–9:40','Preparo todo para mañana / desconecto pantallas',1285,1300],
+ ['😌','9:40–10:00','Tiempo libre / relajarte',1300,1320],
+ ['😴','10:00','Duermo',1320,1320]];
+const TARDE_VIE=[
+ ['🎒','2:15','Salgo del colegio',855,870],
+ ['🍽️','2:30–3:00','Almuerzo',870,900],
+ ['✏️','3:00–4:00','Tareas (bloque 1)',900,960],
+ ['📚','4:00–4:30','Tareas adicionales si tienes pendiente',960,990],
+ ['🎸','4:30–5:00','Tocar el bajo',990,1020],
+ ['🥣','5:00–5:10','Snack pre-entreno: yogurt griego + miel',1020,1030],
+ ['👕','5:10–5:30','Transición / cambiarme / traslado a la cancha',1030,1050],
+ ['⚽','5:30–8:00','Entreno',1050,1200],
+ ['✅','8:00','Termina entreno',1200,1205],
+ ['🏠','8:05','Llego a casa (entrenas en el condominio, el traslado es corto)',1205,1205],
+ ['🥛','8:05–8:35','Ceno + kéfir',1205,1235],
+ ['🚿','8:40–8:55','Me baño',1240,1255],
+ ['🌙','8:55–9:10','Rutina mental nocturna (respiración + visualización + registro breve)',1255,1270],
+ ['🎶','9:10–10:00','Leer / tocar el bajo / relajarte — tú eliges',1270,1320],
+ ['😴','10:00','Duermo',1320,1320]];
+const DIA_SAB=[
+ ['⏰','6:45','Levantarme',405,405],
+ ['🍳','6:45–7:10','Desayunar',405,430],
+ ['👕','7:10–7:30','Alistarme',430,450],
+ ['🚗','7:30–8:00','Traslado a clase de música',450,480],
+ ['🎵','8:00–10:00','Clase de música',480,600],
+ ['🚗','10:00–10:30','Traslado a casa',600,630],
+ ['🍽️','10:30–11:00','Almuerzo',630,660],
+ ['⚽','11:00–11:45','Entreno personal (activación + técnica; incluye 10–15 min de entrenamiento cognitivo Olise)',660,705],
+ ['🌤️','11:45','Empieza la tarde libre',705,705],
+ ['🎸','tarde libre','Tocar el bajo',705,1200],
+ ['📚','tarde libre','Tarea o Progrentis',705,1200],
+ ['🥛','8:00–8:20','Ceno + kéfir',1200,1220],
+ ['🚿','8:40–8:55','Me baño',1240,1255],
+ ['🌙','8:55–9:10','Rutina mental nocturna (respiración + visualización + registro breve)',1255,1270],
+ ['😌','9:10–10:00','Tiempo libre',1270,1320],
+ ['😴','10:00','Duermo',1320,1320]];
+const DIA_DOM=[
+ ['⏰','7:00','Levantarme',420,420],
+ ['🍳','7:00–7:30','Desayunar',420,450],
+ ['😌','7:30–9:00','Tiempo libre / calentamiento si tienes partido',450,540],
+ ['⚽','9:00–11:00','Partido (si tienes) — horario aproximado, ajusta según la liga',540,660],
+ ['🍽️','11:00–12:00','Alistarme / almuerzo ligero si hay tiempo',660,720],
+ ['🚗','12:00–12:30','Traslado a la iglesia',720,750],
+ ['⛪','12:30–1:30','Iglesia',750,810],
+ ['👨‍👩‍👦','1:30–4:00','Tiempo con la familia (variable) — regresas ~4:00pm',810,960],
+ ['😌','4:00–4:30','Descansar al llegar',960,990],
+ ['🎸','4:30–5:00','Tocar el bajo',990,1020],
+ ['📚','5:00–5:45','Tareas o proyectos pendientes / Progrentis',1020,1065],
+ ['🤸','5:45–6:15','Movilidad de recuperación (caminata suave, movilidad, respiración)',1065,1095],
+ ['🥛','6:15–6:45','Ceno + kéfir',1095,1125],
+ ['😌','6:45–8:40','Descansar / tiempo libre',1125,1240],
+ ['🚿','8:40–8:55','Me baño',1240,1255],
+ ['🌙','8:55–9:10','Rutina mental nocturna (respiración + visualización + registro breve)',1255,1270],
+ ['😌','9:10–9:30','Tiempo libre',1270,1290],
+ ['🎒','9:30–10:00','Preparar todo para la semana / desconectar pantallas',1290,1320],
+ ['😴','10:00','Duermo',1320,1320]];
 
-/* ================= DATOS: ENTRENAMIENTO ================= */
+const RUTINA={
+ lun:{sec:[['🌅 Mañana',MAN_LV],['🌆 Tarde / Noche',TARDE_LUN]]},
+ mar:{sec:[['🌅 Mañana',MAN_LV],['🌆 Tarde / Noche',TARDE_MJ]]},
+ mie:{sec:[['🌅 Mañana',MAN_LV],['🌆 Tarde / Noche',TARDE_MJ]]},
+ jue:{sec:[['🌅 Mañana',MAN_LV],['🌆 Tarde / Noche',TARDE_MJ]]},
+ vie:{sec:[['🌅 Mañana',MAN_LV],['🌆 Tarde / Noche',TARDE_VIE]]},
+ sab:{sec:[['🗓️ Día completo',DIA_SAB]]},
+ dom:{sec:[['🗓️ Día completo',DIA_DOM]]}
+};
+const NOTAS={
+ lun:['<div class="nota verde">😴 <b>Nota sobre el sueño:</b> duermes 8h00 (10:00pm–6:00am), 10 minutos menos que antes por el espacio de lectura a las 6:00am. Es un margen justo — sé estricto con la hora de dormir (10:00pm) y no la corras más tarde.</div>'],
+ mar:[],mie:[],jue:[],
+ vie:['<div class="nota azul">🎵 <b>Recordatorio:</b> mañana (sábado) tienes clase de música de 8:00 a 10:00am — duerme a tiempo para poder desayunar con calma antes de salir.</div>',
+      '<div class="nota">🏆 <b>Excepción — días de torneo (ej. Futeca Cayalá):</b> toda la tarde desde la salida del colegio se reemplaza por el torneo. Prioriza hidratación y energía rápida (fruta, dátiles) entre partidos.</div>'],
+ sab:['<div class="nota verde">🌤️ <b>Tarde libre desde las 11:45</b> — recordatorios: tocar el bajo 🎸 y tarea o Progrentis 📚 (están en tu checklist).</div>'],
+ dom:['<div class="nota azul">☀️ Si no tienes partido esa semana, aprovecha la mañana (7:30–12:00) con más calma: desayuno tranquilo, descanso extra o algo de movilidad adicional.</div>']
+};
+NOTAS.mar=NOTAS.lun;NOTAS.mie=NOTAS.lun;NOTAS.jue=NOTAS.lun;
+
+/* ================= DATOS: EJERCICIO ================= */
 const ENTRENO={
-lun:{titulo:'Fuerza completa',sub:'Piernas + Core intenso · Aprovechamos que no hay gimnasio de equipo para meter buena carga',tiempo:'55–60 min',bloques:[
- {b:'Piernas (fuerza + control)',ej:[
+lun:{titulo:'Fuerza completa',emoji:'💪',sub:'Piernas + Core intenso · Aprovechamos que no hay gimnasio de equipo para meter buena carga',tiempo:'55–60 min',bloques:[
+ {b:'🦵 Piernas (fuerza + control)',ej:[
   {n:'Sentadillas a una pierna (pistol squats)',s:'4×8 por pierna',c:'Parado en una pierna, brazos extendidos al frente para balance, baja el glúteo hacia el talón manteniendo el pecho arriba y la rodilla alineada con el pie. La otra pierna se extiende al frente sin tocar el piso. Sube empujando con el talón.',d:'Sostén el disco pegado al pecho (estilo goblet) para añadir resistencia una vez que domines el movimiento sin peso.'},
   {n:'Zancadas inversas con mancuerna (controlando la bajada)',s:'3×10 por pierna',c:'Un paso largo hacia atrás, baja la rodilla trasera casi hasta tocar el piso manteniendo el torso recto, controla 2-3 segundos en la bajada. Empuja con el talón delantero para volver arriba.',d:'Sostén el disco con ambas manos frente al pecho en vez de las mancuernas.'},
   {n:'Peso muerto a una pierna con mancuerna',s:'3×8 por pierna',c:'Parado en una pierna con ligera flexión de rodilla, inclina el torso hacia adelante mientras la pierna libre se eleva atrás en línea recta con la espalda. Baja el peso cerca del piso y regresa controlando el equilibrio.',d:'Sostén el disco con ambas manos frente al cuerpo en vez de la mancuerna.'},
   {n:'Sentadilla con pausa de 3 segundos abajo (con mancuernas)',s:'3×10',c:'Baja a sentadilla completa manteniendo el pecho arriba y las rodillas alineadas con los pies, pausa 3 segundos abajo sin perder tensión, sube explosivo pero controlado.',d:'El disco tipo goblet (pegado al pecho) es una alternativa natural y muy efectiva para este ejercicio.'}]},
- {b:'Core (estabilidad + fuerza)',ej:[
+ {b:'🧱 Core (estabilidad + fuerza)',ej:[
   {n:'Plancha frontal (isométrica)',s:'3×45-50s',c:'Apoyo en antebrazos y puntas de pie, cuerpo en línea recta de cabeza a talones, abdomen y glúteos contraídos, sin dejar caer la cadera.'},
   {n:'Bird Dog con pausa de 2 segundos',s:'3×10 por lado',c:'En cuatro apoyos, extiende brazo y pierna contrarios al mismo tiempo, mantén cadera y hombros nivelados, pausa 2 segundos en extensión completa antes de regresar.'},
   {n:'Elevaciones de piernas lentas',s:'3×15',c:'Acostado boca arriba, manos bajo la cadera para proteger la zona lumbar, sube las piernas rectas hasta 90°, baja lento y controlado sin tocar el piso entre repeticiones.'},
   {n:'Dead bug con mancuerna',s:'3×20',c:'Boca arriba, rodillas y brazos elevados en 90°, extiende brazo y pierna opuestos hacia el piso sin arquear la espalda baja, regresa y alterna.',d:'Sostén el disco con ambas manos extendidas hacia el techo en vez de una mancuerna en cada mano — la tensión en el core se mantiene igual.'},
   {n:'Plancha lateral con elevación de pierna',s:'3×30s por lado',c:'Apoyo en un antebrazo, cuerpo en línea recta lateral, eleva la pierna de arriba manteniendo la cadera estable sin rotar el torso.'},
   {n:'Russian Twists con mancuerna',s:'3×20 (10 por lado)',c:'Sentado con rodillas flexionadas, torso inclinado ligeramente atrás, rota el torso de lado a lado tocando el piso con el peso a cada lado.',d:'Sostén el disco con ambas manos al centro del pecho — el disco reemplaza directamente la mancuerna y funciona muy bien aquí.'}]}]},
-mar:{titulo:'Resistencia intermitente neuromuscular',sub:'Área: Resistencia',tiempo:'50–55 min',bloques:[
- {b:'Calentamiento (10 min)',ej:[
+mar:{titulo:'Resistencia intermitente neuromuscular',emoji:'🫀',sub:'Área: Resistencia',tiempo:'50–55 min',bloques:[
+ {b:'🔥 Calentamiento (10 min)',ej:[
   {n:'Trote, movilidad, skipping, desplazamientos laterales',s:'10 min',c:'Trote suave para elevar el pulso, luego movilidad articular de tobillo/cadera, skipping de rodillas altas y desplazamientos laterales para activar cadera y tobillos antes del trabajo explosivo.'}]},
- {b:'Parte principal (30–35 min)',ej:[
+ {b:'⚡ Parte principal (30–35 min)',ej:[
   {n:'Bloque 1: 15s sprint ida y vuelta + 15s regate técnico + 30s trote/caminata',s:'',c:'Sprint al máximo esfuerzo ida y vuelta durante 15s, luego 15s de regates técnicos con el balón a ritmo controlado, y recupera 30s trotando o caminando antes de repetir.'},
   {n:'Bloque 2: 5 saltos laterales + 15m conducción rápida + 10s recuperación estática',s:'',c:'5 saltos laterales explosivos de lado a lado, después conduce el balón a máxima velocidad 15 metros, y recupera 10s parado sin moverte.'},
   {n:'Bloque 3: 10s cambios de dirección + 10s conducción media + 10s trote',s:'',c:'10s de cambios de dirección explosivos (sin balón), 10s conduciendo el balón a ritmo medio, y 10s de trote suave de recuperación.'},
   {n:'Bloque 4: 20m sprint + tiro/pase largo + caminata de regreso',s:'',c:'Sprint de 20 metros a máxima velocidad, al llegar ejecuta un tiro o pase largo con precisión, y camina de regreso al punto de inicio para recuperar.'}]},
- {b:'Vuelta a la calma (10 min)',ej:[
+ {b:'🧊 Vuelta a la calma (10 min)',ej:[
   {n:'Caminata suave + estiramientos',s:'10 min',c:'Baja el ritmo cardiaco caminando, luego estira cuádriceps, isquiotibiales, gemelos y cadera manteniendo cada posición 20-30 segundos.'}]}]},
-mie:{titulo:'Fuerza y Core (Adaptada)',sub:'Fuerza tren superior + Core',tiempo:'45–50 min',bloques:[
- {b:'Fuerza tren superior',ej:[
+mie:{titulo:'Fuerza y Core (Adaptada)',emoji:'🏋️',sub:'Fuerza tren superior + Core',tiempo:'45–50 min',bloques:[
+ {b:'💪 Fuerza tren superior',ej:[
   {n:'Plancha dinámica',s:'3×12',c:'Desde plancha alta (brazos extendidos) baja a plancha en antebrazos uno a la vez y regresa a plancha alta, manteniendo la cadera estable sin balancear.'},
   {n:'Dominadas',s:'4×6',c:'Agarre pronado un poco más ancho que los hombros, sube hasta que la barbilla pase la barra, baja controlado hasta extensión completa de brazos.'},
   {n:'Fondos en banco o silla',s:'4×10',c:'Manos en el borde del banco, piernas extendidas al frente, baja el cuerpo flexionando codos a 90°, empuja de regreso sin encoger los hombros.'},
   {n:'Press de hombro unilateral con mancuerna',s:'3×6 por brazo',c:'De pie o sentado, empuja el peso desde la altura del hombro hasta la extensión completa arriba, controla la bajada sin arquear la espalda.',d:'Sostén el disco con ambas manos y haz press de hombro a dos manos en vez de unilateral — mismo patrón, estímulo bilateral.'},
   {n:'Remo a 2 apoyos con mancuerna',s:'3×8 por brazo',c:'Una mano y rodilla apoyadas en el banco, espalda recta y paralela al piso, jala el peso hacia la cadera llevando el codo hacia atrás, baja controlado.'},
   {n:'Flexiones con variaciones (normales, inclinadas, diamante)',s:'3×12',c:'Cuerpo en línea recta, baja el pecho hacia el piso controlando el core, empuja de regreso. Alterna manos al ancho de hombros (normal), pies elevados (inclinada) o manos juntas bajo el pecho (diamante).'}]},
- {b:'Core',ej:[
+ {b:'🧱 Core',ej:[
   {n:'Elevaciones de piernas',s:'3×15',c:'Misma técnica que el lunes: manos bajo la cadera, piernas rectas hasta 90°, bajada lenta sin tocar el piso.'},
   {n:'Bird Dog con mancuerna',s:'3×10 por lado',c:'Igual que bird dog normal, pero sostén una mancuerna ligera en la mano que se extiende al frente para sumar estabilidad activa del hombro.',d:'⚠️ No uses el disco de 25lb aquí — es demasiado peso para un movimiento de estabilidad unilateral. Mantenlo con mancuerna ligera o sin peso.'},
   {n:'Dead bugs',s:'3×14',c:'Misma técnica que el lunes, sin peso adicional: rodillas y brazos en 90°, extiende brazo y pierna opuestos sin arquear la espalda baja.'}]}]},
-jue:{titulo:'Velocidad + Cambio de Dirección + Técnica',sub:'Área: Velocidad + Pliometría + Técnica (pliometría sin cambios)',tiempo:'55–60 min',bloques:[
- {b:'Velocidad + potencia',ej:[
+jue:{titulo:'Velocidad + Cambio de Dirección + Técnica',emoji:'💨',sub:'Área: Velocidad + Pliometría + Técnica',tiempo:'55–60 min',bloques:[
+ {b:'⚡ Velocidad + potencia',ej:[
   {n:'Power Skips',s:'3×20 m',c:'Skipping explosivo elevando la rodilla al máximo con cada paso mientras el brazo contrario empuja hacia arriba, buscando altura y no solo velocidad.'},
   {n:'Doble o triple hop adelante (misma pierna)',s:'3×10',c:'En una pierna, salta hacia adelante 2 o 3 veces seguidas sin perder el equilibrio, aterrizando suave y absorbiendo con la rodilla ligeramente flexionada antes del siguiente salto.'},
   {n:'Bounds horizontales',s:'3×20 m',c:'Saltos largos alternando piernas como zancadas explosivas en el aire, buscando distancia en cada salto mientras avanzas.'},
   {n:'Sprints de 20-30 m',s:'5 reps',c:'Salida explosiva desde posición baja o de pie, aceleración máxima manteniendo buena mecánica de brazos y postura ligeramente inclinada al frente los primeros metros.'}]},
- {b:'Cambio de dirección',ej:[
+ {b:'🔀 Cambio de dirección',ej:[
   {n:'Lateral bound + broad jump (una pierna)',s:'3×10',c:'Salta lateralmente en una pierna aterrizando estable, inmediatamente después ejecuta un salto largo hacia adelante en la misma pierna.'},
   {n:'Salto a una pierna + lateral bound',s:'3×8 por pierna',c:'Salto vertical en una pierna, al aterrizar enlaza inmediatamente un salto lateral en la misma pierna sin pausa entre ambos.'},
   {n:'Hop + lateral bound',s:'3×10',c:'Pequeño salto hacia adelante en una pierna seguido de un salto lateral, enlazando ambos movimientos sin detenerte.'},
   {n:'Triple lateral hop',s:'3×6 por lado',c:'Tres saltos laterales consecutivos en la misma pierna, manteniendo el equilibrio y la rodilla estable en cada aterrizaje.'}]},
- {b:'Técnica + movilidad',ej:[
-  {n:'Técnica con balón (regates, fintas, ritmo)',s:'20 min',c:'Trabaja regates a ritmo variable, cambios de ritmo y fintas, priorizando calidad de toque sobre velocidad al inicio, aumentando el ritmo conforme ganas control.'},
+ {b:'⚽ Técnica + movilidad',ej:[
+  {n:'Técnica con balón (regates, fintas, ritmo)',s:'20 min',c:'Trabaja regates a ritmo variable, cambios de ritmo y fintas, priorizando calidad de toque sobre velocidad al inicio, aumentando el ritmo conforme ganas control. Martes y jueves incluye 10–15 min de entrenamiento cognitivo (ver Mental).'},
   {n:'Estiramientos dinámicos y movilidad',s:'10-15 min',c:'Movimientos activos de cadera, tobillo e isquiotibiales (balanceos de pierna, círculos de cadera, zancadas con rotación) sin quedarte estático — el objetivo es preparar el rango de movimiento, no relajar.'}]}]},
-vie:{titulo:'Fuerza explosiva + Pliometría + Sprints + Core potente',sub:'⚠️ Los días de torneo (Futeca Cayalá) esta sesión se salta por completo',tiempo:'55–60 min',bloques:[
- {b:'Fuerza explosiva',ej:[
+vie:{titulo:'Fuerza explosiva + Pliometría + Sprints + Core potente',emoji:'🚀',sub:'⚠️ Los días de torneo (Futeca Cayalá) esta sesión se salta por completo',tiempo:'55–60 min',bloques:[
+ {b:'💥 Fuerza explosiva',ej:[
   {n:'Swing con mancuerna',s:'4×12',c:'Pies al ancho de hombros, bisagra de cadera hacia atrás con el peso entre las piernas, extiende la cadera explosivo para llevar el peso hasta la altura del pecho, controla la bajada.',d:'Sostén el disco con ambas manos frente al cuerpo en vez de la mancuerna — el patrón de bisagra de cadera es el mismo.'},
   {n:'Sentadilla con salto + pausa de 2 segundos antes de subir',s:'3×8',c:'Baja a sentadilla, pausa 2 segundos sin perder tensión, luego salta explosivo lo más alto posible, aterriza suave y vuelve a bajar.'},
   {n:'Press con giro de torso (rotación explosiva)',s:'3×8 por lado',c:'Sostén el peso a la altura del pecho, rota el torso y empuja el peso hacia adelante y al lado con potencia, usando la cadera para generar la fuerza, no solo el brazo.',d:'Sostén el disco con ambas manos al pecho y ejecuta el mismo giro explosivo — funciona muy bien con disco por el agarre a dos manos.'}]},
- {b:'Pliometría (enfocada y efectiva)',ej:[
+ {b:'🦘 Pliometría (enfocada y efectiva)',ej:[
   {n:'Lateral bound + broad jump (una pierna)',s:'3×8',c:'Misma técnica que el jueves: salta lateral en una pierna aterrizando estable, enlaza inmediatamente un salto largo hacia adelante en la misma pierna.'},
   {n:'Hop + lateral bound',s:'3×8',c:'Misma técnica que el jueves: pequeño salto hacia adelante en una pierna seguido de un salto lateral, sin detenerte entre ambos.'}]},
- {b:'Sprints',ej:[
+ {b:'🏃 Sprints',ej:[
   {n:'Aceleración desde estático',s:'3×20 m',c:'Parado, sin impulso previo, arranca lo más explosivo posible manteniendo la postura inclinada al frente en los primeros pasos.'},
   {n:'Con cambio de dirección a los 10 m',s:'2×20 m',c:'Sprint recto los primeros 10m, luego corta en un ángulo de 45-90° sin perder velocidad de base, continúa acelerando en la nueva dirección.'},
   {n:'Sprint máximo',s:'1×30 m',c:'Sprint completo a máxima velocidad sostenida, enfocado en mantener la técnica de carrera (brazos, postura) incluso cuando llega la fatiga en los últimos metros.'}]},
- {b:'Core potente',ej:[
+ {b:'🧱 Core potente',ej:[
   {n:'Plancha con toques de hombro',s:'3×20',c:'En plancha alta, toca el hombro contrario con una mano sin rotar la cadera, alterna manos manteniendo el core rígido.'},
   {n:'Bird dog en plancha (plancha contralateral)',s:'3×12',c:'Desde plancha alta, extiende brazo y pierna contrarios simultáneamente sin perder el nivel de la cadera, regresa y alterna.'},
   {n:'Elevaciones de piernas',s:'3×15',c:'Misma técnica que el lunes.'},
   {n:'Russian Twists con mancuerna',s:'3×20',c:'Misma técnica que el lunes.',d:'Igual que en lunes — el disco funciona muy bien aquí.'},
   {n:'Plancha frontal',s:'3×50-60s',c:'Misma técnica que el lunes.'}]}]},
-sab:{titulo:'Activación Ligera y Técnica',sub:'Activar sin sobrecargar',tiempo:'30–40 min',bloques:[
- {b:'Sesión',ej:[
+sab:{titulo:'Activación Ligera y Técnica',emoji:'🌤️',sub:'Activar sin sobrecargar · 11:00–11:45am, después de la clase de música',tiempo:'30–40 min',bloques:[
+ {b:'🌤️ Sesión',ej:[
   {n:'Saltos con una pierna',s:'3×10 por pierna',c:'Saltos pequeños y controlados en una pierna, sin buscar máxima altura — el objetivo es activar, no fatigar.'},
   {n:'Escalera + cambios de dirección suaves',s:'3 rondas',c:'Trabajo de pies en escalera de agilidad a ritmo controlado, enfocado en la coordinación y no en la velocidad máxima.'},
-  {n:'Técnica con balón (regates suaves, toques controlados, cambios de ritmo)',s:'15 min',c:'Trabaja el balón a ritmo bajo-medio, priorizando el control y la calidad del toque sobre la velocidad.'},
+  {n:'Técnica con balón (regates suaves, toques controlados, cambios de ritmo)',s:'15 min',c:'Trabaja el balón a ritmo bajo-medio, priorizando el control y la calidad del toque sobre la velocidad. Incluye 10–15 min de entrenamiento cognitivo Olise (ver Mental).'},
   {n:'Estiramientos dinámicos ligeros',s:'10-15 min',c:'Movimientos suaves de piernas, caderas, espalda y hombros sin llegar a estiramiento estático profundo — mantener el cuerpo activo pero liviano.'},
   {n:'Movilidad general sin equipo',s:'10 min',c:'Círculos de cadera, tobillo y hombro, enfocándote en rango de movimiento completo y controlado.'}]}]},
-dom:{titulo:'Movilidad + Descanso Activo',sub:'Recuperación',tiempo:'30–40 min',bloques:[
- {b:'Sesión',ej:[
+dom:{titulo:'Movilidad + Descanso Activo',emoji:'🧘',sub:'Recuperación · 5:45–6:15pm',tiempo:'30–40 min',bloques:[
+ {b:'🧘 Sesión',ej:[
   {n:'Caminata ligera o bici suave',s:'15-30 min',c:'Ritmo cómodo y conversacional, sin buscar esfuerzo cardiovascular — el objetivo es circulación, no rendimiento.'},
   {n:'Movilidad general: estiramientos',s:'20 min',c:'Estiramientos estáticos sostenidos 20-30s por grupo muscular (cuádriceps, isquiotibiales, cadera, espalda, hombros), respirando profundo en cada posición.'},
   {n:'Respiración profunda / relajación',s:'10 min',c:'Acostado o sentado cómodo, respira profundo por la nariz 4 segundos, sostén 4 segundos, exhala 6-8 segundos por la boca. Repite relajando conscientemente cada grupo muscular.'}]}]}
 };
 const DIAS=[['lun','Lunes'],['mar','Martes'],['mie','Miércoles'],['jue','Jueves'],['vie','Viernes'],['sab','Sábado'],['dom','Domingo']];
 
+/* ================= DATOS: MENTAL ================= */
+const MENTAL_PASOS=[
+ ['🫁','1. Respiración de caja','3 min','Inhala 4 segundos, sostén 4 segundos, exhala 4 segundos, sostén 4 segundos con los pulmones vacíos. Repite el ciclo durante 3 minutos.'],
+ ['🎯','2. Visualización','5 min','Cierra los ojos y visualiza una jugada específica saliendo perfecta: un regate, un pase, una definición. Siente el movimiento como si ya estuviera pasando, no como un deseo.'],
+ ['📝','3. Registro breve','5 min','Escribe 1 cosa que hiciste bien hoy (en cancha o fuera) y 1 cosa concreta que vas a mejorar mañana. Dos líneas, no un diario largo. (Libreta o notas del teléfono.)']];
+const DIAS_COGNITIVO=['lun','mar','jue','sab'];
+
 /* ================= DATOS: COMIDAS ================= */
 const DESAYUNOS=[
- ['Yogurt griego + miel + avena cruda + banano','Cero cocción, listo en 2 min.'],
- ['Avena cocida con banano y maní','5 min en olla o micro.'],
- ['Huevos revueltos con espinaca y tomate + tortilla','Rápido y con proteína.'],
- ['Pan de masa madre con aguacate y huevo','Tostas, fríes huevo, listo.'],
- ['Batido: leche, banano, avena, maní, miel','Todo a la licuadora.']];
+ ['🥣','Yogurt griego + miel + avena cruda + banano','Cero cocción, listo en 2 min.'],
+ ['🍌','Avena cocida con banano y maní','5 min en olla o micro.'],
+ ['🍳','Huevos revueltos con espinaca y tomate + tortilla','Rápido y con proteína.'],
+ ['🥑','Pan de masa madre con aguacate y huevo','Tostas, fríes huevo, listo.'],
+ ['🥤','Batido: leche, banano, avena, maní, miel','Todo a la licuadora.']];
 const REFACCIONES=[
- ['Manzana + puño de almendras','Fibra + grasa buena, te aguanta hasta el almuerzo.'],
- ['Pan de masa madre con queso mozzarella','Fácil de llevar, proteína + carbo.'],
- ['Yogurt griego con miel','Rápido, alta proteína.'],
- ['Huevo duro + banano','Si dejas huevos cocidos listos, se arma en segundos.'],
- ['Tortilla con frijol y queso','Si sobra frijol de la cena/almuerzo, se recalienta o va fría.'],
- ['Banano con maní / mantequilla de maní','Carbo + grasa, buena energía sostenida.'],
- ['Batido pequeño (leche, banano, avena) en termo','Si sales temprano y no quieres cargar fruta suelta.']];
+ ['🍎','Manzana + puño de almendras','Fibra + grasa buena, te aguanta hasta el almuerzo.'],
+ ['🧀','Pan de masa madre con queso mozzarella','Fácil de llevar, proteína + carbo.'],
+ ['🍯','Yogurt griego con miel','Rápido, alta proteína.'],
+ ['🥚','Huevo duro + banano','Si dejas huevos cocidos listos, se arma en segundos.'],
+ ['🌮','Tortilla con frijol y queso','Si sobra frijol de la cena/almuerzo, se recalienta o va fría.'],
+ ['🥜','Banano con maní / mantequilla de maní','Carbo + grasa, buena energía sostenida.'],
+ ['🧃','Batido pequeño (leche, banano, avena) en termo','Si sales temprano y no quieres cargar fruta suelta.']];
 const CENAS=[
- ['Huevos revueltos o tortilla de huevo con queso y tomate','5 min.'],
- ['Yogurt griego con fruta y avena','Igual que desayuno, sirve perfecto de cena ligera.'],
- ['Pan de masa madre con aguacate y huevo duro','Si dejas huevos cocidos listos, es instantáneo.'],
- ['Frijol volteado con queso y tortilla','Rapidísimo si el frijol ya está hecho.'],
- ['Batido de leche con fruta + yogurt','Cuando llegas tarde y sin ganas de cocinar.'],
- ['Quesadilla de tortilla con mozzarella y espinaca','5 min en sartén.']];
+ ['🍳','Huevos revueltos o tortilla de huevo con queso y tomate','5 min.'],
+ ['🍓','Yogurt griego con fruta y avena','Igual que desayuno, sirve perfecto de cena ligera.'],
+ ['🥑','Pan de masa madre con aguacate y huevo duro','Si dejas huevos cocidos listos, es instantáneo.'],
+ ['🫘','Frijol volteado con queso y tortilla','Rapidísimo si el frijol ya está hecho.'],
+ ['🥤','Batido de leche con fruta + yogurt','Cuando llegas tarde y sin ganas de cocinar.'],
+ ['🫓','Quesadilla de tortilla con mozzarella y espinaca','5 min en sartén.']];
 const COMPRA={
- 'Proteínas':['Huevos (cartón de 30)','Yogurt griego','Queso mozzarella','Frijol negro','Leche'],
- 'Carbohidratos':['Avena','Pan de masa madre','Tortilla de maíz'],
- 'Frutas':['Banano','Manzana','Fruta para picar/batir (papaya o fresa)'],
- 'Verduras':['Espinaca','Tomate'],
- 'Grasas buenas':['Aguacate','Maní / mantequilla de maní','Almendras'],
- 'Extras':['Miel']};
+ '🥚 Proteínas':['Huevos (cartón de 30)','Yogurt griego','Queso mozzarella','Frijol negro','Leche'],
+ '🌾 Carbohidratos':['Avena','Pan de masa madre','Tortilla de maíz'],
+ '🍌 Frutas':['Banano','Manzana','Fruta para picar/batir (papaya o fresa)'],
+ '🥬 Verduras':['Espinaca','Tomate'],
+ '🥑 Grasas buenas':['Aguacate','Maní / mantequilla de maní','Almendras'],
+ '🍯 Extras':['Miel']};
 
 /* ================= ESTADO ================= */
 const hoy=new Date();
-const claveDia=()=>hoy.toISOString().slice(0,10);
-const dow=hoy.getDay(); // 0=dom
+const fkey=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const HOYKEY=fkey(hoy);
+const dow=hoy.getDay();
 const DKEY=['dom','lun','mar','mie','jue','vie','sab'][dow];
-let checks=JSON.parse(localStorage.getItem('midia_checks_'+claveDia())||'{}');
+let checks=JSON.parse(localStorage.getItem('midia_checks_'+HOYKEY)||'{}');
+let hist=JSON.parse(localStorage.getItem('midia_hist')||'{}');
 let compra=JSON.parse(localStorage.getItem('midia_compras')||'{}');
-function guardar(){localStorage.setItem('midia_checks_'+claveDia(),JSON.stringify(checks))}
+let calMes=hoy.getMonth(),calAno=hoy.getFullYear();
+
+function idsHoy(){
+  const ids=[];
+  RUTINA[DKEY].sec.forEach((s,si)=>s[1].forEach((_,i)=>ids.push('r_'+DKEY+'_'+si+'_'+i)));
+  ENTRENO[DKEY].bloques.forEach((bl,bi)=>bl.ej.forEach((_,ei)=>ids.push('e_'+DKEY+'_'+bi+'_'+ei)));
+  MENTAL_PASOS.forEach((_,i)=>ids.push('m_paso_'+i));
+  if(DIAS_COGNITIVO.includes(DKEY))ids.push('m_cog');
+  return ids;
+}
+function guardar(){
+  localStorage.setItem('midia_checks_'+HOYKEY,JSON.stringify(checks));
+  const ids=idsHoy();
+  const done=ids.filter(i=>checks[i]).length;
+  const p=Math.round(done/ids.length*100);
+  hist[HOYKEY]={d:done,t:ids.length,p:p};
+  localStorage.setItem('midia_hist',JSON.stringify(hist));
+  refrescarProgreso();
+}
 function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('ver');
   clearTimeout(t._x);t._x=setTimeout(()=>t.classList.remove('ver'),1800)}
+function toggle(id){
+  checks[id]=!checks[id];if(!checks[id])delete checks[id];
+  guardar();
+}
 
 /* ================= NAV ================= */
 document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
@@ -379,101 +572,84 @@ document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
   document.querySelectorAll('.pag').forEach(x=>x.classList.remove('activa'));
   b.classList.add('on');
   document.getElementById('pag-'+b.dataset.pag).classList.add('activa');
+  if(b.dataset.pag==='calendario')pintarCalendario();
   window.scrollTo(0,0);
 });
-function irEntrenoHoy(){document.querySelector('nav button[data-pag=entreno]').click();pintarEntreno(DKEY)}
 
-/* ================= HOY ================= */
+/* ================= CABECERA / AHORA ================= */
 const nombresDia=['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
-const meses=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
-document.getElementById('fechaHoy').textContent=nombresDia[dow]+' '+hoy.getDate()+' de '+meses[hoy.getMonth()];
+const nombresMes=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+document.getElementById('fechaHoy').textContent=nombresDia[dow]+' '+hoy.getDate()+' de '+nombresMes[hoy.getMonth()];
 
-const TODO=[...MANANA,...TARDE];
-const esColegio=dow>=1&&dow<=4; // lun-jue: día tipo
-const esViernes=dow===5;
-
-function itemActual(){
-  const m=new Date();const mins=m.getHours()*60+m.getMinutes();
-  let actual=null,sig=null;
-  for(const it of TODO){
-    if(mins>=it.ini&&mins<Math.max(it.fin,it.ini+1))actual=it;
-    if(it.ini>mins&&!sig)sig=it;
-  }
-  return{actual,sig,mins};
-}
+function itemsPlanos(d){const out=[];RUTINA[d].sec.forEach(s=>s[1].forEach(it=>out.push(it)));return out}
 function pintarAhora(){
-  const c=document.getElementById('cardAhora');
-  const e=ENTRENO[DKEY];
-  if(!esColegio){
-    let msg=esViernes
-      ?'<span class="lbl">VIERNES</span><div class="act">🏆 Torneo Futeca Cayalá</div><div class="hor">No hay entreno personal ni de equipo — el bloque 4:40–8:00pm se reemplaza por el torneo. Hidratación y energía rápida entre partidos.</div>'
-      :'<span class="lbl">'+nombresDia[dow].toUpperCase()+'</span><div class="act">'+(dow===0?'🧘 Recuperación':'⚽ Día libre de colegio')+'</div><div class="hor">Hoy toca: <b style="color:var(--txt)">'+e.titulo+'</b> · '+e.tiempo+'</div>';
-    c.innerHTML=msg;return;
+  const m=new Date();const mins=m.getHours()*60+m.getMinutes();
+  const items=itemsPlanos(DKEY);
+  let actual=null,sig=null;
+  for(const it of items){
+    if(typeof it[3]==='number'&&mins>=it[3]&&mins<Math.max(it[4],it[3]+1))actual=it;
+    if(typeof it[3]==='number'&&it[3]>mins&&!sig)sig=it;
   }
-  const{actual,sig}=itemActual();
-  let h='<span class="lbl">AHORA</span>';
-  h+=actual?'<div class="act">'+actual.t+'</div><div class="hor">'+actual.hora+'</div>'
-           :'<div class="act">Fuera de horario</div>';
-  if(sig)h+='<div class="sig">Siguiente: <b>'+sig.t+'</b> · '+sig.hora+'</div>';
-  c.innerHTML=h;
+  let h='<span class="lbl">⏳ AHORA · '+nombresDia[dow].toUpperCase()+'</span>';
+  h+=actual?'<div class="act">'+actual[0]+' '+actual[2]+'</div><div class="hor">'+actual[1]+'</div>'
+           :'<div class="act">😌 Sin actividad programada</div>';
+  if(sig)h+='<div class="sig">Siguiente: <b>'+sig[0]+' '+sig[2]+'</b> · '+sig[1]+'</div>';
+  document.getElementById('cardAhora').innerHTML=h;
 }
-function pintarBanner(){
-  const b=document.getElementById('cardBanner');
-  if(esViernes){b.style.display='block';b.innerHTML='<span class="tag nar">Excepción viernes</span><div style="font-size:14px;color:var(--dim);line-height:1.6">Torneo Futeca Cayalá: sin entreno personal ni de equipo. Ajusta comida e hidratación según los horarios de los partidos.</div>'}
-  else if(dow===0||dow===6){b.style.display='block';b.innerHTML='<span class="tag az">Fin de semana</span><div style="font-size:14px;color:var(--dim);line-height:1.6">Sin horario de colegio. El checklist de hoy es la sesión del día + la rutina mental nocturna. Si hay partido de liga, cuida el snack pre-partido y la hidratación.</div>'}
+
+/* ================= RUTINA ================= */
+let diaRutina=DKEY;
+function pintarChipsRutina(){
+  document.getElementById('chipsRutina').innerHTML=DIAS.map(([k,n])=>
+    '<button class="'+(k===diaRutina?'on':'')+'" data-d="'+k+'">'+n.slice(0,3)+(k===DKEY?' ⭐':'')+'</button>').join('');
+  document.querySelectorAll('#chipsRutina button').forEach(b=>b.onclick=()=>pintarRutina(b.dataset.d));
 }
-function listaDeHoy(){
-  if(esColegio)return TODO.map((it,i)=>({id:'h'+i,hora:it.hora,t:it.t,ini:it.ini,fin:it.fin}));
-  if(esViernes)return TODO.filter(it=>!it.torneo).map((it,i)=>({id:'v'+i,hora:it.hora,t:it.t,ini:it.ini,fin:it.fin}))
-    .concat([{id:'vtorneo',hora:'4:40–8:00',t:'🏆 Torneo Futeca Cayalá',ini:1000,fin:1200}])
-    .sort((a,b)=>a.ini-b.ini);
-  const e=ENTRENO[DKEY];
-  return[{id:'w1',hora:e.tiempo,t:'Sesión del día: '+e.titulo},
-         {id:'w2',hora:'9:30–9:45',t:'Rutina mental nocturna'},
-         {id:'w3',hora:'10:00',t:'Dormir a la hora'}];
-}
-function pintarHoy(){
-  pintarAhora();
-  const items=listaDeHoy();
-  const{mins}=itemActual();
-  const cont=document.getElementById('listaHoy');
-  cont.innerHTML=items.map(it=>{
-    const on=checks[it.id]?' hecho':'';
-    const act=(esColegio&&it.ini!==undefined&&mins>=it.ini&&mins<Math.max(it.fin,it.ini+1))?' actual':'';
-    return'<div class="chk'+on+act+'" data-id="'+it.id+'"><div class="box">'+(checks[it.id]?'✓':'')+'</div><div class="tx"><div class="h">'+it.hora+'</div>'+it.t+'</div></div>';
-  }).join('');
-  cont.querySelectorAll('.chk').forEach(el=>el.onclick=()=>{
-    const id=el.dataset.id;checks[id]=!checks[id];if(!checks[id])delete checks[id];
-    guardar();pintarHoy();
+function pintarRutina(d){
+  diaRutina=d;pintarChipsRutina();
+  const esHoy=d===DKEY;
+  const m=new Date();const mins=m.getHours()*60+m.getMinutes();
+  document.getElementById('subtRutina').textContent=esHoy
+    ?'Marca cada cosa cuando la hagas — mañana el checklist se reinicia solo, pero tu % del día queda guardado en el calendario. 📆'
+    :'Estás viendo el '+DIAS.find(x=>x[0]===d)[1].toLowerCase()+' (solo lectura — únicamente puedes marcar el día de hoy).';
+  let h='';
+  RUTINA[d].sec.forEach((s,si)=>{
+    h+='<h3>'+s[0]+'</h3>';
+    s[1].forEach((it,i)=>{
+      const id='r_'+d+'_'+si+'_'+i;
+      const on=esHoy&&checks[id]?' hecho':'';
+      const act=esHoy&&typeof it[3]==='number'&&mins>=it[3]&&mins<Math.max(it[4],it[3]+1)?' actual':'';
+      const ver=esHoy?'':' soloVer';
+      h+='<div class="chk'+on+act+ver+'" data-id="'+id+'">'+(esHoy?'<div class="box">'+(checks[id]?'✓':'')+'</div>':'')+
+         '<div class="emo">'+it[0]+'</div><div class="tx"><div class="h">'+it[1]+'</div>'+it[2]+'</div></div>';
+    });
   });
-  const total=items.length,hechos=items.filter(i=>checks[i.id]).length;
-  document.getElementById('progBar').style.width=(total?hechos/total*100:0)+'%';
-  document.getElementById('progTxt').textContent=hechos+'/'+total;
-  const e=ENTRENO[DKEY];
-  document.getElementById('resumenEntreno').innerHTML=
-    '<div style="font-family:Space Grotesk;font-size:17px;margin-bottom:3px">'+DIAS.find(d=>d[0]===DKEY)[1]+' — '+e.titulo+'</div>'+
-    '<div class="subt">'+e.sub+' · ⏱ '+e.tiempo+'</div>';
+  document.getElementById('contRutina').innerHTML=h;
+  if(esHoy)document.querySelectorAll('#contRutina .chk').forEach(el=>el.onclick=()=>{toggle(el.dataset.id);pintarRutina(diaRutina)});
+  document.getElementById('notasRutina').innerHTML=(NOTAS[d]||[]).join('');
+  refrescarProgreso();
+}
+function refrescarProgreso(){
+  const ids=idsHoy();
+  const done=ids.filter(i=>checks[i]).length;
+  const p=ids.length?Math.round(done/ids.length*100):0;
+  document.getElementById('progBar').style.width=p+'%';
+  document.getElementById('progTxt').textContent=p+'% · '+done+'/'+ids.length;
+  document.getElementById('pctHoy').textContent=p+'%';
+  document.getElementById('detHoy').textContent=done+' de '+ids.length+' cosas completadas (rutina + ejercicio + mental)';
 }
 
-/* ================= HORARIO ================= */
-function pintarHorario(){
-  const f=arr=>arr.map(it=>'<div class="chk"><div class="tx"><div class="h">'+it.hora+'</div>'+it.t+'</div></div>').join('');
-  document.getElementById('tablaManana').innerHTML=f(MANANA);
-  document.getElementById('tablaTarde').innerHTML=f(TARDE);
-}
-
-/* ================= ENTRENO ================= */
-let diaSel=DKEY;
-function pintarChips(){
+/* ================= EJERCICIO ================= */
+let diaEj=DKEY;
+function pintarChipsEj(){
   document.getElementById('chipsDias').innerHTML=DIAS.map(([k,n])=>
-    '<button class="'+(k===diaSel?'on':'')+'" data-d="'+k+'">'+n.slice(0,3)+(k===DKEY?' •':'')+'</button>').join('');
+    '<button class="'+(k===diaEj?'on':'')+'" data-d="'+k+'">'+ENTRENO[k].emoji+' '+n.slice(0,3)+(k===DKEY?' ⭐':'')+'</button>').join('');
   document.querySelectorAll('#chipsDias button').forEach(b=>b.onclick=()=>pintarEntreno(b.dataset.d));
 }
 function pintarEntreno(d){
-  diaSel=d;pintarChips();
+  diaEj=d;pintarChipsEj();
   const e=ENTRENO[d];
   const nombre=DIAS.find(x=>x[0]===d)[1];
-  let h='<div class="card"><span class="tag">'+nombre+' · ⏱ '+e.tiempo+'</span><h2>'+e.titulo+'</h2><div class="subt">'+e.sub+'</div>';
+  let h='<div class="card"><span class="tag">'+nombre+' · ⏱ '+e.tiempo+'</span><h2>'+e.emoji+' '+e.titulo+'</h2><div class="subt">'+e.sub+'</div>';
   e.bloques.forEach((bl,bi)=>{
     h+='<h3>'+bl.b+'</h3>';
     bl.ej.forEach((ej,ei)=>{
@@ -490,17 +666,33 @@ function pintarEntreno(d){
   document.getElementById('contEntreno').innerHTML=h;
 }
 function tickEj(id,d){
-  if(d!==DKEY){toast('Solo puedes marcar el día de hoy');return}
-  checks[id]=!checks[id];if(!checks[id])delete checks[id];
-  guardar();
+  if(d!==DKEY){toast('⭐ Solo puedes marcar el día de hoy');return}
+  toggle(id);
   const el=document.getElementById(id);
   el.classList.toggle('hecho',!!checks[id]);
   el.querySelector('.box').textContent=checks[id]?'✓':'';
 }
 
+/* ================= MENTAL ================= */
+function pintarMental(){
+  const cog=document.getElementById('chkCognitivo');
+  if(DIAS_COGNITIVO.includes(DKEY)){
+    cog.innerHTML='<div class="chk'+(checks['m_cog']?' hecho':'')+'" data-id="m_cog"><div class="box">'+(checks['m_cog']?'✓':'')+'</div><div class="emo">🧠</div><div class="tx"><div class="h">hoy toca</div>Sesión cognitiva de hoy (elige tu nivel abajo)</div></div>';
+    cog.querySelector('.chk').onclick=()=>{toggle('m_cog');pintarMental()};
+  }else{
+    cog.innerHTML='<div class="nota" style="margin:8px 0">📅 Hoy no toca sesión cognitiva — se hace lunes, martes, jueves y sábado.</div>';
+  }
+  const mn=document.getElementById('chkMental');
+  mn.innerHTML=MENTAL_PASOS.map((p,i)=>{
+    const id='m_paso_'+i;
+    return'<div class="chk'+(checks[id]?' hecho':'')+'" data-id="'+id+'"><div class="box">'+(checks[id]?'✓':'')+'</div><div class="emo">'+p[0]+'</div><div class="tx"><div class="h">'+p[2]+'</div><b>'+p[1]+'</b><div style="font-size:13px;color:var(--dim);margin-top:2px">'+p[3]+'</div></div></div>';
+  }).join('');
+  mn.querySelectorAll('.chk').forEach(el=>el.onclick=()=>{toggle(el.dataset.id);pintarMental()});
+}
+
 /* ================= COMIDAS ================= */
 function pintarComidas(){
-  const f=arr=>arr.map(r=>'<div class="receta"><b>'+r[0]+'</b><p>'+r[1]+'</p></div>').join('');
+  const f=arr=>arr.map(r=>'<div class="receta"><div class="emo">'+r[0]+'</div><div><b>'+r[1]+'</b><p>'+r[2]+'</p></div></div>').join('');
   document.getElementById('listaDesayunos').innerHTML=f(DESAYUNOS);
   document.getElementById('listaRefacciones').innerHTML=f(REFACCIONES);
   document.getElementById('listaCenas').innerHTML=f(CENAS);
@@ -518,11 +710,54 @@ function pintarComidas(){
     localStorage.setItem('midia_compras',JSON.stringify(compra));pintarComidas();
   });
 }
-function resetCompra(){compra={};localStorage.setItem('midia_compras','{}');pintarComidas();toast('Lista reiniciada')}
+function resetCompra(){compra={};localStorage.setItem('midia_compras','{}');pintarComidas();toast('🛒 Lista reiniciada')}
+
+/* ================= CALENDARIO ================= */
+function clasePct(p){
+  if(p>=90)return'p100';if(p>=70)return'p75';if(p>=40)return'p50';if(p>=1)return'p25';return'p1';
+}
+function pintarCalendario(){
+  document.getElementById('calTitulo').textContent=nombresMes[calMes]+' '+calAno;
+  const primero=new Date(calAno,calMes,1);
+  const nDias=new Date(calAno,calMes+1,0).getDate();
+  let inicio=(primero.getDay()+6)%7; // lunes=0
+  let h=['L','M','X','J','V','S','D'].map(d=>'<div class="dow">'+d+'</div>').join('');
+  for(let i=0;i<inicio;i++)h+='<div class="calDia vacio"></div>';
+  for(let d=1;d<=nDias;d++){
+    const k=calAno+'-'+String(calMes+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
+    const e=hist[k];
+    const cls=(e?' '+clasePct(e.p):'')+(k===HOYKEY?' hoy':'');
+    h+='<div class="calDia'+cls+'">'+d+(e?'<small>'+e.p+'%</small>':'')+'</div>';
+  }
+  document.getElementById('calGrid').innerHTML=h;
+  // semana actual (lunes a domingo)
+  const lunes=new Date(hoy);lunes.setDate(hoy.getDate()-((dow+6)%7));
+  let sh='';
+  for(let i=0;i<7;i++){
+    const dd=new Date(lunes);dd.setDate(lunes.getDate()+i);
+    const k=fkey(dd);const e=hist[k];
+    const est=e?' '+clasePct(e.p):'';
+    sh+='<div class="semDia'+(k===HOYKEY?'" style="outline:2px solid var(--azul)':'')+'"><div class="d">'+['L','M','X','J','V','S','D'][i]+'</div><div class="p'+est+'">'+(e?e.p+'%':'—')+'</div></div>';
+  }
+  document.getElementById('semRow').innerHTML=sh;
+  // mejora por meses
+  const porMes={};
+  Object.entries(hist).forEach(([k,e])=>{
+    const mk=k.slice(0,7);
+    (porMes[mk]=porMes[mk]||[]).push(e.p);
+  });
+  const meses=Object.keys(porMes).sort().slice(-6);
+  document.getElementById('mejoraMeses').innerHTML=meses.length?meses.map(mk=>{
+    const arr=porMes[mk];const avg=Math.round(arr.reduce((a,b)=>a+b,0)/arr.length);
+    const[y,m]=mk.split('-');
+    return'<div class="mesBar"><div class="lbl"><span>'+nombresMes[+m-1]+' '+y+'</span><span>'+avg+'% · '+arr.length+(arr.length===1?' día':' días')+'</span></div><div class="barra"><i style="width:'+avg+'%"></i></div></div>';
+  }).join(''):'<div class="nota verde">🌱 Todavía no hay datos — empieza a marcar tu checklist y aquí verás tu progreso mes a mes.</div>';
+}
+function moverMes(n){calMes+=n;if(calMes<0){calMes=11;calAno--}if(calMes>11){calMes=0;calAno++}pintarCalendario()}
 
 /* ================= INIT ================= */
-pintarHoy();pintarBanner();pintarHorario();pintarEntreno(DKEY);pintarComidas();
-setInterval(pintarHoy,60000);
+pintarAhora();pintarRutina(DKEY);pintarEntreno(DKEY);pintarMental();pintarComidas();pintarCalendario();
+setInterval(()=>{pintarAhora();if(diaRutina===DKEY)pintarRutina(DKEY)},60000);
 if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js');
 </script>
 </body>
