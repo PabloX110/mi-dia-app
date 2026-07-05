@@ -360,11 +360,11 @@ const DIA_SAB=[
  ['🚗','7:30–8:00','Traslado a clase de música',450,480],
  ['🎵','8:00–10:00','Clase de música',480,600],
  ['🚗','10:00–10:30','Traslado a casa',600,630],
- ['🍽️','10:30–11:00','Almuerzo',630,660],
  ['⚽','11:00–11:45','Entreno personal (activación + técnica; incluye 10–15 min de entrenamiento cognitivo Olise)',660,705],
  ['🌤️','11:45','Empieza la tarde libre',705,705],
  ['🎸','tarde libre','Tocar el bajo',705,1200],
  ['📚','tarde libre','Tarea o Progrentis',705,1200],
+ ['🍽️','2:30–3:00','Almuerzo (misma hora que los demás días)',870,900],
  ['🥛','8:00–8:20','Ceno + kéfir',1200,1220],
  ['🚿','8:40–8:55','Me baño',1240,1255],
  ['🌙','8:55–9:10','Rutina mental nocturna (respiración + visualización + registro breve)',1255,1270],
@@ -375,10 +375,11 @@ const DIA_DOM=[
  ['🍳','7:00–7:30','Desayunar',420,450],
  ['😌','7:30–9:00','Tiempo libre / calentamiento si tienes partido',450,540],
  ['⚽','9:00–11:00','Partido (si tienes) — horario aproximado, ajusta según la liga',540,660],
- ['🍽️','11:00–12:00','Alistarme / almuerzo ligero si hay tiempo',660,720],
+ ['👕','11:00–12:00','Alistarme',660,720],
  ['🚗','12:00–12:30','Traslado a la iglesia',720,750],
  ['⛪','12:30–1:30','Iglesia',750,810],
  ['👨‍👩‍👦','1:30–4:00','Tiempo con la familia (variable) — regresas ~4:00pm',810,960],
+ ['🍽️','2:30–3:00','Almuerzo (misma hora que los demás días)',870,900],
  ['😌','4:00–4:30','Descansar al llegar',960,990],
  ['🎸','4:30–5:00','Tocar el bajo',990,1020],
  ['📚','5:00–5:45','Tareas o proyectos pendientes / Progrentis',1020,1065],
@@ -424,7 +425,10 @@ lun:{titulo:'Fuerza completa',emoji:'💪',sub:'Piernas + Core intenso · Aprove
   {n:'Elevaciones de piernas lentas',s:'3×15',c:'Acostado boca arriba, manos bajo la cadera para proteger la zona lumbar, sube las piernas rectas hasta 90°, baja lento y controlado sin tocar el piso entre repeticiones.'},
   {n:'Dead bug con mancuerna',s:'3×20',c:'Boca arriba, rodillas y brazos elevados en 90°, extiende brazo y pierna opuestos hacia el piso sin arquear la espalda baja, regresa y alterna.',d:'Sostén el disco con ambas manos extendidas hacia el techo en vez de una mancuerna en cada mano — la tensión en el core se mantiene igual.'},
   {n:'Plancha lateral con elevación de pierna',s:'3×30s por lado',c:'Apoyo en un antebrazo, cuerpo en línea recta lateral, eleva la pierna de arriba manteniendo la cadera estable sin rotar el torso.'},
-  {n:'Russian Twists con mancuerna',s:'3×20 (10 por lado)',c:'Sentado con rodillas flexionadas, torso inclinado ligeramente atrás, rota el torso de lado a lado tocando el piso con el peso a cada lado.',d:'Sostén el disco con ambas manos al centro del pecho — el disco reemplaza directamente la mancuerna y funciona muy bien aquí.'}]}]},
+  {n:'Russian Twists con mancuerna',s:'3×20 (10 por lado)',c:'Sentado con rodillas flexionadas, torso inclinado ligeramente atrás, rota el torso de lado a lado tocando el piso con el peso a cada lado.',d:'Sostén el disco con ambas manos al centro del pecho — el disco reemplaza directamente la mancuerna y funciona muy bien aquí.'}]},
+ {b:'⚽ Técnica + 🧠 Cognitivo Olise (6:00–6:15pm)',ej:[
+  {n:'Técnica: toques a la pared y control orientado',s:'10 min',c:'La técnica que te toca hoy: toques contra la pared con ambos pies y control orientado del rebote, a ritmo cómodo, priorizando la calidad del toque.'},
+  {n:'Sesión cognitiva Olise — elige tu nivel',s:'3×1 min',c:'Va en el hueco de 6:00–6:15pm, después del primer entreno y antes de alistarte para el de equipo. Elige UN nivel según cómo vayas hoy: 🟢 Base (solo) — conduce el balón a ritmo medio mientras lanzas y atrapas una pelota de tenis con la misma mano; mirada en la pelota, el balón se controla por sensación de pie (3×1 min). 🔵 Intermedio (pared) — golpea el balón contra la pared mientras lanzas y atrapas la pelota con la mano contraria al pie que golpea, alternando pie cada 30 segundos (3×1 min). 🟣 Avanzado (con compañero) — conduce en espacio reducido evitando conos mientras te lanzan la pelota en momentos aleatorios: atrápala sin perder el balón.'}]}]},
 mar:{titulo:'Resistencia intermitente neuromuscular',emoji:'🫀',sub:'Área: Resistencia',tiempo:'50–55 min',bloques:[
  {b:'🔥 Calentamiento (10 min)',ej:[
   {n:'Trote, movilidad, skipping, desplazamientos laterales',s:'10 min',c:'Trote suave para elevar el pulso, luego movilidad articular de tobillo/cadera, skipping de rodillas altas y desplazamientos laterales para activar cadera y tobillos antes del trabajo explosivo.'}]},
@@ -434,7 +438,10 @@ mar:{titulo:'Resistencia intermitente neuromuscular',emoji:'🫀',sub:'Área: Re
   {n:'Bloque 3: 10s cambios de dirección + 10s conducción media + 10s trote',s:'',c:'10s de cambios de dirección explosivos (sin balón), 10s conduciendo el balón a ritmo medio, y 10s de trote suave de recuperación.'},
   {n:'Bloque 4: 20m sprint + tiro/pase largo + caminata de regreso',s:'',c:'Sprint de 20 metros a máxima velocidad, al llegar ejecuta un tiro o pase largo con precisión, y camina de regreso al punto de inicio para recuperar.'}]},
  {b:'🧊 Vuelta a la calma (10 min)',ej:[
-  {n:'Caminata suave + estiramientos',s:'10 min',c:'Baja el ritmo cardiaco caminando, luego estira cuádriceps, isquiotibiales, gemelos y cadera manteniendo cada posición 20-30 segundos.'}]}]},
+  {n:'Caminata suave + estiramientos',s:'10 min',c:'Baja el ritmo cardiaco caminando, luego estira cuádriceps, isquiotibiales, gemelos y cadera manteniendo cada posición 20-30 segundos.'}]},
+ {b:'⚽ Técnica + 🧠 Cognitivo Olise (dentro del primer entreno)',ej:[
+  {n:'Técnica libre con balón',s:'libre',c:'Hoy te toca técnica libre: regates, fintas y cambios de ritmo a tu aire — y dentro de estos minutos va la sesión cognitiva.'},
+  {n:'Sesión cognitiva Olise — elige tu nivel',s:'10–15 min',c:'No es tiempo extra — es una variación de tus minutos de técnica. Elige UN nivel según cómo vayas hoy: 🟢 Base (solo) — conduce el balón a ritmo medio mientras lanzas y atrapas una pelota de tenis con la misma mano; mirada en la pelota, el balón se controla por sensación de pie (3×1 min). 🔵 Intermedio (pared) — golpea el balón contra la pared mientras lanzas y atrapas la pelota con la mano contraria al pie que golpea, alternando pie cada 30 segundos (3×1 min). 🟣 Avanzado (con compañero) — conduce en espacio reducido evitando conos mientras te lanzan la pelota en momentos aleatorios: atrápala sin perder el balón.'}]}]},
 mie:{titulo:'Fuerza y Core (Adaptada)',emoji:'🏋️',sub:'Fuerza tren superior + Core',tiempo:'45–50 min',bloques:[
  {b:'💪 Fuerza tren superior',ej:[
   {n:'Plancha dinámica',s:'3×12',c:'Desde plancha alta (brazos extendidos) baja a plancha en antebrazos uno a la vez y regresa a plancha alta, manteniendo la cadera estable sin balancear.'},
@@ -459,7 +466,8 @@ jue:{titulo:'Velocidad + Cambio de Dirección + Técnica',emoji:'💨',sub:'Áre
   {n:'Hop + lateral bound',s:'3×10',c:'Pequeño salto hacia adelante en una pierna seguido de un salto lateral, enlazando ambos movimientos sin detenerte.'},
   {n:'Triple lateral hop',s:'3×6 por lado',c:'Tres saltos laterales consecutivos en la misma pierna, manteniendo el equilibrio y la rodilla estable en cada aterrizaje.'}]},
  {b:'⚽ Técnica + movilidad',ej:[
-  {n:'Técnica con balón (regates, fintas, ritmo)',s:'20 min',c:'Trabaja regates a ritmo variable, cambios de ritmo y fintas, priorizando calidad de toque sobre velocidad al inicio, aumentando el ritmo conforme ganas control. Martes y jueves incluye 10–15 min de entrenamiento cognitivo (ver Mental).'},
+  {n:'Técnica con balón (regates, fintas, ritmo)',s:'20 min',c:'Hoy te toca técnica: trabaja regates a ritmo variable, cambios de ritmo y fintas, priorizando calidad de toque sobre velocidad al inicio, aumentando el ritmo conforme ganas control.'},
+  {n:'Sesión cognitiva Olise — elige tu nivel',s:'10–15 min',c:'Va dentro de tus minutos de técnica — no es tiempo extra. Elige UN nivel según cómo vayas hoy: 🟢 Base (solo) — conduce el balón a ritmo medio mientras lanzas y atrapas una pelota de tenis con la misma mano; mirada en la pelota, el balón se controla por sensación de pie (3×1 min). 🔵 Intermedio (pared) — golpea el balón contra la pared mientras lanzas y atrapas la pelota con la mano contraria al pie que golpea, alternando pie cada 30 segundos (3×1 min). 🟣 Avanzado (con compañero) — conduce en espacio reducido evitando conos mientras te lanzan la pelota en momentos aleatorios: atrápala sin perder el balón.'},
   {n:'Estiramientos dinámicos y movilidad',s:'10-15 min',c:'Movimientos activos de cadera, tobillo e isquiotibiales (balanceos de pierna, círculos de cadera, zancadas con rotación) sin quedarte estático — el objetivo es preparar el rango de movimiento, no relajar.'}]}]},
 vie:{titulo:'Fuerza explosiva + Pliometría + Sprints + Core potente',emoji:'🚀',sub:'⚠️ Los días de torneo (Futeca Cayalá) esta sesión se salta por completo',tiempo:'55–60 min',bloques:[
  {b:'💥 Fuerza explosiva',ej:[
@@ -483,7 +491,8 @@ sab:{titulo:'Activación Ligera y Técnica',emoji:'🌤️',sub:'Activar sin sob
  {b:'🌤️ Sesión',ej:[
   {n:'Saltos con una pierna',s:'3×10 por pierna',c:'Saltos pequeños y controlados en una pierna, sin buscar máxima altura — el objetivo es activar, no fatigar.'},
   {n:'Escalera + cambios de dirección suaves',s:'3 rondas',c:'Trabajo de pies en escalera de agilidad a ritmo controlado, enfocado en la coordinación y no en la velocidad máxima.'},
-  {n:'Técnica con balón (regates suaves, toques controlados, cambios de ritmo)',s:'15 min',c:'Trabaja el balón a ritmo bajo-medio, priorizando el control y la calidad del toque sobre la velocidad. Incluye 10–15 min de entrenamiento cognitivo Olise (ver Mental).'},
+  {n:'Técnica con balón (regates suaves, toques controlados, cambios de ritmo)',s:'15 min',c:'Hoy te toca técnica: trabaja el balón a ritmo bajo-medio, priorizando el control y la calidad del toque sobre la velocidad — dentro de este bloque va la sesión cognitiva.'},
+  {n:'Sesión cognitiva Olise — elige tu nivel',s:'10–15 min',c:'Va dentro del bloque de técnica de tu activación ligera. Elige UN nivel según cómo vayas hoy: 🟢 Base (solo) — conduce el balón a ritmo medio mientras lanzas y atrapas una pelota de tenis con la misma mano; mirada en la pelota, el balón se controla por sensación de pie (3×1 min). 🔵 Intermedio (pared) — golpea el balón contra la pared mientras lanzas y atrapas la pelota con la mano contraria al pie que golpea, alternando pie cada 30 segundos (3×1 min). 🟣 Avanzado (con compañero) — conduce en espacio reducido evitando conos mientras te lanzan la pelota en momentos aleatorios: atrápala sin perder el balón.'},
   {n:'Estiramientos dinámicos ligeros',s:'10-15 min',c:'Movimientos suaves de piernas, caderas, espalda y hombros sin llegar a estiramiento estático profundo — mantener el cuerpo activo pero liviano.'},
   {n:'Movilidad general sin equipo',s:'10 min',c:'Círculos de cadera, tobillo y hombro, enfocándote en rango de movimiento completo y controlado.'}]}]},
 dom:{titulo:'Movilidad + Descanso Activo',emoji:'🧘',sub:'Recuperación · 5:45–6:15pm',tiempo:'30–40 min',bloques:[
@@ -547,7 +556,6 @@ function idsHoy(){
   RUTINA[DKEY].sec.forEach((s,si)=>s[1].forEach((_,i)=>ids.push('r_'+DKEY+'_'+si+'_'+i)));
   ENTRENO[DKEY].bloques.forEach((bl,bi)=>bl.ej.forEach((_,ei)=>ids.push('e_'+DKEY+'_'+bi+'_'+ei)));
   MENTAL_PASOS.forEach((_,i)=>ids.push('m_paso_'+i));
-  if(DIAS_COGNITIVO.includes(DKEY))ids.push('m_cog');
   return ids;
 }
 function guardar(){
@@ -676,12 +684,9 @@ function tickEj(id,d){
 /* ================= MENTAL ================= */
 function pintarMental(){
   const cog=document.getElementById('chkCognitivo');
-  if(DIAS_COGNITIVO.includes(DKEY)){
-    cog.innerHTML='<div class="chk'+(checks['m_cog']?' hecho':'')+'" data-id="m_cog"><div class="box">'+(checks['m_cog']?'✓':'')+'</div><div class="emo">🧠</div><div class="tx"><div class="h">hoy toca</div>Sesión cognitiva de hoy (elige tu nivel abajo)</div></div>';
-    cog.querySelector('.chk').onclick=()=>{toggle('m_cog');pintarMental()};
-  }else{
-    cog.innerHTML='<div class="nota" style="margin:8px 0">📅 Hoy no toca sesión cognitiva — se hace lunes, martes, jueves y sábado.</div>';
-  }
+  cog.innerHTML=DIAS_COGNITIVO.includes(DKEY)
+    ?'<div class="nota verde" style="margin:8px 0">✅ <b>Hoy toca sesión cognitiva</b> — está al final de tu sesión en la pestaña Ejercicio 🏋️, ahí la marcas como parte del entrenamiento.</div>'
+    :'<div class="nota" style="margin:8px 0">📅 Hoy no toca sesión cognitiva — se hace lunes, martes, jueves y sábado (aparece al final de la sesión en Ejercicio 🏋️).</div>';
   const mn=document.getElementById('chkMental');
   mn.innerHTML=MENTAL_PASOS.map((p,i)=>{
     const id='m_paso_'+i;
