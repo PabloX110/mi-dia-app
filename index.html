@@ -118,8 +118,12 @@ nav button.on .ic{filter:none;opacity:1}
 .estadoEj{margin-top:10px;text-align:center;font-family:'Poppins';font-weight:600;font-size:14.5px;
   padding:10px;border-radius:11px}
 .estadoEj.haciendo{background:rgba(28,143,214,.1);color:var(--azulOsc);animation:puls 1.3s infinite}
+.estadoEj.corriendo{background:rgba(28,143,214,.1);color:var(--azulOsc);font-variant-numeric:tabular-nums;font-size:17px}
 .estadoEj.desc{background:rgba(125,194,66,.16);color:var(--verdeOsc);font-variant-numeric:tabular-nums;font-size:17px}
 @keyframes puls{0%,100%{opacity:1}50%{opacity:.5}}
+.btnEj.cancelar{background:#fff;border:1.5px solid var(--line);color:var(--dim);margin-top:6px}
+.racha{margin-top:10px;display:inline-block;background:rgba(255,157,92,.14);color:#b5560f;
+  font-family:'Poppins';font-weight:600;font-size:13.5px;padding:7px 14px;border-radius:99px}
 .h3desc{color:var(--dim)!important;text-transform:none;letter-spacing:0;font-weight:500;
   -webkit-text-fill-color:var(--dim)}
 /* comidas */
@@ -247,9 +251,9 @@ a{color:var(--azul)}
     <div class="subt"><b>Qué se entrena:</b> velocidad de procesamiento, visión periférica, toma de decisión bajo presión y ejecución técnica simultánea (dual-task).</div>
     <div id="chkCognitivo"></div>
     <h3>📆 Cuándo hacerlo</h3>
-    <div class="subt"><b>Frecuencia recomendada: 3–4 veces por semana.</b> Es suficiente repetición para generar adaptación real en velocidad de procesamiento, sin sumar carga mental a una semana que ya es físicamente exigente. Más de eso no acelera el progreso — la ganancia está en la consistencia, no en el volumen.</div>
-    <div class="nota verde">📌 <b>Días y momentos exactos:</b><br>• <b>Lunes:</b> 6:00–6:15pm, en el hueco después del primer entreno personal y antes de alistarte para el entreno de equipo (que ese día empieza a las 7:00).<br>• <b>Miércoles y viernes:</b> al final de tu sesión de entrenamiento personal, junto a los 10 min de toques a la pared.<br>• <b>Sábado:</b> dentro del bloque de técnica de tu sesión de activación ligera.</div>
-    <div class="nota">⚠️ <b>Martes, jueves y domingo — sin sesión cognitiva:</b> martes y jueves ya tienes doble entreno con gimnasio de equipo, y domingo es tu único día real de recuperación. La ganancia está en la consistencia, no en el volumen.</div>
+    <div class="subt"><b>Frecuencia recomendada: 3 veces por semana.</b> Es suficiente repetición para generar adaptación real en velocidad de procesamiento, sin sumar carga mental a una semana que ya es físicamente exigente. Más de eso no acelera el progreso — la ganancia está en la consistencia, no en el volumen.</div>
+    <div class="nota verde">📌 <b>Días y momentos exactos:</b><br>• <b>Lunes:</b> 6:00–6:15pm, en el hueco después del primer entreno personal y antes de alistarte para el entreno de equipo (que ese día empieza a las 7:00).<br>• <b>Viernes:</b> al final de tu sesión de entrenamiento personal, junto a los 10 min de toques a la pared.<br>• <b>Sábado:</b> dentro del bloque de técnica de tu sesión de activación ligera.</div>
+    <div class="nota">⚠️ <b>Martes, miércoles, jueves y domingo — sin ejercicio cognitivo:</b> martes y jueves ya tienes doble entreno con gimnasio de equipo, el miércoles tienes poco tiempo, y el domingo es tu único día real de recuperación. La ganancia está en la consistencia, no en el volumen.</div>
     <h3>🎒 Qué necesitas</h3>
     <div class="subt">🎾 Pelota de tenis (o una pelota pequeña similar de goma)<br>⚽ Balón de fútbol<br>🧱 Pared libre de obstáculos (para el nivel intermedio)<br>🔶 4–6 conos para el nivel avanzado (puedes sustituir con botellas o zapatos)</div>
     <h3>🏃 Ejercicios</h3>
@@ -274,6 +278,7 @@ a{color:var(--azul)}
     <div class="subt" style="margin-bottom:2px">Progreso de hoy</div>
     <div class="pct" id="pctHoy">0%</div>
     <div class="subt" id="detHoy"></div>
+    <div class="racha" id="racha"></div>
   </div>
   <div class="card">
     <h2>📆 Esta semana</h2>
@@ -478,10 +483,7 @@ mie:{titulo:'Fuerza y Core (Adaptada)',emoji:'🏋️',sub:'Fuerza tren superior
  {b:'🧱 Core',d:40,ej:[
   {n:'Elevaciones de piernas',s:'3×15',c:'Misma técnica que el lunes: manos bajo la cadera, piernas rectas hasta 90°, bajada lenta sin tocar el piso.'},
   {n:'Bird Dog con mancuerna',s:'3×10 por lado',c:'Igual que bird dog normal, pero sostén una mancuerna ligera en la mano que se extiende al frente para sumar estabilidad activa del hombro.',d:'⚠️ No uses el disco de 25lb aquí — es demasiado peso para un movimiento de estabilidad unilateral. Mantenlo con mancuerna ligera o sin peso.'},
-  {n:'Dead bugs',s:'3×14',c:'Misma técnica que el lunes, sin peso adicional: rodillas y brazos en 90°, extiende brazo y pierna opuestos sin arquear la espalda baja.'}]},
- {b:'🧠 Ejercicio cognitivo + técnica (al final de la sesión)',d:30,ej:[
-  {n:'Técnica: toques a la pared y control orientado',s:'10 min',c:'La técnica que te toca hoy: toques contra la pared con ambos pies y control orientado del rebote, a ritmo cómodo, priorizando la calidad del toque.'},
-  {n:'Ejercicio cognitivo — elige tu nivel',s:'3×1 min',c:OLISE}]}]},
+  {n:'Dead bugs',s:'3×14',c:'Misma técnica que el lunes, sin peso adicional: rodillas y brazos en 90°, extiende brazo y pierna opuestos sin arquear la espalda baja.'}]}]},
 jue:{titulo:'Velocidad + Cambio de Dirección + Técnica',emoji:'💨',sub:'Área: Velocidad + Pliometría + Técnica',tiempo:'55–60 min',bloques:[
  {b:'⚡ Velocidad + potencia',d:75,ej:[
   {n:'Power Skips',s:'3×20 m',c:'Skipping explosivo elevando la rodilla al máximo con cada paso mientras el brazo contrario empuja hacia arriba, buscando altura y no solo velocidad.'},
@@ -539,7 +541,7 @@ const MENTAL_PASOS=[
  ['🫁','1. Respiración de caja','3 min','Inhala 4 segundos, sostén 4 segundos, exhala 4 segundos, sostén 4 segundos con los pulmones vacíos. Repite el ciclo durante 3 minutos.'],
  ['🎯','2. Visualización','5 min','Cierra los ojos y visualiza una jugada específica saliendo perfecta: un regate, un pase, una definición. Siente el movimiento como si ya estuviera pasando, no como un deseo.'],
  ['📝','3. Registro breve','5 min','Escribe 1 cosa que hiciste bien hoy (en cancha o fuera) y 1 cosa concreta que vas a mejorar mañana. Dos líneas, no un diario largo. (Libreta o notas del teléfono.)']];
-const DIAS_COGNITIVO=['lun','mie','vie','sab'];
+const DIAS_COGNITIVO=['lun','vie','sab'];
 
 /* ================= DATOS: COMIDAS ================= */
 const DESAYUNOS=[
@@ -707,13 +709,21 @@ function pintarEntreno(d){
       const on=(esHoy&&checks[id])?' hecho':'';
       let extra='';
       if(esHoy){
-        if(sesion.id===id&&sesion.fase==='haciendo'){
-          extra='<div class="estadoEj haciendo">🏃 Haciendo ejercicio…</div><button class="btnEj ya" onclick="yaEj()">✅ ¡Ya!</button>';
-        }else if(sesion.id===id&&sesion.fase==='descanso'){
-          const s=Math.max(1,Math.ceil((sesion.fin-Date.now())/1000));
-          extra='<div class="estadoEj desc">😮‍💨 Descanso: <span id="timerEj">'+fmtSeg(s)+'</span></div><button class="btnEj saltar" onclick="saltarDescanso()">⏭ Saltar descanso</button>';
+        if(sesion.id===id){
+          const s=Math.max(0,Math.ceil((sesion.fin-Date.now())/1000));
+          const serie=sesion.sets>1?' · Serie '+sesion.set+'/'+sesion.sets:'';
+          if(sesion.fase==='rest'){
+            extra='<div class="estadoEj desc">😮‍💨 Descanso · <span id="timerEj">'+fmtSeg(s)+'</span>'+(sesion.sets>1?' · sigue serie '+(sesion.set+1)+'/'+sesion.sets:'')+'</div><button class="btnEj saltar" onclick="saltar()">⏭ Saltar descanso</button>';
+          }else if(sesion.work>0){
+            extra='<div class="estadoEj corriendo">🏃 Haciendo'+serie+' · <span id="timerEj">'+fmtSeg(s)+'</span></div><button class="btnEj ya" onclick="yaEj()">✅ Terminé antes</button><button class="btnEj cancelar" onclick="cancelarEj()">✕ Cancelar</button>';
+          }else{
+            extra='<div class="estadoEj haciendo">🏃 Haciendo ejercicio'+serie+'…</div><button class="btnEj ya" onclick="yaEj()">✅ ¡Ya!</button><button class="btnEj cancelar" onclick="cancelarEj()">✕ Cancelar</button>';
+          }
         }else{
-          extra='<button class="btnEj" onclick="empezarEj(\''+id+'\','+dur+')">▶ Empezar</button>';
+          const p=parseEj(ej.s,dur);
+          let hint=p.sets>1?p.sets+' series':'';
+          if(p.work>0)hint+=(hint?' · ':'')+'⏱ '+fmtSeg(p.work);
+          extra='<button class="btnEj" onclick="empezarEj(\''+id+'\')">▶ Empezar'+(hint?' <small style="opacity:.8;font-weight:600">('+hint+')</small>':'')+'</button>';
         }
       }
       h+='<div class="ej'+on+'" id="'+id+'"><div class="top" onclick="tickEj(\''+id+'\',\''+d+'\')">'+
@@ -733,61 +743,72 @@ function tickEj(id,d){
   el.classList.toggle('hecho',!!checks[id]);
   el.querySelector('.box').textContent=checks[id]?'✓':'';
 }
-/* --- Empezar / Ya / descanso --- */
-let sesion={id:null,fase:null,fin:0,dur:0,timer:null};
-let audioCtx=null;
-function fmtSeg(s){return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
-function empezarEj(id,dur){
-  if(sesion.timer)clearInterval(sesion.timer);
-  sesion={id:id,fase:'haciendo',fin:0,dur:dur,timer:null};
+/* --- Temporizadores automáticos: trabajo + descanso por series --- */
+let sesion={id:null,fase:null,set:0,sets:0,work:0,rest:0,fin:0,timer:null};
+let audioCtx=null,wakeLock=null;
+function fmtSeg(s){s=Math.max(0,s);return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
+/* lee la serie ("3×45-50s", "4×8", "15-30 min", "5 reps"...) y saca series + segundos de trabajo */
+function parseEj(ser,restDef){
+  ser=ser||'';
+  let sets=1;const mS=ser.match(/(\d+)\s*(?:×|x|series?|rondas?|reps?)/i);if(mS)sets=+mS[1];
+  let work=0;
+  const seg=ser.match(/(\d+)\s*(?:-\s*(\d+))?\s*s\b/);
+  const min=ser.match(/(\d+)\s*(?:-\s*(\d+))?\s*min\b/);
+  if(seg)work=seg[2]?+seg[2]:+seg[1];
+  else if(min)work=(min[2]?+min[2]:+min[1])*60;
+  return{sets:sets,work:work,rest:restDef||45};
+}
+function limpiarTimer(){if(sesion.timer){clearInterval(sesion.timer);sesion.timer=null}}
+function sesionCero(){limpiarTimer();sesion={id:null,fase:null,set:0,sets:0,work:0,rest:0,fin:0,timer:null}}
+function empezarEj(id){
+  limpiarTimer();
+  const p2=id.split('_'),d=p2[1],bi=+p2[2],ei=+p2[3];
+  const bl=ENTRENO[d].bloques[bi],ej=bl.ej[ei];
+  const p=parseEj(ej.s,bl.d);
+  sesion={id:id,fase:null,set:1,sets:p.sets,work:p.work,rest:p.rest,fin:0,timer:null};
+  ensureAudio();pedirWakeLock();
+  iniciarTrabajo();
+}
+function iniciarTrabajo(){
+  sesion.fase='work';
+  if(sesion.work>0){sesion.fin=Date.now()+sesion.work*1000;sesion.timer=setInterval(tick,250)}
   pintarEntreno(diaEj);
 }
-function yaEj(){
-  const id=sesion.id;
-  if(!checks[id]){checks[id]=true;guardar()}
-  try{if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume()}catch(e){}
-  if(sesion.dur>0){
-    sesion.fase='descanso';sesion.fin=Date.now()+sesion.dur*1000;
-    sesion.timer=setInterval(tickDescanso,250);
-  }else{
-    sesion={id:null,fase:null,fin:0,dur:0,timer:null};
-    toast('💪 ¡Hecho!');
-  }
+function finTrabajo(){
+  limpiarTimer();beep(1);
+  if(sesion.set<sesion.sets)iniciarDescanso();else completarEj();
+}
+function iniciarDescanso(){
+  sesion.fase='rest';sesion.fin=Date.now()+sesion.rest*1000;sesion.timer=setInterval(tick,250);
   pintarEntreno(diaEj);
 }
-function tickDescanso(){
+function finDescanso(){limpiarTimer();beep(2);sesion.set++;iniciarTrabajo()}
+function tick(){
   const s=Math.ceil((sesion.fin-Date.now())/1000);
-  if(s<=0){finDescanso();return}
-  const el=document.getElementById('timerEj');
-  if(el)el.textContent=fmtSeg(s);
+  if(s<=0){sesion.fase==='work'?finTrabajo():finDescanso();return}
+  const el=document.getElementById('timerEj');if(el)el.textContent=fmtSeg(s);
 }
-function finDescanso(){
-  clearInterval(sesion.timer);
-  sesion={id:null,fase:null,fin:0,dur:0,timer:null};
-  pitido();
-  toast('🔔 ¡Descanso terminado — siguiente!');
+function yaEj(){ensureAudio();finTrabajo()}
+function saltar(){ensureAudio();sesion.fase==='work'?finTrabajo():finDescanso()}
+function completarEj(){
+  const id=sesion.id;if(id&&!checks[id]){checks[id]=true;guardar()}
+  liberarWakeLock();sesionCero();beep(2);toast('💪 ¡Ejercicio completo!');
   pintarEntreno(diaEj);
 }
-function saltarDescanso(){
-  clearInterval(sesion.timer);
-  sesion={id:null,fase:null,fin:0,dur:0,timer:null};
-  pintarEntreno(diaEj);
-}
-function pitido(){
-  if(navigator.vibrate)navigator.vibrate([250,120,250]);
-  try{
-    if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();
-    const t=audioCtx.currentTime;
-    [0,.35].forEach(off=>{
-      const o=audioCtx.createOscillator(),g=audioCtx.createGain();
-      o.connect(g);g.connect(audioCtx.destination);
-      o.frequency.value=880;
-      g.gain.setValueAtTime(.3,t+off);
-      g.gain.exponentialRampToValueAtTime(.001,t+off+.3);
-      o.start(t+off);o.stop(t+off+.3);
-    });
+function cancelarEj(){liberarWakeLock();sesionCero();pintarEntreno(diaEj)}
+function ensureAudio(){try{if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume()}catch(e){}}
+function beep(n){
+  if(navigator.vibrate)navigator.vibrate(n>1?[200,100,200]:[280]);
+  try{if(!audioCtx)return;const t=audioCtx.currentTime;
+    for(let i=0;i<n;i++){const off=i*.34,o=audioCtx.createOscillator(),g=audioCtx.createGain();
+      o.connect(g);g.connect(audioCtx.destination);o.frequency.value=(n>1&&i===n-1)?1150:880;
+      g.gain.setValueAtTime(.32,t+off);g.gain.exponentialRampToValueAtTime(.001,t+off+.32);
+      o.start(t+off);o.stop(t+off+.32)}
   }catch(e){}
 }
+async function pedirWakeLock(){try{if('wakeLock'in navigator)wakeLock=await navigator.wakeLock.request('screen')}catch(e){}}
+function liberarWakeLock(){try{if(wakeLock){wakeLock.release();wakeLock=null}}catch(e){}}
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&sesion.id&&!wakeLock)pedirWakeLock()});
 
 /* ================= MENTAL ================= */
 function pintarMental(){
@@ -853,6 +874,13 @@ function pintarCalendario(){
     sh+='<div class="semDia'+(k===HOYKEY?'" style="outline:2px solid var(--azul)':'')+'"><div class="d">'+['L','M','X','J','V','S','D'][i]+'</div><div class="p'+est+'">'+(e?e.p+'%':'—')+'</div></div>';
   }
   document.getElementById('semRow').innerHTML=sh;
+  // racha de días cumplidos (≥80%) consecutivos
+  let r=0;const dd2=new Date(hoy);
+  const hk=fkey(dd2);
+  if(!(hist[hk]&&hist[hk].p>=80))dd2.setDate(dd2.getDate()-1); // si hoy aún no llega, no rompe la racha
+  while(true){const k=fkey(dd2);if(hist[k]&&hist[k].p>=80){r++;dd2.setDate(dd2.getDate()-1)}else break}
+  const rEl=document.getElementById('racha');
+  rEl.textContent=r>0?'🔥 Racha: '+r+(r===1?' día cumplido':' días cumplidos')+' (≥80%)':'🌱 Empieza tu racha: cumple ≥80% hoy';
   // mejora por meses
   const porMes={};
   Object.entries(hist).forEach(([k,e])=>{
