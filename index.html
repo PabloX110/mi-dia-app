@@ -70,6 +70,11 @@ header h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:te
 .chk.actual{background:rgba(125,194,66,.1);border-radius:12px;margin:0 -6px;padding:10px}
 .chk.soloVer{cursor:default}
 .chk.soloVer .box{display:none}
+.chk.autoItem{cursor:default}
+.chk.autoItem .box{opacity:.85}
+.vasos{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:6px 0 10px}
+.vaso{font-size:30px;cursor:pointer;filter:grayscale(.6);opacity:.5;transition:.12s;line-height:1}
+.vaso.on{filter:none;opacity:1;transform:scale(1.05)}
 /* nav */
 nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;
   background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-top:1px solid var(--line);
@@ -222,6 +227,13 @@ a{color:var(--azul)}
     <div class="subt">La clave de la cena: proteína + algo ligero, sin freír mucho ni cocinar elaborado.</div>
     <div id="listaCenas"></div>
   </div>
+  <div class="card">
+    <span class="tag az">💧 hidratación</span>
+    <h2>💧 Tomar agua</h2>
+    <div class="subt">Toca un vaso cada vez que tomes agua. Meta: 8 vasos al día. Se reinicia cada día. 🎯 Idea: uno al despertar, uno en cada comida y refacción, y uno antes/después del entreno.</div>
+    <div class="vasos" id="aguaVasos"></div>
+    <div class="subt" id="aguaTxt" style="text-align:center;font-weight:600;color:var(--azulOsc)"></div>
+  </div>
   <div class="card compra">
     <h2>🛒 Lista de compra</h2>
     <div id="listaCompra"></div>
@@ -270,8 +282,14 @@ a{color:var(--azul)}
   <div class="card">
     <span class="tag">🌙 9:10–9:25pm · entre la cena y dormir</span>
     <h2>😴 Rutina mental nocturna</h2>
-    <div class="subt">10–15 min. El objetivo es cortar el modo acelerado del día y entrenar la cabeza igual que el cuerpo. Marca cada paso cuando lo hagas:</div>
+    <div class="subt">10–15 min. El objetivo es cortar el modo acelerado del día y entrenar la cabeza igual que el cuerpo. Los pasos 1 y 2 tienen temporizador y se marcan solos al terminar; el 3 lo marcas tú al escribir.</div>
     <div id="chkMental"></div>
+  </div>
+  <div class="card">
+    <span class="tag az">📖 hábito diario</span>
+    <h2>📖 Lectura</h2>
+    <div class="subt">Lee 10 minutos. Al terminar el temporizador se marca solo aquí y en tu rutina del día — no se puede marcar a mano.</div>
+    <div id="lecturaCtrl"></div>
   </div>
 </div>
 
@@ -324,7 +342,7 @@ a{color:var(--azul)}
 /* item = [emoji, hora, texto, ini, fin] (minutos desde medianoche) */
 const MAN_LV=[
  ['⏰','6:00','Levantarme',360,360],
- ['📖','6:00–6:10','Leer libro',360,370],
+ ['📖','6:00–6:10','Leer libro',360,370,'LEER'],
  ['🧘','6:10–6:15','Meditar',370,375],
  ['🍳','6:15–6:30','Desayunar',375,390],
  ['🪥','6:30–6:45','Higiene (lavarme cara, cepillarme, cambiarme, perfume, crema)',390,405],
@@ -389,8 +407,9 @@ const TARDE_VIE=[
 const DIA_SAB=[
  ['⏰','6:45','Levantarme',405,405],
  ['🍳','6:45–7:10','Desayunar',405,430],
- ['👕','7:10–7:30','Alistarme',430,450],
- ['🚗','7:30–8:00','Traslado a clase de música',450,480],
+ ['👕','7:10–7:40','Alistarme',430,470],
+ ['📖','7:40–7:50','Leer libro',470,480,'LEER'],
+ ['🚶','7:50','Salgo a clase de música (llegas en ~5 min)',480,480],
  ['🎵','8:00–10:00','Clase de música',480,600],
  ['🚗','10:00–10:30','Traslado a casa',600,630],
  ['⚽','11:00–11:45','Entreno personal (activación + técnica; incluye 10–15 min de ejercicio cognitivo)',660,705],
@@ -589,10 +608,11 @@ let calMes=hoy.getMonth(),calAno=hoy.getFullYear();
 
 function idsHoy(){
   const ids=[];
-  RUTINA[DKEY].sec.forEach((s,si)=>s[1].forEach((_,i)=>ids.push('r_'+DKEY+'_'+si+'_'+i)));
+  RUTINA[DKEY].sec.forEach((s,si)=>s[1].forEach((it,i)=>ids.push(it[5]||('r_'+DKEY+'_'+si+'_'+i))));
   ENTRENO[DKEY].bloques.forEach((bl,bi)=>bl.ej.forEach((_,ei)=>ids.push('e_'+DKEY+'_'+bi+'_'+ei)));
   MENTAL_PASOS.forEach((_,i)=>ids.push('m_paso_'+i));
-  return ids;
+  ids.push('LEER'); // lectura del día (Mental, enlazada con la rutina)
+  return [...new Set(ids)];
 }
 function guardar(){
   localStorage.setItem('midia_checks_'+HOYKEY,JSON.stringify(checks));
@@ -666,16 +686,20 @@ function pintarRutina(d){
   RUTINA[d].sec.forEach((s,si)=>{
     h+='<h3>'+s[0]+'</h3>';
     s[1].forEach((it,i)=>{
-      const id='r_'+d+'_'+si+'_'+i;
+      const auto=it[5]; // id fijo => se marca solo (ej. lectura); no se toca a mano
+      const id=auto||('r_'+d+'_'+si+'_'+i);
       const on=esHoy&&checks[id]?' hecho':'';
       const act=esHoy&&typeof it[3]==='number'&&mins>=it[3]&&mins<Math.max(it[4],it[3]+1)?' actual':'';
-      const ver=esHoy?'':' soloVer';
-      h+='<div class="chk'+on+act+ver+'" data-id="'+id+'">'+(esHoy?'<div class="box">'+(checks[id]?'✓':'')+'</div>':'')+
-         '<div class="emo">'+it[0]+'</div><div class="tx"><div class="h">'+it[1]+'</div>'+it[2]+'</div></div>';
+      let cls='chk'+on+act;
+      if(!esHoy)cls+=' soloVer'; else if(auto)cls+=' autoItem';
+      const box=esHoy?'<div class="box">'+(checks[id]?'✓':'')+'</div>':'';
+      const hint=(esHoy&&auto)?' <small style="color:var(--dim)">· se marca al leer 📖 en Mental</small>':'';
+      h+='<div class="'+cls+'" data-id="'+id+'">'+box+
+         '<div class="emo">'+it[0]+'</div><div class="tx"><div class="h">'+it[1]+'</div>'+it[2]+hint+'</div></div>';
     });
   });
   document.getElementById('contRutina').innerHTML=h;
-  if(esHoy)document.querySelectorAll('#contRutina .chk').forEach(el=>el.onclick=()=>{toggle(el.dataset.id);pintarRutina(diaRutina)});
+  if(esHoy)document.querySelectorAll('#contRutina .chk:not(.autoItem)').forEach(el=>el.onclick=()=>{toggle(el.dataset.id);pintarRutina(diaRutina)});
   document.getElementById('notasRutina').innerHTML=(NOTAS[d]||[]).join('');
   refrescarProgreso();
 }
@@ -818,20 +842,102 @@ function beep(n){
 }
 async function pedirWakeLock(){try{if('wakeLock'in navigator)wakeLock=await navigator.wakeLock.request('screen')}catch(e){}}
 function liberarWakeLock(){try{if(wakeLock){wakeLock.release();wakeLock=null}}catch(e){}}
-document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&sesion.id&&!wakeLock)pedirWakeLock()});
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&(sesion.id||mSes.id)&&!wakeLock)pedirWakeLock()});
 
 /* ================= MENTAL ================= */
 function pintarMental(){
   const cog=document.getElementById('chkCognitivo');
   cog.innerHTML=DIAS_COGNITIVO.includes(DKEY)
     ?'<div class="nota verde" style="margin:8px 0">✅ <b>Hoy toca ejercicio cognitivo</b> — está al final de tu sesión en la pestaña Ejercicio 🏋️, ahí lo marcas como parte del entrenamiento.</div>'
-    :'<div class="nota" style="margin:8px 0">📅 Hoy no toca ejercicio cognitivo — se hace lunes, miércoles, viernes y sábado (aparece al final de la sesión en Ejercicio 🏋️).</div>';
+    :'<div class="nota" style="margin:8px 0">📅 Hoy no toca ejercicio cognitivo — se hace lunes, viernes y sábado (aparece al final de la sesión en Ejercicio 🏋️).</div>';
   const mn=document.getElementById('chkMental');
-  mn.innerHTML=MENTAL_PASOS.map((p,i)=>{
+  let h='';
+  MENTAL_PASOS.forEach((p,i)=>{
     const id='m_paso_'+i;
-    return'<div class="chk'+(checks[id]?' hecho':'')+'" data-id="'+id+'"><div class="box">'+(checks[id]?'✓':'')+'</div><div class="emo">'+p[0]+'</div><div class="tx"><div class="h">'+p[2]+'</div><b>'+p[1]+'</b><div style="font-size:13px;color:var(--dim);margin-top:2px">'+p[3]+'</div></div></div>';
-  }).join('');
-  mn.querySelectorAll('.chk').forEach(el=>el.onclick=()=>{toggle(el.dataset.id);pintarMental()});
+    const done=checks[id];
+    const conTimer=(i<2); // pasos 1 (respiración) y 2 (visualización)
+    let ctrl='';
+    if(conTimer){
+      if(mSes.id===id){
+        if(mSes.caja)
+          ctrl='<div class="estadoEj corriendo" style="text-align:center"><b id="mFase">preparando…</b> · <span id="mTimer"></span></div><button class="btnEj cancelar" onclick="cancelarMental()">✕ Cancelar</button>';
+        else
+          ctrl='<div class="estadoEj corriendo">🧘 Visualizando · <span id="mTimer"></span></div><button class="btnEj cancelar" onclick="cancelarMental()">✕ Cancelar</button>';
+      }else if(!done){
+        ctrl='<button class="btnEj" onclick="empezarMental(\''+id+'\','+(i===0?180:300)+','+(i===0)+')">▶ Empezar ('+p[2]+')</button>';
+      }
+    }
+    const clickable=!conTimer; // solo el paso 3 (registro) se marca a mano
+    h+='<div class="chk'+(done?' hecho':'')+(clickable?'':' autoItem')+'" data-id="'+id+'">'+
+       '<div class="box">'+(done?'✓':'')+'</div><div class="emo">'+p[0]+'</div>'+
+       '<div class="tx"><div class="h">'+p[2]+'</div><b>'+p[1]+'</b>'+
+       '<div style="font-size:13px;color:var(--dim);margin-top:2px">'+p[3]+'</div>'+ctrl+'</div></div>';
+  });
+  mn.innerHTML=h;
+  mn.querySelectorAll('.chk:not(.autoItem)').forEach(el=>el.onclick=()=>{toggle(el.dataset.id);pintarMental()});
+  // lectura
+  const lc=document.getElementById('lecturaCtrl');
+  if(checks['LEER'])
+    lc.innerHTML='<div class="chk hecho autoItem"><div class="box">✓</div><div class="emo">📖</div><div class="tx"><b>¡Lectura de hoy hecha!</b> <small style="color:var(--dim)">· también marcada en tu rutina</small></div></div>';
+  else if(mSes.id==='LEER')
+    lc.innerHTML='<div class="estadoEj corriendo">📖 Leyendo · <span id="mTimer"></span></div><button class="btnEj cancelar" onclick="cancelarMental()">✕ Cancelar</button>';
+  else
+    lc.innerHTML='<button class="btnEj" onclick="empezarMental(\'LEER\',600,false)">▶ Empezar (10 min)</button>';
+}
+/* --- Temporizadores de la parte mental (respiración de caja, visualización, lectura) --- */
+let mSes={id:null,ini:0,total:0,caja:false,fase:-1,timer:null};
+const CAJA=['🫁 Inhala','⏸️ Sostén','😮‍💨 Exhala','⏸️ Sostén vacío'];
+function empezarMental(id,total,caja){
+  pararMTimer();ensureAudio();pedirWakeLock();
+  mSes={id:id,ini:Date.now(),total:total,caja:!!caja,fase:-1,timer:setInterval(mTick,200)};
+  pintarMental();
+}
+function mTick(){
+  const el=(Date.now()-mSes.ini)/1000;
+  const rem=Math.ceil(mSes.total-el);
+  if(rem<=0){mFin();return}
+  if(mSes.caja){
+    const fase=Math.floor(el/4)%4;
+    if(fase!==mSes.fase){mSes.fase=fase;beepSuave()}
+    const enFase=4-Math.floor(el%4);
+    const f=document.getElementById('mFase');if(f)f.textContent=CAJA[mSes.fase]+' '+enFase;
+  }
+  const t=document.getElementById('mTimer');if(t)t.textContent=(mSes.caja?'queda ':'')+fmtSeg(rem);
+}
+function mFin(){
+  pararMTimer();
+  const id=mSes.id;
+  mSes={id:null,ini:0,total:0,caja:false,fase:-1,timer:null};
+  if(id&&!checks[id]){checks[id]=true;guardar()}
+  liberarWakeLock();beepSuave();setTimeout(beepSuave,260);
+  toast('🧘 ¡Listo!');
+  pintarMental();
+  if(diaRutina===DKEY)pintarRutina(DKEY);
+}
+function cancelarMental(){pararMTimer();liberarWakeLock();mSes={id:null,ini:0,total:0,caja:false,fase:-1,timer:null};pintarMental()}
+function pararMTimer(){if(mSes.timer){clearInterval(mSes.timer);mSes.timer=null}}
+function beepSuave(){
+  if(navigator.vibrate)navigator.vibrate(60);
+  try{if(!audioCtx)return;const t=audioCtx.currentTime;
+    const o=audioCtx.createOscillator(),g=audioCtx.createGain();
+    o.connect(g);g.connect(audioCtx.destination);o.frequency.value=560;
+    g.gain.setValueAtTime(.09,t);g.gain.exponentialRampToValueAtTime(.001,t+.22);
+    o.start(t);o.stop(t+.22);
+  }catch(e){}
+}
+/* --- Agua --- */
+let agua=+(localStorage.getItem('midia_agua_'+HOYKEY)||0);
+function pintarAgua(){
+  const cont=document.getElementById('aguaVasos');if(!cont)return;
+  let h='';for(let i=0;i<8;i++)h+='<span class="vaso'+(i<agua?' on':'')+'" data-i="'+i+'">'+(i<agua?'💧':'🥛')+'</span>';
+  cont.innerHTML=h;
+  cont.querySelectorAll('.vaso').forEach(el=>el.onclick=()=>{
+    const i=+el.dataset.i;
+    agua=(i+1===agua)?i:i+1; // tocar el último lleno lo baja; si no, sube hasta ahí
+    localStorage.setItem('midia_agua_'+HOYKEY,agua);
+    pintarAgua();
+  });
+  document.getElementById('aguaTxt').textContent=agua+' / 8 vasos'+(agua>=8?' · ¡meta cumplida! 🎉':'');
 }
 
 /* ================= COMIDAS ================= */
@@ -907,7 +1013,7 @@ function pintarCalendario(){
 function moverMes(n){calMes+=n;if(calMes<0){calMes=11;calAno--}if(calMes>11){calMes=0;calAno++}pintarCalendario()}
 
 /* ================= INIT ================= */
-pintarAhora();pintarRutina(DKEY);pintarEntreno(DKEY);pintarMental();pintarComidas();pintarCalendario();
+pintarAhora();pintarRutina(DKEY);pintarEntreno(DKEY);pintarMental();pintarComidas();pintarAgua();pintarCalendario();
 setInterval(()=>{pintarAhora();if(diaRutina===DKEY)pintarRutina(DKEY)},60000);
 if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js');
 </script>
