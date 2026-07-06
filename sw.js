@@ -1,4 +1,4 @@
-const CACHE = 'midia-v5';
+const CACHE = 'midia-v6';
 const FILES = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', e => {
