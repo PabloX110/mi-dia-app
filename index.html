@@ -92,7 +92,7 @@ nav button.on .ic{filter:none;opacity:1}
   margin-bottom:4px;box-shadow:0 2px 6px rgba(51,58,68,.06)}
 /* ejercicio */
 .ej{border:1px solid var(--line);border-radius:14px;padding:12px;margin:9px 0;background:#fbfdff}
-.ej .top{display:flex;align-items:flex-start;gap:10px;cursor:pointer}
+.ej .top{display:flex;align-items:flex-start;gap:10px}
 .ej .nom{flex:1;font-weight:600;font-size:14.5px}
 .ej .ser{font-size:12.5px;color:var(--verdeOsc);font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums}
 .ej.hecho .nom{opacity:.4;text-decoration:line-through}
@@ -122,6 +122,9 @@ nav button.on .ic{filter:none;opacity:1}
 .estadoEj.desc{background:rgba(125,194,66,.16);color:var(--verdeOsc);font-variant-numeric:tabular-nums;font-size:17px}
 @keyframes puls{0%,100%{opacity:1}50%{opacity:.5}}
 .btnEj.cancelar{background:#fff;border:1.5px solid var(--line);color:var(--dim);margin-top:6px}
+.btnEj.bloq{background:#eef3f8;color:var(--dim);cursor:default;box-shadow:none}
+.ej .okdot{width:22px;height:22px;min-width:22px;border-radius:7px;background:var(--gradV);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
 .racha{margin-top:10px;display:inline-block;background:rgba(255,157,92,.14);color:#b5560f;
   font-family:'Poppins';font-weight:600;font-size:13.5px;padding:7px 14px;border-radius:99px}
 .h3desc{color:var(--dim)!important;text-transform:none;letter-spacing:0;font-weight:500;
@@ -710,24 +713,31 @@ function pintarEntreno(d){
       let extra='';
       if(esHoy){
         if(sesion.id===id){
-          const s=Math.max(0,Math.ceil((sesion.fin-Date.now())/1000));
           const serie=sesion.sets>1?' · Serie '+sesion.set+'/'+sesion.sets:'';
           if(sesion.fase==='rest'){
+            const s=Math.max(0,Math.ceil((sesion.fin-Date.now())/1000));
             extra='<div class="estadoEj desc">😮‍💨 Descanso · <span id="timerEj">'+fmtSeg(s)+'</span>'+(sesion.sets>1?' · sigue serie '+(sesion.set+1)+'/'+sesion.sets:'')+'</div><button class="btnEj saltar" onclick="saltar()">⏭ Saltar descanso</button>';
           }else if(sesion.work>0){
-            extra='<div class="estadoEj corriendo">🏃 Haciendo'+serie+' · <span id="timerEj">'+fmtSeg(s)+'</span></div><button class="btnEj ya" onclick="yaEj()">✅ Terminé antes</button><button class="btnEj cancelar" onclick="cancelarEj()">✕ Cancelar</button>';
+            const el=Math.floor((Date.now()-sesion.ini)/1000);
+            if(sesion.unlocked){
+              extra='<div class="estadoEj corriendo">🏃 Haciendo'+serie+' · <span id="timerEj">'+fmtSeg(el)+'</span></div><button class="btnEj ya" onclick="yaEj()">✅ ¡Ya!</button><button class="btnEj cancelar" onclick="cancelarEj()">✕ Cancelar</button>';
+            }else{
+              extra='<div class="estadoEj corriendo">🏃 Haciendo'+serie+' · <span id="timerEj">'+fmtSeg(el)+'</span> <small style="opacity:.7">/ mín '+fmtSeg(sesion.workMin)+'</small></div><button class="btnEj bloq" disabled>⏳ Puedes terminar a los '+fmtSeg(sesion.workMin)+'</button><button class="btnEj cancelar" onclick="cancelarEj()">✕ Cancelar</button>';
+            }
           }else{
             extra='<div class="estadoEj haciendo">🏃 Haciendo ejercicio'+serie+'…</div><button class="btnEj ya" onclick="yaEj()">✅ ¡Ya!</button><button class="btnEj cancelar" onclick="cancelarEj()">✕ Cancelar</button>';
           }
+        }else if(checks[id]){
+          extra='';
         }else{
           const p=parseEj(ej.s,dur);
           let hint=p.sets>1?p.sets+' series':'';
-          if(p.work>0)hint+=(hint?' · ':'')+'⏱ '+fmtSeg(p.work);
+          if(p.work>0)hint+=(hint?' · ':'')+'⏱ '+(p.workMin<p.work?fmtSeg(p.workMin)+'–'+fmtSeg(p.work):fmtSeg(p.work));
           extra='<button class="btnEj" onclick="empezarEj(\''+id+'\')">▶ Empezar'+(hint?' <small style="opacity:.8;font-weight:600">('+hint+')</small>':'')+'</button>';
         }
       }
-      h+='<div class="ej'+on+'" id="'+id+'"><div class="top" onclick="tickEj(\''+id+'\',\''+d+'\')">'+
-         '<div class="box">'+(on?'✓':'')+'</div><div class="nom">'+ej.n+'</div>'+(ej.s?'<div class="ser">'+ej.s+'</div>':'')+'</div>'+
+      h+='<div class="ej'+on+'" id="'+id+'"><div class="top">'+
+         (on?'<div class="okdot">✓</div>':'')+'<div class="nom">'+ej.n+'</div>'+(ej.s?'<div class="ser">'+ej.s+'</div>':'')+'</div>'+
          '<details><summary>Cómo se hace</summary><p>'+ej.c+'</p></details>'+
          (ej.d?'<details class="disco"><summary>Alternativa con disco 25lb</summary><p>'+ej.d+'</p></details>':'')+
          extra+'</div>';
@@ -736,42 +746,35 @@ function pintarEntreno(d){
   h+='</div>';
   document.getElementById('contEntreno').innerHTML=h;
 }
-function tickEj(id,d){
-  if(d!==DKEY){toast('⭐ Solo puedes marcar el día de hoy');return}
-  toggle(id);
-  const el=document.getElementById(id);
-  el.classList.toggle('hecho',!!checks[id]);
-  el.querySelector('.box').textContent=checks[id]?'✓':'';
-}
 /* --- Temporizadores automáticos: trabajo + descanso por series --- */
-let sesion={id:null,fase:null,set:0,sets:0,work:0,rest:0,fin:0,timer:null};
+let sesion={id:null,fase:null,set:0,sets:0,work:0,workMin:0,rest:0,ini:0,fin:0,unlocked:false,timer:null};
 let audioCtx=null,wakeLock=null;
 function fmtSeg(s){s=Math.max(0,s);return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
 /* lee la serie ("3×45-50s", "4×8", "15-30 min", "5 reps"...) y saca series + segundos de trabajo */
 function parseEj(ser,restDef){
   ser=ser||'';
   let sets=1;const mS=ser.match(/(\d+)\s*(?:×|x|series?|rondas?|reps?)/i);if(mS)sets=+mS[1];
-  let work=0;
+  let lo=0,hi=0;
   const seg=ser.match(/(\d+)\s*(?:-\s*(\d+))?\s*s\b/);
   const min=ser.match(/(\d+)\s*(?:-\s*(\d+))?\s*min\b/);
-  if(seg)work=seg[2]?+seg[2]:+seg[1];
-  else if(min)work=(min[2]?+min[2]:+min[1])*60;
-  return{sets:sets,work:work,rest:restDef||45};
+  if(seg){lo=+seg[1];hi=seg[2]?+seg[2]:+seg[1]}
+  else if(min){lo=(+min[1])*60;hi=(min[2]?+min[2]:+min[1])*60}
+  return{sets:sets,work:hi,workMin:lo,rest:restDef||45};
 }
 function limpiarTimer(){if(sesion.timer){clearInterval(sesion.timer);sesion.timer=null}}
-function sesionCero(){limpiarTimer();sesion={id:null,fase:null,set:0,sets:0,work:0,rest:0,fin:0,timer:null}}
+function sesionCero(){limpiarTimer();sesion={id:null,fase:null,set:0,sets:0,work:0,workMin:0,rest:0,ini:0,fin:0,unlocked:false,timer:null}}
 function empezarEj(id){
   limpiarTimer();
   const p2=id.split('_'),d=p2[1],bi=+p2[2],ei=+p2[3];
   const bl=ENTRENO[d].bloques[bi],ej=bl.ej[ei];
   const p=parseEj(ej.s,bl.d);
-  sesion={id:id,fase:null,set:1,sets:p.sets,work:p.work,rest:p.rest,fin:0,timer:null};
+  sesion={id:id,fase:null,set:1,sets:p.sets,work:p.work,workMin:p.workMin,rest:p.rest,ini:0,fin:0,unlocked:false,timer:null};
   ensureAudio();pedirWakeLock();
   iniciarTrabajo();
 }
 function iniciarTrabajo(){
-  sesion.fase='work';
-  if(sesion.work>0){sesion.fin=Date.now()+sesion.work*1000;sesion.timer=setInterval(tick,250)}
+  sesion.fase='work';sesion.unlocked=(sesion.work===0);
+  if(sesion.work>0){sesion.ini=Date.now();sesion.timer=setInterval(tick,250)}
   pintarEntreno(diaEj);
 }
 function finTrabajo(){
@@ -784,11 +787,18 @@ function iniciarDescanso(){
 }
 function finDescanso(){limpiarTimer();beep(2);sesion.set++;iniciarTrabajo()}
 function tick(){
-  const s=Math.ceil((sesion.fin-Date.now())/1000);
-  if(s<=0){sesion.fase==='work'?finTrabajo():finDescanso();return}
-  const el=document.getElementById('timerEj');if(el)el.textContent=fmtSeg(s);
+  if(sesion.fase==='work'){
+    const el=Math.floor((Date.now()-sesion.ini)/1000);
+    if(el>=sesion.work){finTrabajo();return}
+    if(!sesion.unlocked&&el>=sesion.workMin){sesion.unlocked=true;beep(1);pintarEntreno(diaEj);return}
+    const t=document.getElementById('timerEj');if(t)t.textContent=fmtSeg(el);
+  }else{
+    const s=Math.ceil((sesion.fin-Date.now())/1000);
+    if(s<=0){finDescanso();return}
+    const t=document.getElementById('timerEj');if(t)t.textContent=fmtSeg(s);
+  }
 }
-function yaEj(){ensureAudio();finTrabajo()}
+function yaEj(){if(sesion.fase==='work'&&sesion.work>0&&!sesion.unlocked)return;ensureAudio();finTrabajo()}
 function saltar(){ensureAudio();sesion.fase==='work'?finTrabajo():finDescanso()}
 function completarEj(){
   const id=sesion.id;if(id&&!checks[id]){checks[id]=true;guardar()}
