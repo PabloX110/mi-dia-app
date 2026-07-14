@@ -180,9 +180,48 @@ a{color:var(--azul)}
 .mesBar .lbl span:last-child{color:var(--azulOsc)}
 .mesBar .barra{height:14px;background:#e9eff5;border-radius:99px;overflow:hidden}
 .mesBar .barra i{display:block;height:100%;background:var(--grad);border-radius:99px}
+/* perfil / login */
+#gate{position:fixed;inset:0;background:var(--bg);z-index:200;display:flex;align-items:center;justify-content:center;padding:22px}
+#gate .box2{background:#fff;border:1px solid var(--line);border-radius:20px;padding:24px 20px;max-width:360px;width:100%;box-shadow:0 12px 44px rgba(51,58,68,.14);text-align:center}
+#gate .glogo{width:60px;height:60px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto 12px}
+#gate h2{font-size:21px;margin-bottom:4px}
+#gate p{color:var(--dim);font-size:13.5px;margin-bottom:16px;line-height:1.5}
+#gate input{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;font-size:15px;margin-bottom:10px;font-family:'Inter'}
+#gate input:focus{outline:none;border-color:var(--azul)}
+#gate .err{color:var(--rojo);font-size:12.5px;min-height:15px;margin-bottom:4px}
+#gate .alt{margin-top:12px;font-size:13px;color:var(--azulOsc);cursor:pointer;font-weight:600}
+#gate .aviso{font-size:11px;color:var(--dim);margin-top:14px;line-height:1.45}
+.perfilBtn{margin-left:auto;align-self:center;background:#fff;border:1.5px solid var(--line);border-radius:99px;padding:6px 11px;font-size:12px;font-weight:600;color:var(--azulOsc);cursor:pointer;font-family:'Poppins';white-space:nowrap}
+/* tareas importantes */
+.tarea{display:flex;align-items:flex-start;gap:11px;padding:12px 4px;border-bottom:1px solid #eef3f8}
+.tarea:last-child{border-bottom:none}
+.tarea .emo{font-size:22px;width:28px;text-align:center;margin-top:1px}
+.tarea .tx{flex:1}
+.tarea .tx b{font-size:15px}
+.tarea .tx .d{font-size:12.5px;color:var(--dim);margin-top:1px;line-height:1.4}
+.tarea.hecho .tx b{opacity:.5;text-decoration:line-through}
+.tareaBox{width:26px;height:26px;min-width:26px;border-radius:8px;border:2px solid #cfd9e3;display:flex;align-items:center;justify-content:center;font-size:15px;color:#fff;margin-top:1px;transition:.12s}
+.tarea.hecho .tareaBox{background:var(--gradV);border-color:var(--verde)}
+.tarea.tap{cursor:pointer}
+.tarea.tap .tareaBox{cursor:pointer}
+.tarea.goto{cursor:pointer}
 </style>
 </head>
 <body>
+
+<div id="gate" style="display:none">
+  <div class="box2">
+    <div class="glogo">⚡</div>
+    <h2 id="gateTit">Bienvenido a Mi Día</h2>
+    <p id="gateSub">Crea tu perfil para guardar tu progreso.</p>
+    <input id="gateNom" placeholder="Tu nombre" autocomplete="off" autocapitalize="words">
+    <input id="gatePass" type="password" placeholder="Contraseña" autocomplete="new-password">
+    <div class="err" id="gateErr"></div>
+    <button class="btn grad" id="gateBtn" onclick="gateAccion()">Crear perfil</button>
+    <div class="alt" id="gateAlt" onclick="gateToggle()">¿Ya tienes perfil? Inicia sesión</div>
+    <div class="aviso">🔒 Tu perfil y progreso se guardan solo en este dispositivo. La contraseña es un candado local para separar perfiles — no la uses igual que la de tu correo o banco.</div>
+  </div>
+</div>
 
 <header>
   <div class="logo">⚡</div>
@@ -190,22 +229,35 @@ a{color:var(--azul)}
     <div class="fecha" id="fechaHoy"></div>
     <h1>Mi <em>Día</em></h1>
   </div>
+  <button class="perfilBtn" id="perfilBtn" onclick="menuPerfil()">👤 <span id="perfilNombre"></span></button>
 </header>
 
-<!-- ============ RUTINA DIARIA ============ -->
-<div class="pag activa" id="pag-rutina">
+<!-- ============ HOY (tareas importantes) ============ -->
+<div class="pag activa" id="pag-hoy">
   <div class="card ahora" id="cardAhora"></div>
-  <div class="chipsRow">
-    <button class="flechaDia" onclick="pasoDia('rutina',-1)">‹</button>
-    <div class="chips" id="chipsRutina"></div>
-    <button class="flechaDia" onclick="pasoDia('rutina',1)">›</button>
-  </div>
   <div class="card">
     <div class="prog"><div class="barra"><i id="progBar" style="width:0%"></i></div><span id="progTxt">0%</span></div>
-    <div class="subt" id="subtRutina"></div>
-    <div id="contRutina"></div>
+    <div class="racha" id="rachaHoy" style="margin-top:8px"></div>
   </div>
-  <div id="notasRutina"></div>
+  <div class="card">
+    <h2>🎯 Tareas importantes de hoy</h2>
+    <div class="subt">Lo que estás trabajando por mejorar cada día. Esto es lo que mide tu progreso — de a poco, todos los días. 🌱</div>
+    <div id="tareasList"></div>
+  </div>
+</div>
+
+<!-- ============ HORARIO (rutina perfecta, referencia) ============ -->
+<div class="pag" id="pag-horario">
+  <div class="chipsRow">
+    <button class="flechaDia" onclick="pasoDia('hor',-1)">‹</button>
+    <div class="chips" id="chipsHor"></div>
+    <button class="flechaDia" onclick="pasoDia('hor',1)">›</button>
+  </div>
+  <div class="card">
+    <div class="subt" id="subtHor"></div>
+    <div id="contHor"></div>
+  </div>
+  <div id="notasHor"></div>
 </div>
 
 <!-- ============ COMIDAS ============ -->
@@ -255,46 +307,20 @@ a{color:var(--azul)}
     <div class="nota azul">⚽ <b>Técnica de balón fuera de estos bloques:</b> martes, jueves y sábado — un rato practicando técnica libre. Lunes, miércoles y viernes — 10 min de toques a la pared y control orientado.</div>
     <div class="nota">📹 <b>Movilidad de referencia</b> (video guardado): <a href="https://vm.tiktok.com/ZMBtjWAcw/" target="_blank" rel="noopener">ver en TikTok</a></div>
   </div>
+  <div class="card">
+    <span class="tag az">🧠 velocidad de decisión</span>
+    <h2>🧠 Ejercicio cognitivo</h2>
+    <div class="subt">Aparece al final de tu sesión los días que toca (<b>lunes, viernes y sábado</b>). Entrena velocidad de procesamiento, visión periférica y decisión bajo presión (dual-task). Elige UN nivel — todo se hace solo.</div>
+    <details><summary>📆 Cuándo y qué necesitas</summary><p>Frecuencia: 3 veces por semana; la ganancia está en la consistencia, no en el volumen. Materiales: 🎾 pelota de tenis, ⚽ balón, 🧱 una pared (nivel intermedio) y 🔶 4–6 conos o botellas (nivel avanzado).</p></details>
+    <details><summary>🟢 Nivel base (solo) — Toque y captura</summary><p>Conduce el balón a ritmo medio mientras lanzas y atrapas una pelota de tenis con la misma mano; la mirada en la pelota, el balón se controla por sensación de pie. 3×1 min.</p></details>
+    <details><summary>🔵 Nivel intermedio (pared) — Pared + pelota</summary><p>Golpea el balón contra la pared con el pie mientras lanzas y atrapas la pelota con la mano contraria al pie que golpea; alterna el pie cada 30 s. 3×1 min.</p></details>
+    <details><summary>🟣 Nivel avanzado (conos) — Slalom + pelota</summary><p>Conduce el balón en zigzag entre 4–6 conos mientras lanzas y atrapas la pelota de tenis; cuando lo domines, sube el ritmo o junta los conos. 3×1 min.</p></details>
+  </div>
   <div class="nota">🏆 <b>Nota — días de torneo (ej. Futeca Cayalá):</b> los días que juegas torneo no haces la sesión personal de ese día ni gimnasio de equipo — vas directo al torneo. Si el torneo implica varios partidos seguidos, prioriza hidratación y algo de energía rápida (fruta, dátiles) entre partidos.</div>
 </div>
 
-<!-- ============ MENTAL ============ -->
-<div class="pag" id="pag-mental">
-  <div class="card">
-    <span class="tag az">🎯 velocidad de decisión</span>
-    <h2>🧠 Entrenamiento cognitivo</h2>
-    <div class="subt"><b>Qué se entrena:</b> velocidad de procesamiento, visión periférica, toma de decisión bajo presión y ejecución técnica simultánea (dual-task).</div>
-    <div id="chkCognitivo"></div>
-    <h3>📆 Cuándo hacerlo</h3>
-    <div class="subt"><b>Frecuencia recomendada: 3 veces por semana.</b> Es suficiente repetición para generar adaptación real en velocidad de procesamiento, sin sumar carga mental a una semana que ya es físicamente exigente. Más de eso no acelera el progreso — la ganancia está en la consistencia, no en el volumen.</div>
-    <div class="nota verde">📌 <b>Días y momentos exactos:</b><br>• <b>Lunes:</b> 6:00–6:15pm, en el hueco después del primer entreno personal y antes de alistarte para el entreno de equipo (que ese día empieza a las 7:00).<br>• <b>Viernes:</b> al final de tu sesión de entrenamiento personal, junto a los 10 min de toques a la pared.<br>• <b>Sábado:</b> dentro del bloque de técnica de tu sesión de activación ligera.</div>
-    <div class="nota">⚠️ <b>Martes, miércoles, jueves y domingo — sin ejercicio cognitivo:</b> martes y jueves ya tienes doble entreno con gimnasio de equipo, el miércoles tienes poco tiempo, y el domingo es tu único día real de recuperación. La ganancia está en la consistencia, no en el volumen.</div>
-    <h3>🎒 Qué necesitas</h3>
-    <div class="subt">🎾 Pelota de tenis (o una pelota pequeña similar de goma)<br>⚽ Balón de fútbol<br>🧱 Pared libre de obstáculos (para el nivel intermedio)<br>🔶 4–6 conos para el nivel avanzado (puedes sustituir con botellas o zapatos)</div>
-    <h3>🏃 Ejercicios</h3>
-    <div class="ej"><div class="top" style="cursor:default"><div class="nom">🟢 Nivel base (solo) — Toque y captura</div><div class="ser">3×1 min</div></div>
-      <details><summary>Cómo se hace</summary><p>Conduce el balón con los pies a ritmo medio. Al mismo tiempo, lanza una pelota pequeña (de tenis) hacia arriba con una mano y atrápala con la misma mano sin dejar de conducir. Enfoca la mirada en la pelota pequeña, no en el balón — el balón se controla por sensación de pie, no por la vista.</p></details></div>
-    <div class="ej"><div class="top" style="cursor:default"><div class="nom">🔵 Nivel intermedio (solo, con pared) — Pared + pelota</div><div class="ser">3×1 min</div></div>
-      <details><summary>Cómo se hace</summary><p>Frente a una pared, golpea el balón contra ella con el pie mientras lanzas y atrapas la pelota pequeña con la mano contraria al pie que golpea. Alterna el pie de golpeo cada 30 segundos.</p></details></div>
-    <div class="ej"><div class="top" style="cursor:default"><div class="nom">🟣 Nivel avanzado (solo, con conos) — Slalom + pelota</div><div class="ser">3×1 min</div></div>
-      <details><summary>Cómo se hace</summary><p>Coloca 4–6 conos (o botellas/zapatos) en línea o zigzag. Conduce el balón pasando entre los conos mientras lanzas y atrapas la pelota de tenis con una mano. Empieza a ritmo lento; cuando logres pasar todos los conos sin perder el balón ni la pelota, sube el ritmo o junta más los conos. Esto entrena la doble atención real de un partido: el balón y lo que pasa alrededor.</p></details></div>
-  </div>
-  <div class="card">
-    <span class="tag">🌙 9:10–9:25pm · entre la cena y dormir</span>
-    <h2>😴 Rutina mental nocturna</h2>
-    <div class="subt">10–15 min. El objetivo es cortar el modo acelerado del día y entrenar la cabeza igual que el cuerpo. Los pasos 1 y 2 tienen temporizador y se marcan solos al terminar; el 3 lo marcas tú al escribir.</div>
-    <div id="chkMental"></div>
-  </div>
-  <div class="card">
-    <span class="tag az">📖 hábito diario</span>
-    <h2>📖 Lectura</h2>
-    <div class="subt">Lee 10 minutos. Al terminar el temporizador se marca solo aquí y en tu rutina del día — no se puede marcar a mano.</div>
-    <div id="lecturaCtrl"></div>
-  </div>
-</div>
-
-<!-- ============ CALENDARIO ============ -->
-<div class="pag" id="pag-calendario">
+<!-- ============ PROGRESO ============ -->
+<div class="pag" id="pag-progreso">
   <div class="card" style="text-align:center">
     <div class="subt" style="margin-bottom:2px">Progreso de hoy</div>
     <div class="pct" id="pctHoy">0%</div>
@@ -329,11 +355,11 @@ a{color:var(--azul)}
 </div>
 
 <nav>
-  <button data-pag="rutina" class="on"><span class="ic">📋</span>Rutina</button>
-  <button data-pag="comidas"><span class="ic">🍽️</span>Comidas</button>
+  <button data-pag="hoy" class="on"><span class="ic">🎯</span>Hoy</button>
+  <button data-pag="horario"><span class="ic">📅</span>Horario</button>
   <button data-pag="ejercicio"><span class="ic">🏋️</span>Ejercicio</button>
-  <button data-pag="mental"><span class="ic">🧠</span>Mental</button>
-  <button data-pag="calendario"><span class="ic">📆</span>Calendario</button>
+  <button data-pag="comidas"><span class="ic">🍽️</span>Comidas</button>
+  <button data-pag="progreso"><span class="ic">📆</span>Progreso</button>
 </nav>
 <div class="toast" id="toast"></div>
 
@@ -595,32 +621,48 @@ const COMPRA={
  '🥑 Grasas buenas':['Aguacate','Maní / mantequilla de maní','Almendras'],
  '🍯 Extras':['Miel']};
 
-/* ================= ESTADO ================= */
+/* ================= TAREAS IMPORTANTES (lo que mide el progreso) ================= */
+const TAREAS=[
+ {id:'LEER',emo:'📖',label:'Leer',desc:'10 minutos de lectura',t:600},
+ {id:'t_medita',emo:'🧘',label:'Meditar',desc:'5 min de meditación tranquila',t:300},
+ {id:'t_respira',emo:'🫁',label:'Respiración de caja',desc:'Inhala 4 · sostén 4 · exhala 4 · sostén 4, 3 min',t:180,caja:true},
+ {id:'t_visual',emo:'🎯',label:'Visualización',desc:'5 min visualizando una jugada saliendo perfecta',t:300},
+ {id:'t_registro',emo:'📝',label:'Registro nocturno',desc:'1 cosa que hiciste bien + 1 a mejorar mañana'},
+ {id:'t_kefir',emo:'🥛',label:'Tomar kéfir',desc:'Con la cena'},
+ {id:'t_comer',emo:'🥗',label:'Comer bien hoy',desc:'Desayuno, almuerzo y cena de calidad'},
+ {id:'t_agua',emo:'💧',label:'Tomar agua (8 vasos)',desc:'Regístralos en Comidas',reflect:'agua',goto:'comidas'},
+ {id:'t_entreno',emo:'🏋️',label:'Entreno de hoy',desc:'Completa tu sesión en Ejercicio',reflect:'entreno',goto:'ejercicio'},
+ {id:'t_dormir',emo:'😴',label:'Dormir a las 10pm',desc:'Clave para descansar 8 horas'}
+];
+
+/* ================= ESTADO + PERFIL ================= */
 const hoy=new Date();
 const fkey=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
 const HOYKEY=fkey(hoy);
 const dow=hoy.getDay();
 const DKEY=['dom','lun','mar','mie','jue','vie','sab'][dow];
-let checks=JSON.parse(localStorage.getItem('midia_checks_'+HOYKEY)||'{}');
-let hist=JSON.parse(localStorage.getItem('midia_hist')||'{}');
-let compra=JSON.parse(localStorage.getItem('midia_compras')||'{}');
+let PERFIL=localStorage.getItem('midia_perfil_activo')||'';
+const K=base=>'midia_u_'+PERFIL+'_'+base;
+function perfiles(){try{return JSON.parse(localStorage.getItem('midia_perfiles')||'{}')}catch(e){return{}}}
+function hashPass(s){let h=5381;for(let i=0;i<s.length;i++)h=((h<<5)+h+s.charCodeAt(i))>>>0;return h.toString(36)}
+let checks=JSON.parse(localStorage.getItem(K('checks_'+HOYKEY))||'{}');
+let hist=JSON.parse(localStorage.getItem(K('hist'))||'{}');
+let compra=JSON.parse(localStorage.getItem(K('compras'))||'{}');
 let calMes=hoy.getMonth(),calAno=hoy.getFullYear();
 
-function idsHoy(){
-  const ids=[];
-  RUTINA[DKEY].sec.forEach((s,si)=>s[1].forEach((it,i)=>ids.push(it[5]||('r_'+DKEY+'_'+si+'_'+i))));
-  ENTRENO[DKEY].bloques.forEach((bl,bi)=>bl.ej.forEach((_,ei)=>ids.push('e_'+DKEY+'_'+bi+'_'+ei)));
-  MENTAL_PASOS.forEach((_,i)=>ids.push('m_paso_'+i));
-  ids.push('LEER'); // lectura del día (Mental, enlazada con la rutina)
-  return [...new Set(ids)];
+/* reflect: agua>=8 ; entreno: todos los ejercicios de hoy hechos */
+function ejerciciosDelDia(){const ids=[];ENTRENO[DKEY].bloques.forEach((bl,bi)=>bl.ej.forEach((_,ei)=>ids.push('e_'+DKEY+'_'+bi+'_'+ei)));return ids}
+function tareaHecha(t){
+  if(t.reflect==='agua')return agua>=8;
+  if(t.reflect==='entreno'){const ids=ejerciciosDelDia();return ids.length>0&&ids.every(i=>checks[i])}
+  return !!checks[t.id];
 }
 function guardar(){
-  localStorage.setItem('midia_checks_'+HOYKEY,JSON.stringify(checks));
-  const ids=idsHoy();
-  const done=ids.filter(i=>checks[i]).length;
-  const p=Math.round(done/ids.length*100);
-  hist[HOYKEY]={d:done,t:ids.length,p:p};
-  localStorage.setItem('midia_hist',JSON.stringify(hist));
+  localStorage.setItem(K('checks_'+HOYKEY),JSON.stringify(checks));
+  const done=TAREAS.filter(tareaHecha).length;
+  const p=Math.round(done/TAREAS.length*100);
+  hist[HOYKEY]={d:done,t:TAREAS.length,p:p};
+  localStorage.setItem(K('hist'),JSON.stringify(hist));
   refrescarProgreso();
 }
 function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('ver');
@@ -629,14 +671,57 @@ function toggle(id){
   checks[id]=!checks[id];if(!checks[id])delete checks[id];
   guardar();
 }
+/* ---- perfil / login ---- */
+function gateModo(){return document.getElementById('gateBtn').dataset.modo||'crear'}
+function gateToggle(){
+  const crear=gateModo()==='crear';
+  document.getElementById('gateBtn').dataset.modo=crear?'entrar':'crear';
+  document.getElementById('gateTit').textContent=crear?'Inicia sesión':'Bienvenido a Mi Día';
+  document.getElementById('gateSub').textContent=crear?'Entra con tu nombre y contraseña.':'Crea tu perfil para guardar tu progreso.';
+  document.getElementById('gateBtn').textContent=crear?'Entrar':'Crear perfil';
+  document.getElementById('gateAlt').textContent=crear?'¿Eres nuevo? Crea tu perfil':'¿Ya tienes perfil? Inicia sesión';
+  document.getElementById('gateErr').textContent='';
+}
+function gateAccion(){
+  const nom=(document.getElementById('gateNom').value||'').trim();
+  const pass=document.getElementById('gatePass').value||'';
+  const err=document.getElementById('gateErr');
+  if(nom.length<2){err.textContent='Escribe tu nombre.';return}
+  if(pass.length<4){err.textContent='La contraseña necesita al menos 4 caracteres.';return}
+  const key=nom.toLowerCase(), ps=perfiles();
+  if(gateModo()==='crear'){
+    if(ps[key]){err.textContent='Ese nombre ya existe. Inicia sesión.';return}
+    ps[key]={n:nom,p:hashPass(pass)};
+    localStorage.setItem('midia_perfiles',JSON.stringify(ps));
+  }else{
+    if(!ps[key]){err.textContent='No existe ese perfil. Créalo primero.';return}
+    if(ps[key].p!==hashPass(pass)){err.textContent='Contraseña incorrecta.';return}
+  }
+  localStorage.setItem('midia_perfil_activo',key);
+  location.reload();
+}
+function menuPerfil(){
+  const ps=perfiles(),n=(ps[PERFIL]&&ps[PERFIL].n)||PERFIL;
+  if(confirm('Perfil: '+n+'\n\n¿Cerrar sesión? Tu progreso queda guardado en este dispositivo.')){
+    localStorage.removeItem('midia_perfil_activo');location.reload();
+  }
+}
 
 /* ================= NAV ================= */
+function irTab(pag){
+  const b=document.querySelector('nav button[data-pag='+pag+']');if(b)b.click();
+}
 document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
   document.querySelectorAll('nav button').forEach(x=>x.classList.remove('on'));
   document.querySelectorAll('.pag').forEach(x=>x.classList.remove('activa'));
   b.classList.add('on');
-  document.getElementById('pag-'+b.dataset.pag).classList.add('activa');
-  if(b.dataset.pag==='calendario')pintarCalendario();
+  const p=b.dataset.pag;
+  document.getElementById('pag-'+p).classList.add('activa');
+  if(p==='hoy')pintarHoy();
+  else if(p==='horario')pintarHorario(diaHor);
+  else if(p==='ejercicio')pintarEntreno(diaEj);
+  else if(p==='comidas'){pintarComidas();pintarAgua()}
+  else if(p==='progreso')pintarCalendario();
   window.scrollTo(0,0);
 });
 
@@ -661,56 +746,90 @@ function pintarAhora(){
   document.getElementById('cardAhora').innerHTML=h;
 }
 
-/* ================= RUTINA ================= */
-let diaRutina=DKEY;
-function pintarChipsRutina(){
-  document.getElementById('chipsRutina').innerHTML=DIAS.map(([k,n])=>
-    '<button class="'+(k===diaRutina?'on':'')+'" data-d="'+k+'">'+n.slice(0,3)+(k===DKEY?' ⭐':'')+'</button>').join('');
-  document.querySelectorAll('#chipsRutina button').forEach(b=>b.onclick=()=>pintarRutina(b.dataset.d));
-  const act=document.querySelector('#chipsRutina button.on');
-  if(act)act.scrollIntoView({inline:'center',block:'nearest'});
+/* ================= HOY (tareas importantes) ================= */
+function pintarHoy(){
+  pintarAhora();
+  const cont=document.getElementById('tareasList');
+  let h='';
+  TAREAS.forEach(t=>{
+    const done=tareaHecha(t);
+    const esTimer=!!t.t, esRef=!!t.reflect;
+    let ctrl='';
+    if(esTimer&&!done){
+      if(mSes.id===t.id){
+        ctrl=t.caja
+          ?'<div class="estadoEj corriendo" style="text-align:center"><b id="mFase">…</b> · <span id="mTimer"></span></div><button class="btnEj cancelar" onclick="cancelarMental()">✕ Cancelar</button>'
+          :'<div class="estadoEj corriendo">⏳ <span id="mTimer"></span></div><button class="btnEj cancelar" onclick="cancelarMental()">✕ Cancelar</button>';
+      }else{
+        ctrl='<button class="btnEj" onclick="empezarMental(\''+t.id+'\','+t.t+','+(!!t.caja)+')">▶ Empezar ('+Math.round(t.t/60)+' min)</button>';
+      }
+    }
+    const tap=(!esTimer&&!esRef);
+    const cls='tarea'+(done?' hecho':'')+(tap?' tap':'')+(esRef?' goto':'');
+    const hint=esRef?' <small style="color:var(--azulOsc);font-weight:600">· toca para ir →</small>':'';
+    h+='<div class="'+cls+'" data-id="'+t.id+'"'+(esRef?' data-goto="'+t.goto+'"':'')+'>'+
+       '<div class="tareaBox">'+(done?'✓':'')+'</div>'+
+       '<div class="emo">'+t.emo+'</div>'+
+       '<div class="tx"><b>'+t.label+'</b><div class="d">'+t.desc+hint+'</div>'+ctrl+'</div></div>';
+  });
+  cont.innerHTML=h;
+  cont.querySelectorAll('.tarea').forEach(el=>{
+    const t=TAREAS.find(x=>x.id===el.dataset.id);
+    if(el.dataset.goto){el.onclick=()=>irTab(el.dataset.goto);return}
+    if(!t.t&&!t.reflect){
+      const box=el.querySelector('.tareaBox');
+      const marca=()=>{toggle(t.id);const d=tareaHecha(t);el.classList.toggle('hecho',d);box.textContent=d?'✓':''};
+      el.onclick=marca;
+    }
+  });
+  refrescarProgreso();
+}
+function calcRacha(){
+  let r=0;const d=new Date(hoy);
+  if(!(hist[fkey(d)]&&hist[fkey(d)].p>=80))d.setDate(d.getDate()-1);
+  while(hist[fkey(d)]&&hist[fkey(d)].p>=80){r++;d.setDate(d.getDate()-1)}
+  return r;
+}
+function refrescarProgreso(){
+  const done=TAREAS.filter(tareaHecha).length,total=TAREAS.length;
+  const p=total?Math.round(done/total*100):0;
+  const pb=document.getElementById('progBar');if(pb)pb.style.width=p+'%';
+  const pt=document.getElementById('progTxt');if(pt)pt.textContent=p+'% · '+done+'/'+total;
+  const pc=document.getElementById('pctHoy');if(pc)pc.textContent=p+'%';
+  const dh=document.getElementById('detHoy');if(dh)dh.textContent=done+' de '+total+' tareas importantes';
+  const r=calcRacha();
+  const rh=document.getElementById('rachaHoy');
+  if(rh)rh.textContent=r>0?'🔥 Racha: '+r+(r===1?' día cumplido':' días cumplidos')+' (≥80%)':'🌱 Cumple ≥80% hoy para empezar tu racha';
+}
+/* ================= HORARIO (rutina perfecta, referencia) ================= */
+let diaHor=DKEY;
+function pintarChipsHor(){
+  document.getElementById('chipsHor').innerHTML=DIAS.map(([k,n])=>
+    '<button class="'+(k===diaHor?'on':'')+'" data-d="'+k+'">'+n.slice(0,3)+(k===DKEY?' ⭐':'')+'</button>').join('');
+  document.querySelectorAll('#chipsHor button').forEach(b=>b.onclick=()=>pintarHorario(b.dataset.d));
 }
 function pasoDia(cual,n){
   const orden=DIAS.map(x=>x[0]);
-  if(cual==='rutina')pintarRutina(orden[(orden.indexOf(diaRutina)+n+7)%7]);
+  if(cual==='hor')pintarHorario(orden[(orden.indexOf(diaHor)+n+7)%7]);
   else pintarEntreno(orden[(orden.indexOf(diaEj)+n+7)%7]);
 }
-function pintarRutina(d){
-  diaRutina=d;pintarChipsRutina();
+function pintarHorario(d){
+  diaHor=d;pintarChipsHor();
   const esHoy=d===DKEY;
   const m=new Date();const mins=m.getHours()*60+m.getMinutes();
-  document.getElementById('subtRutina').textContent=esHoy
-    ?'Marca cada cosa cuando la hagas — mañana el checklist se reinicia solo, pero tu % del día queda guardado en el calendario. 📆'
-    :'Estás viendo el '+DIAS.find(x=>x[0]===d)[1].toLowerCase()+' (solo lectura — únicamente puedes marcar el día de hoy).';
+  document.getElementById('subtHor').innerHTML=esHoy
+    ?'🗓️ <b>Tu día perfecto</b> — cómo se vería tu día ideal. Es una referencia, aquí no se marca nada; lo que cuenta son las <b>Tareas importantes</b> en 🎯 Hoy.'
+    :'🗓️ Rutina ideal del '+DIAS.find(x=>x[0]===d)[1].toLowerCase()+' (referencia, no se marca).';
   let h='';
-  RUTINA[d].sec.forEach((s,si)=>{
+  RUTINA[d].sec.forEach((s)=>{
     h+='<h3>'+s[0]+'</h3>';
-    s[1].forEach((it,i)=>{
-      const auto=it[5]; // id fijo => se marca solo (ej. lectura); no se toca a mano
-      const id=auto||('r_'+d+'_'+si+'_'+i);
-      const on=esHoy&&checks[id]?' hecho':'';
+    s[1].forEach((it)=>{
       const act=esHoy&&typeof it[3]==='number'&&mins>=it[3]&&mins<Math.max(it[4],it[3]+1)?' actual':'';
-      let cls='chk'+on+act;
-      if(!esHoy)cls+=' soloVer'; else if(auto)cls+=' autoItem';
-      const box=esHoy?'<div class="box">'+(checks[id]?'✓':'')+'</div>':'';
-      const hint=(esHoy&&auto)?' <small style="color:var(--dim)">· se marca al leer 📖 en Mental</small>':'';
-      h+='<div class="'+cls+'" data-id="'+id+'">'+box+
-         '<div class="emo">'+it[0]+'</div><div class="tx"><div class="h">'+it[1]+'</div>'+it[2]+hint+'</div></div>';
+      h+='<div class="chk soloVer'+act+'"><div class="emo">'+it[0]+'</div><div class="tx"><div class="h">'+it[1]+'</div>'+it[2]+'</div></div>';
     });
   });
-  document.getElementById('contRutina').innerHTML=h;
-  if(esHoy)document.querySelectorAll('#contRutina .chk:not(.autoItem)').forEach(el=>el.onclick=()=>{toggle(el.dataset.id);pintarRutina(diaRutina)});
-  document.getElementById('notasRutina').innerHTML=(NOTAS[d]||[]).join('');
-  refrescarProgreso();
-}
-function refrescarProgreso(){
-  const ids=idsHoy();
-  const done=ids.filter(i=>checks[i]).length;
-  const p=ids.length?Math.round(done/ids.length*100):0;
-  document.getElementById('progBar').style.width=p+'%';
-  document.getElementById('progTxt').textContent=p+'% · '+done+'/'+ids.length;
-  document.getElementById('pctHoy').textContent=p+'%';
-  document.getElementById('detHoy').textContent=done+' de '+ids.length+' cosas completadas (rutina + ejercicio + mental)';
+  document.getElementById('contHor').innerHTML=h;
+  document.getElementById('notasHor').innerHTML=(NOTAS[d]||[]).join('');
 }
 
 /* ================= EJERCICIO ================= */
@@ -719,8 +838,6 @@ function pintarChipsEj(){
   document.getElementById('chipsDias').innerHTML=DIAS.map(([k,n])=>
     '<button class="'+(k===diaEj?'on':'')+'" data-d="'+k+'">'+ENTRENO[k].emoji+' '+n.slice(0,3)+(k===DKEY?' ⭐':'')+'</button>').join('');
   document.querySelectorAll('#chipsDias button').forEach(b=>b.onclick=()=>pintarEntreno(b.dataset.d));
-  const act=document.querySelector('#chipsDias button.on');
-  if(act)act.scrollIntoView({inline:'center',block:'nearest'});
 }
 function pintarEntreno(d){
   diaEj=d;pintarChipsEj();
@@ -740,7 +857,8 @@ function pintarEntreno(d){
           const serie=sesion.sets>1?' · Serie '+sesion.set+'/'+sesion.sets:'';
           if(sesion.fase==='rest'){
             const s=Math.max(0,Math.ceil((sesion.fin-Date.now())/1000));
-            extra='<div class="estadoEj desc">😮‍💨 Descanso · <span id="timerEj">'+fmtSeg(s)+'</span>'+(sesion.sets>1?' · sigue serie '+(sesion.set+1)+'/'+sesion.sets:'')+'</div><button class="btnEj saltar" onclick="saltar()">⏭ Saltar descanso</button>';
+            const sigue=sesion.set<sesion.sets?' · sigue serie '+(sesion.set+1)+'/'+sesion.sets:' · luego el siguiente ejercicio';
+            extra='<div class="estadoEj desc">😮‍💨 Descanso · <span id="timerEj">'+fmtSeg(s)+'</span>'+sigue+'</div><button class="btnEj saltar" onclick="saltar()">⏭ Saltar descanso</button>';
           }else if(sesion.work>0){
             const el=Math.floor((Date.now()-sesion.ini)/1000);
             if(sesion.unlocked){
@@ -803,13 +921,17 @@ function iniciarTrabajo(){
 }
 function finTrabajo(){
   limpiarTimer();beep(1);
-  if(sesion.set<sesion.sets)iniciarDescanso();else completarEj();
+  iniciarDescanso(); // siempre descansa tras cada serie, incluida la última (descanso entre ejercicios)
 }
 function iniciarDescanso(){
   sesion.fase='rest';sesion.fin=Date.now()+sesion.rest*1000;sesion.timer=setInterval(tick,250);
   pintarEntreno(diaEj);
 }
-function finDescanso(){limpiarTimer();beep(2);sesion.set++;iniciarTrabajo()}
+function finDescanso(){
+  limpiarTimer();
+  if(sesion.set<sesion.sets){beep(2);sesion.set++;iniciarTrabajo()}
+  else completarEj();
+}
 function tick(){
   if(sesion.fase==='work'){
     const el=Math.floor((Date.now()-sesion.ini)/1000);
@@ -845,52 +967,13 @@ function liberarWakeLock(){try{if(wakeLock){wakeLock.release();wakeLock=null}}ca
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&(sesion.id||mSes.id)&&!wakeLock)pedirWakeLock()});
 
 /* ================= MENTAL ================= */
-function pintarMental(){
-  const cog=document.getElementById('chkCognitivo');
-  cog.innerHTML=DIAS_COGNITIVO.includes(DKEY)
-    ?'<div class="nota verde" style="margin:8px 0">✅ <b>Hoy toca ejercicio cognitivo</b> — está al final de tu sesión en la pestaña Ejercicio 🏋️, ahí lo marcas como parte del entrenamiento.</div>'
-    :'<div class="nota" style="margin:8px 0">📅 Hoy no toca ejercicio cognitivo — se hace lunes, viernes y sábado (aparece al final de la sesión en Ejercicio 🏋️).</div>';
-  const mn=document.getElementById('chkMental');
-  let h='';
-  MENTAL_PASOS.forEach((p,i)=>{
-    const id='m_paso_'+i;
-    const done=checks[id];
-    const conTimer=(i<2); // pasos 1 (respiración) y 2 (visualización)
-    let ctrl='';
-    if(conTimer){
-      if(mSes.id===id){
-        if(mSes.caja)
-          ctrl='<div class="estadoEj corriendo" style="text-align:center"><b id="mFase">preparando…</b> · <span id="mTimer"></span></div><button class="btnEj cancelar" onclick="cancelarMental()">✕ Cancelar</button>';
-        else
-          ctrl='<div class="estadoEj corriendo">🧘 Visualizando · <span id="mTimer"></span></div><button class="btnEj cancelar" onclick="cancelarMental()">✕ Cancelar</button>';
-      }else if(!done){
-        ctrl='<button class="btnEj" onclick="empezarMental(\''+id+'\','+(i===0?180:300)+','+(i===0)+')">▶ Empezar ('+p[2]+')</button>';
-      }
-    }
-    const clickable=!conTimer; // solo el paso 3 (registro) se marca a mano
-    h+='<div class="chk'+(done?' hecho':'')+(clickable?'':' autoItem')+'" data-id="'+id+'">'+
-       '<div class="box">'+(done?'✓':'')+'</div><div class="emo">'+p[0]+'</div>'+
-       '<div class="tx"><div class="h">'+p[2]+'</div><b>'+p[1]+'</b>'+
-       '<div style="font-size:13px;color:var(--dim);margin-top:2px">'+p[3]+'</div>'+ctrl+'</div></div>';
-  });
-  mn.innerHTML=h;
-  mn.querySelectorAll('.chk:not(.autoItem)').forEach(el=>el.onclick=()=>{toggle(el.dataset.id);pintarMental()});
-  // lectura
-  const lc=document.getElementById('lecturaCtrl');
-  if(checks['LEER'])
-    lc.innerHTML='<div class="chk hecho autoItem"><div class="box">✓</div><div class="emo">📖</div><div class="tx"><b>¡Lectura de hoy hecha!</b> <small style="color:var(--dim)">· también marcada en tu rutina</small></div></div>';
-  else if(mSes.id==='LEER')
-    lc.innerHTML='<div class="estadoEj corriendo">📖 Leyendo · <span id="mTimer"></span></div><button class="btnEj cancelar" onclick="cancelarMental()">✕ Cancelar</button>';
-  else
-    lc.innerHTML='<button class="btnEj" onclick="empezarMental(\'LEER\',600,false)">▶ Empezar (10 min)</button>';
-}
-/* --- Temporizadores de la parte mental (respiración de caja, visualización, lectura) --- */
+/* --- Temporizadores de tareas (respiración de caja, visualización, meditar, lectura) --- */
 let mSes={id:null,ini:0,total:0,caja:false,fase:-1,timer:null};
 const CAJA=['🫁 Inhala','⏸️ Sostén','😮‍💨 Exhala','⏸️ Sostén vacío'];
 function empezarMental(id,total,caja){
   pararMTimer();ensureAudio();pedirWakeLock();
   mSes={id:id,ini:Date.now(),total:total,caja:!!caja,fase:-1,timer:setInterval(mTick,200)};
-  pintarMental();
+  pintarHoy();
 }
 function mTick(){
   const el=(Date.now()-mSes.ini)/1000;
@@ -910,11 +993,10 @@ function mFin(){
   mSes={id:null,ini:0,total:0,caja:false,fase:-1,timer:null};
   if(id&&!checks[id]){checks[id]=true;guardar()}
   liberarWakeLock();beepSuave();setTimeout(beepSuave,260);
-  toast('🧘 ¡Listo!');
-  pintarMental();
-  if(diaRutina===DKEY)pintarRutina(DKEY);
+  toast('✅ ¡Listo!');
+  pintarHoy();
 }
-function cancelarMental(){pararMTimer();liberarWakeLock();mSes={id:null,ini:0,total:0,caja:false,fase:-1,timer:null};pintarMental()}
+function cancelarMental(){pararMTimer();liberarWakeLock();mSes={id:null,ini:0,total:0,caja:false,fase:-1,timer:null};pintarHoy()}
 function pararMTimer(){if(mSes.timer){clearInterval(mSes.timer);mSes.timer=null}}
 function beepSuave(){
   if(navigator.vibrate)navigator.vibrate(60);
@@ -926,7 +1008,7 @@ function beepSuave(){
   }catch(e){}
 }
 /* --- Agua --- */
-let agua=+(localStorage.getItem('midia_agua_'+HOYKEY)||0);
+let agua=+(localStorage.getItem(K('agua_'+HOYKEY))||0);
 function pintarAgua(){
   const cont=document.getElementById('aguaVasos');if(!cont)return;
   let h='';for(let i=0;i<8;i++)h+='<span class="vaso'+(i<agua?' on':'')+'" data-i="'+i+'">'+(i<agua?'💧':'🥛')+'</span>';
@@ -934,8 +1016,8 @@ function pintarAgua(){
   cont.querySelectorAll('.vaso').forEach(el=>el.onclick=()=>{
     const i=+el.dataset.i;
     agua=(i+1===agua)?i:i+1; // tocar el último lleno lo baja; si no, sube hasta ahí
-    localStorage.setItem('midia_agua_'+HOYKEY,agua);
-    pintarAgua();
+    localStorage.setItem(K('agua_'+HOYKEY),agua);
+    pintarAgua();guardar(); // la tarea "tomar agua" cuenta al llegar a 8
   });
   document.getElementById('aguaTxt').textContent=agua+' / 8 vasos'+(agua>=8?' · ¡meta cumplida! 🎉':'');
 }
@@ -957,10 +1039,10 @@ function pintarComidas(){
   document.getElementById('listaCompra').innerHTML=h;
   document.querySelectorAll('#listaCompra .chk').forEach(el=>el.onclick=()=>{
     const id=el.dataset.id;compra[id]=!compra[id];if(!compra[id])delete compra[id];
-    localStorage.setItem('midia_compras',JSON.stringify(compra));pintarComidas();
+    localStorage.setItem(K('compras'),JSON.stringify(compra));pintarComidas();
   });
 }
-function resetCompra(){compra={};localStorage.setItem('midia_compras','{}');pintarComidas();toast('🛒 Lista reiniciada')}
+function resetCompra(){compra={};localStorage.setItem(K('compras'),'{}');pintarComidas();toast('🛒 Lista reiniciada')}
 
 /* ================= CALENDARIO ================= */
 function clasePct(p){
@@ -1013,9 +1095,23 @@ function pintarCalendario(){
 function moverMes(n){calMes+=n;if(calMes<0){calMes=11;calAno--}if(calMes>11){calMes=0;calAno++}pintarCalendario()}
 
 /* ================= INIT ================= */
-pintarAhora();pintarRutina(DKEY);pintarEntreno(DKEY);pintarMental();pintarComidas();pintarAgua();pintarCalendario();
-setInterval(()=>{pintarAhora();if(diaRutina===DKEY)pintarRutina(DKEY)},60000);
 if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js');
+if(!PERFIL || !perfiles()[PERFIL]){
+  // sin sesión: mostrar login/crear perfil
+  document.getElementById('gate').style.display='flex';
+  if(Object.keys(perfiles()).length>0)gateToggle(); // ya hay perfiles => por defecto "entrar"
+}else{
+  // limpieza única de datos de prueba viejos (sin perfil)
+  if(!localStorage.getItem('midia_migrado')){
+    Object.keys(localStorage).forEach(k=>{if(/^midia_(checks_|agua_|hist$|compras$)/.test(k))localStorage.removeItem(k)});
+    localStorage.setItem('midia_migrado','1');
+    checks={};hist={};compra={};agua=0;
+  }
+  const ps=perfiles();document.getElementById('perfilNombre').textContent=(ps[PERFIL]&&ps[PERFIL].n)||PERFIL;
+  pintarHoy();pintarHorario(DKEY);pintarEntreno(DKEY);pintarComidas();pintarAgua();pintarCalendario();
+  setInterval(()=>{if(document.getElementById('pag-hoy').classList.contains('activa'))pintarHoy();
+    else if(document.getElementById('pag-horario').classList.contains('activa'))pintarHorario(diaHor)},60000);
+}
 </script>
 </body>
 </html>
