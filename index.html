@@ -75,6 +75,9 @@ header h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:te
 .vasos{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:6px 0 10px}
 .vaso{font-size:30px;cursor:pointer;filter:grayscale(.6);opacity:.5;transition:.12s;line-height:1}
 .vaso.on{filter:none;opacity:1;transform:scale(1.05)}
+.ingredientes{display:flex;flex-wrap:wrap;gap:7px;margin:6px 0 12px}
+.ingr{background:#fff;border:1.5px solid var(--line);color:var(--dim);padding:7px 11px;border-radius:99px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:'Inter'}
+.ingr.on{background:var(--gradV);color:#fff;border-color:transparent}
 /* nav */
 nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;
   background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-top:1px solid var(--line);
@@ -285,6 +288,14 @@ a{color:var(--azul)}
     <div class="subt">Toca un vaso cada vez que tomes agua. Meta: 8 vasos al día. Se reinicia cada día. 🎯 Idea: uno al despertar, uno en cada comida y refacción, y uno antes/después del entreno.</div>
     <div class="vasos" id="aguaVasos"></div>
     <div class="subt" id="aguaTxt" style="text-align:center;font-weight:600;color:var(--azulOsc)"></div>
+  </div>
+  <div class="card">
+    <span class="tag">🧑‍🍳 con lo que tienes</span>
+    <h2>🥘 Crear receta</h2>
+    <div class="subt">Marca lo que tienes en casa y toca el botón — te armo recetas con eso.</div>
+    <div class="ingredientes" id="ingredientes"></div>
+    <button class="btn grad" onclick="crearReceta()">🍳 Crear receta</button>
+    <div id="recetasResultado" style="margin-top:6px"></div>
   </div>
   <div class="card compra">
     <h2>🛒 Lista de compra</h2>
@@ -720,7 +731,7 @@ document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
   if(p==='hoy')pintarHoy();
   else if(p==='horario')pintarHorario(diaHor);
   else if(p==='ejercicio')pintarEntreno(diaEj);
-  else if(p==='comidas'){pintarComidas();pintarAgua()}
+  else if(p==='comidas'){pintarComidas();pintarAgua();pintarDespensa()}
   else if(p==='progreso')pintarCalendario();
   window.scrollTo(0,0);
 });
@@ -1022,6 +1033,50 @@ function pintarAgua(){
   document.getElementById('aguaTxt').textContent=agua+' / 8 vasos'+(agua>=8?' · ¡meta cumplida! 🎉':'');
 }
 
+/* ================= CREAR RECETA ================= */
+const INGR=[['huevos','🥚','Huevos'],['tomate','🍅','Tomate'],['queso','🧀','Queso'],['espinaca','🥬','Espinaca'],['aguacate','🥑','Aguacate'],['pan','🍞','Pan'],['tortilla','🫓','Tortilla'],['frijol','🫘','Frijol'],['yogurt','🥛','Yogurt'],['avena','🌾','Avena'],['banano','🍌','Banano'],['manzana','🍎','Manzana'],['miel','🍯','Miel'],['mani','🥜','Maní'],['almendras','🌰','Almendras'],['leche','🥛','Leche']];
+const RECETAS=[
+ {n:'Huevos revueltos con espinaca y tomate',e:'🍳',r:['huevos','espinaca','tomate'],p:'Sofríe el tomate y la espinaca 2 min, agrega los huevos batidos y revuelve. Va con tortilla si tienes.'},
+ {n:'Tortilla de huevo con queso y tomate',e:'🍳',r:['huevos','queso','tomate'],p:'Bate los huevos, viértelos, agrega queso y tomate picado, dobla y listo (5 min).'},
+ {n:'Pan con aguacate y huevo',e:'🥑',r:['pan','aguacate','huevos'],p:'Tuesta el pan, unta aguacate y fríe un huevo encima. Sal y pimienta.'},
+ {n:'Quesadilla de espinaca y queso',e:'🫓',r:['tortilla','queso','espinaca'],p:'Rellena la tortilla con queso y espinaca, dóblala y dórala 3 min.'},
+ {n:'Frijol volteado con queso y tortilla',e:'🫘',r:['frijol','queso','tortilla'],p:'Calienta el frijol hasta espesar, sirve con queso y tortilla.'},
+ {n:'Yogurt con avena, banano y miel',e:'🥣',r:['yogurt','avena','banano','miel'],p:'Mezcla yogurt con avena cruda, banano en rodajas y un chorrito de miel (2 min).'},
+ {n:'Avena con banano y maní',e:'🍌',r:['avena','banano','mani'],p:'Cocina la avena 5 min con leche o agua, agrega banano y maní.'},
+ {n:'Batido energético',e:'🥤',r:['leche','banano','avena'],p:'Licúa leche, banano y avena (suma maní/miel si tienes) hasta cremoso.'},
+ {n:'Tostada de aguacate y tomate',e:'🥑',r:['pan','aguacate','tomate'],p:'Tuesta el pan, unta aguacate y pon rodajas de tomate con sal.'},
+ {n:'Huevo duro con banano',e:'🥚',r:['huevos','banano'],p:'Cuece los huevos 10 min, pélalos y acompaña con banano.'},
+ {n:'Pan con queso',e:'🧀',r:['pan','queso'],p:'Pon queso sobre el pan y fúndelo en sartén o micro.'},
+ {n:'Manzana con maní',e:'🍎',r:['manzana','mani'],p:'Corta la manzana y acompáñala con maní. Fibra + grasa buena.'},
+ {n:'Manzana con almendras',e:'🍎',r:['manzana','almendras'],p:'Manzana en gajos con un puño de almendras. Te aguanta hasta el almuerzo.'},
+ {n:'Yogurt griego con miel',e:'🍯',r:['yogurt','miel'],p:'Yogurt griego con un chorrito de miel. Alta proteína, 1 min.'},
+ {n:'Tortilla con frijol y queso',e:'🌮',r:['tortilla','frijol','queso'],p:'Calienta la tortilla, rellena con frijol y queso, dobla.'}
+];
+let despensa=JSON.parse(localStorage.getItem(K('despensa'))||'{}');
+function pintarDespensa(){
+  const c=document.getElementById('ingredientes');if(!c)return;
+  c.innerHTML=INGR.map(([id,e,n])=>'<button class="ingr'+(despensa[id]?' on':'')+'" data-i="'+id+'">'+e+' '+n+'</button>').join('');
+  c.querySelectorAll('.ingr').forEach(b=>b.onclick=()=>{const i=b.dataset.i;despensa[i]=!despensa[i];if(!despensa[i])delete despensa[i];localStorage.setItem(K('despensa'),JSON.stringify(despensa));b.classList.toggle('on')});
+}
+function nombreIngr(id){const x=INGR.find(i=>i[0]===id);return x?x[2]:id}
+function recetaHTML(rc,falta){
+  const ing=rc.r.map(nombreIngr).join(' · ');
+  const f=falta?' <small style="color:#b57912">· te falta '+nombreIngr(falta[0])+'</small>':'';
+  return '<div class="receta"><div class="emo">'+rc.e+'</div><div><b>'+rc.n+'</b>'+f+'<p style="color:var(--dim)">🧺 '+ing+'</p><p>'+rc.p+'</p></div></div>';
+}
+function crearReceta(){
+  const out=document.getElementById('recetasResultado');
+  const tengo=Object.keys(despensa).filter(k=>despensa[k]);
+  if(!tengo.length){out.innerHTML='<div class="nota">👆 Marca al menos un ingrediente.</div>';return}
+  const sc=RECETAS.map(rc=>({rc,falta:rc.r.filter(x=>!despensa[x])}));
+  const listas=sc.filter(s=>s.falta.length===0);
+  const casi=sc.filter(s=>s.falta.length===1).slice(0,3);
+  let h='';
+  if(listas.length)h+='<h3>✅ Puedes hacer ahora</h3>'+listas.map(s=>recetaHTML(s.rc)).join('');
+  if(casi.length)h+='<h3>🛒 Casi — te falta 1</h3>'+casi.map(s=>recetaHTML(s.rc,s.falta)).join('');
+  if(!listas.length&&!casi.length)h='<div class="nota">Con eso todavía no armo una receta. Prueba con huevos, tomate, queso, pan o tortilla.</div>';
+  out.innerHTML=h;
+}
 /* ================= COMIDAS ================= */
 function pintarComidas(){
   const f=arr=>arr.map(r=>'<div class="receta"><div class="emo">'+r[0]+'</div><div><b>'+r[1]+'</b><p>'+r[2]+'</p></div></div>').join('');
@@ -1108,7 +1163,7 @@ if(!PERFIL || !perfiles()[PERFIL]){
     checks={};hist={};compra={};agua=0;
   }
   const ps=perfiles();document.getElementById('perfilNombre').textContent=(ps[PERFIL]&&ps[PERFIL].n)||PERFIL;
-  pintarHoy();pintarHorario(DKEY);pintarEntreno(DKEY);pintarComidas();pintarAgua();pintarCalendario();
+  pintarHoy();pintarHorario(DKEY);pintarEntreno(DKEY);pintarComidas();pintarAgua();pintarDespensa();pintarCalendario();
   setInterval(()=>{if(document.getElementById('pag-hoy').classList.contains('activa'))pintarHoy();
     else if(document.getElementById('pag-horario').classList.contains('activa'))pintarHorario(diaHor)},60000);
 }
