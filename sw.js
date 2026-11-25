@@ -1,5 +1,5 @@
-const CACHE = 'midia-v14';
-const FILES = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png'];
+const CACHE = 'midia-v16';
+const FILES = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png', './img/hoy.svg', './img/horario.svg', './img/ejercicio.svg', './img/comidas.svg', './img/progreso.svg', './img/gate.svg'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)).then(() => self.skipWaiting()));

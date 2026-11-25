@@ -8,15 +8,14 @@
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <style>
 :root{
   --verde:#3fa63f; --verde2:#7dc242; --verdeOsc:#1e7a2e;
   --azul:#1c8fd6; --azul2:#39b7f0; --azulOsc:#0f6cb4;
   --bg:#f3f7fb; --card:#ffffff; --line:#e3eaf2;
-  --txt:#333a44; --dim:#66727f;
+  --txt:#333a44; --dim:#5d6976;
   --grad:linear-gradient(135deg,#7dc242,#3fa63f 40%,#1c8fd6 75%,#39b7f0);
   --gradV:linear-gradient(135deg,#7dc242,#3fa63f);
   --gradA:linear-gradient(135deg,#39b7f0,#1c8fd6);
@@ -75,7 +74,7 @@ header h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:te
 .tag{display:inline-block;font-size:11px;font-weight:600;padding:3px 10px;border-radius:99px;
   background:color-mix(in srgb,var(--verde) 13%,transparent);color:var(--verdeOsc);margin-bottom:6px}
 .tag.az{background:color-mix(in srgb,var(--azul) 11%,transparent);color:var(--azulOsc)}
-.tag.nar{background:rgba(245,176,62,.15);color:#93600c}
+.tag.nar{background:rgba(245,176,62,.15);color:var(--azulOsc)}
 /* AHORA */
 .ahora{background:var(--grad);color:#fff;border:none}
 .ahora .lbl{font-size:11px;letter-spacing:1.5px;font-weight:700;opacity:.9}
@@ -92,7 +91,7 @@ header h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:te
 /* checklist */
 .chk{display:flex;align-items:flex-start;gap:11px;padding:10px 4px;border-bottom:1px solid var(--soft);cursor:pointer}
 .chk:last-child{border-bottom:none}
-.chk .emo{font-size:19px;width:26px;text-align:center;margin-top:1px}
+.chk .row-icon{font-size:19px;width:26px;text-align:center;margin-top:1px}
 .chk .box{width:23px;height:23px;min-width:23px;border-radius:8px;border:2px solid var(--boxB);
   display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;margin-top:1px;transition:.15s}
 .chk.hecho .box{background:var(--gradV);border-color:var(--verde)}
@@ -144,7 +143,7 @@ nav button.on .ic{filter:none;opacity:1}
 .ej summary::before{content:'▸ '}
 .ej details[open] summary::before{content:'▾ '}
 .ej details p{font-size:13px;color:var(--dim);line-height:1.55;margin-top:5px}
-.ej .disco summary{color:#93600c}
+.ej .disco summary{color:var(--azulOsc)}
 .nota{font-size:13px;color:var(--txt2);line-height:1.6;background:var(--card);border:1px solid var(--line);
   border-left:4px solid var(--amar);border-radius:0 12px 12px 0;padding:10px 12px;margin:10px 0}
 .nota b{color:var(--txt)}
@@ -172,7 +171,7 @@ nav button.on .ic{filter:none;opacity:1}
 /* comidas */
 .receta{display:flex;gap:10px;padding:11px 4px;border-bottom:1px solid var(--soft)}
 .receta:last-child{border:none}
-.receta .emo{font-size:22px}
+.receta .row-icon{font-size:22px}
 .receta b{font-size:14.5px}
 .receta p{font-size:13px;color:var(--dim);margin-top:2px}
 .btn{display:block;width:100%;background:var(--card);border:1.5px solid var(--line);color:var(--txt);
@@ -230,7 +229,7 @@ a{color:var(--azulOsc)}
 /* tareas importantes */
 .tarea{display:flex;align-items:flex-start;gap:11px;padding:12px 4px;border-bottom:1px solid var(--soft)}
 .tarea:last-child{border-bottom:none}
-.tarea .emo{font-size:22px;width:28px;text-align:center;margin-top:1px}
+.tarea .row-icon{font-size:22px;width:28px;text-align:center;margin-top:1px}
 .tarea .tx{flex:1}
 .tarea .tx b{font-size:15px}
 .tarea .tx .d{font-size:12.5px;color:var(--dim);margin-top:1px;line-height:1.4}
@@ -342,13 +341,286 @@ nav button{font-size:11.5px;font-weight:700}
   #temaHoja .panel{transition:none}
   .btn:active,.btnEj:active,.chips button:active,nav button:active,.temaOp:active{transform:none}
 }
+
+/* SVG artwork and Lucide icons share all eight palettes. */
+.icon-sprite{position:absolute;width:0;height:0;overflow:hidden;pointer-events:none}
+.i{width:22px;height:22px;display:inline-block;vertical-align:-5px;flex:none;color:var(--verdeOsc)}
+.row-icon{width:26px;min-width:26px;line-height:24px;margin-top:1px;text-align:center}
+.tareaBox .i,.chk .box .i,.ej .okdot .i{width:20px;height:20px;color:currentColor}
+nav button .ic{display:flex;filter:none;opacity:1;line-height:1}
+nav .i,.temaBtn .i,.perfilBtn .i{color:var(--azulOsc)}
+.card h2 .i,#temaHoja h2 .i{margin-right:5px}
+.card h3 .i{width:20px;height:20px;vertical-align:-4px;margin-right:4px}
+.illustration{height:96px;max-height:120px;margin:8px 0 10px;overflow:hidden;border-radius:18px;background:var(--soft);color:var(--verdeOsc)}
+.illustration>svg{display:block;width:100%;height:100%}
+#gate .gate-illustration{height:80px;margin:0 0 12px}
+header .logo,#gate .glogo{background:var(--soft);box-shadow:none;flex-shrink:0}
+#gate .glogo{width:36px;height:36px;margin-bottom:8px}
+.temaBtn{display:flex;align-items:center;justify-content:center}
+header h1 em,.pct{background:none;color:var(--verdeOsc);-webkit-text-fill-color:currentColor}
+.ahora{background:var(--soft);color:var(--txt);border:1px solid var(--line);box-shadow:none}
+.ahora .hor,.ahora .sig{opacity:1}
+.ahora .sig{border-color:var(--boxB)}
+.tag.nar,.ej .disco summary{color:var(--azulOsc)}
+:root{--actionBg:var(--verdeOsc);--actionInk:#fff;--rojo:#b72f22}
+[data-tema="noche"],[data-tema="galaxia"]{--actionInk:var(--bg);--rojo:#ff9b8f}
+.btn.grad,.btnEj,.btnEj.ya,.chips button.on,.ingr.on,.calDia.p100,
+.chk.hecho .box,.ej.hecho .box,.ej .okdot,.tarea.hecho .tareaBox{background:var(--actionBg);color:var(--actionInk)}
+.btnEj .i,.btn.grad .i,.chips button.on .i{color:currentColor}
+.btnEj.cancelar,.btnEj.saltar{background:var(--card);color:var(--txt2)}
+.btnEj.bloq{background:var(--soft);color:var(--txt2)}
+.chk.hecho .tx,.tarea.hecho .tx b,.ej.hecho .nom{opacity:1;color:var(--txt2)}
+.estadoEj small,.btnEj small{opacity:1!important}
+@keyframes puls{0%,100%{box-shadow:0 0 0 0 var(--line)}50%{box-shadow:0 0 0 3px var(--line)}}
+@media(max-width:390px){header{padding-left:14px;padding-right:14px;gap:8px}header h1{font-size:28px}.perfilBtn{max-width:100px;overflow:hidden;text-overflow:ellipsis;padding:6px 8px}.temaBtn{margin-left:0}}
+@media(max-height:650px){#gate{overflow-y:auto;align-items:flex-start;padding:12px}#gate .box2{padding:16px}#gate .gate-illustration{height:64px}}
+
+/* ===================== ESTILO APPLE ===================== */
+:root{--sys:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display",system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --sep:color-mix(in srgb,var(--txt) 13%,transparent);--fill:color-mix(in srgb,var(--txt) 7%,transparent);
+  --fill2:color-mix(in srgb,var(--txt) 11%,transparent);--mat:color-mix(in srgb,var(--card) 72%,transparent);
+  --okC:#248a3d;--badC:#d70015;--spring:cubic-bezier(.32,.72,0,1)}
+[data-tema="noche"],[data-tema="galaxia"]{--okC:#30d158;--badC:#ff6961}
+body,body *{font-family:var(--sys)!important}
+body{background:var(--bg);font-size:16px;letter-spacing:-.01em;padding-bottom:calc(104px + env(safe-area-inset-bottom))}
+/* barra superior: título grande + material translúcido */
+header{position:sticky;top:0;z-index:40;padding:calc(env(safe-area-inset-top) + 12px) 16px 10px;gap:10px;
+  background:color-mix(in srgb,var(--bg) 76%,transparent);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px)}
+header .logo{display:none}
+header .fecha{font-size:13px;font-weight:600;letter-spacing:.02em;text-transform:uppercase;color:var(--txt2)}
+header .fecha::first-letter{text-transform:uppercase}
+header h1{font-size:34px;font-weight:700;letter-spacing:-.025em;line-height:1.08}
+.perfilBtn,.temaBtn{border:none;background:var(--fill);color:var(--azulOsc);height:36px;box-shadow:none}
+.perfilBtn{border-radius:99px;padding:0 12px;font-size:15px;font-weight:600;display:flex;align-items:center;gap:5px}
+.temaBtn{width:36px;min-width:36px;border-radius:50%}
+.perfilBtn .i,.temaBtn .i{width:19px;height:19px;vertical-align:0}
+.pag{padding:0 16px}
+/* tarjetas = grupos insertados de iOS */
+.card{border:none;border-radius:20px;padding:16px;margin:14px 0;box-shadow:none;background:var(--card)}
+.card h2{font-size:21px;font-weight:700;letter-spacing:-.02em;display:flex;align-items:center;gap:10px}
+.card h3{font-size:13px;font-weight:600;letter-spacing:.03em;color:var(--txt2);-webkit-text-fill-color:currentColor}
+.subt{font-size:15px;line-height:1.45}
+.illustration{border-radius:20px;margin:6px 0 4px}
+.tag{border-radius:7px;padding:3px 8px}
+.ahora{background:var(--card);border:none}
+.ahora .lbl{color:var(--azulOsc);font-size:13px;letter-spacing:.04em}
+.ahora .act{font-size:24px;letter-spacing:-.02em}
+.ahora .sig{border-top:.5px solid var(--sep)}
+/* barra de progreso estilo Actividad */
+.prog .barra,.mesBar .barra{background:var(--fill2);height:12px}
+.prog .barra i,.mesBar .barra i{background:var(--actionBg)}
+.racha{border-radius:12px;font-size:15px}
+/* filas con separadores finos */
+.tarea,.chk,.receta{border-bottom:.5px solid var(--sep)}
+.tarea{padding:13px 0;gap:12px;align-items:flex-start}
+.tarea .tx b{font-size:17px;font-weight:600;letter-spacing:-.02em}
+.tarea .tx .d,.receta p{font-size:15px}
+/* casillas redondas tipo Recordatorios */
+.tareaBox,.chk .box,.ej .box,.ej .okdot{width:26px;height:26px;min-width:26px;border-radius:50%;border:2px solid var(--boxB)}
+.tarea.hecho .tareaBox,.chk.hecho .box,.ej.hecho .box,.ej .okdot{border-color:transparent}
+.tareaBox .i,.chk .box .i,.ej .okdot .i{width:16px;height:16px;stroke-width:3}
+/* íconos = imágenes en cuadritos de color (como Ajustes de iPhone) */
+.row-icon,.card h2>.i{--tile:var(--azulOsc);display:flex;align-items:center;justify-content:center;flex:none;
+  width:32px;min-width:32px;height:32px;border-radius:9px;margin-top:-2px;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--tile) 78%,#fff),var(--tile));box-shadow:inset 0 0 0 .5px rgba(0,0,0,.08)}
+.row-icon .i{width:19px;height:19px;color:#fff;vertical-align:0}
+.card h2>.i{color:#fff;padding:6px;margin:0;box-sizing:border-box;--tile:var(--azulOsc)}
+.chk .row-icon{width:30px;min-width:30px;height:30px}
+.row-icon:has(use[href="#i-book-open"]),.card h2>.i:has(use[href="#i-book-open"]){--tile:#f57c00}
+.row-icon:has(use[href="#i-wind"]){--tile:#0a9fb5}
+.row-icon:has(use[href="#i-target"]),.card h2>.i:has(use[href="#i-target"]){--tile:#e8344e}
+.row-icon:has(use[href="#i-pencil"]){--tile:#c98a00}
+.row-icon:has(use[href="#i-utensils"]),.card h2>.i:has(use[href="#i-utensils"]){--tile:#2e9e4f}
+.row-icon:has(use[href="#i-droplet"]),.card h2>.i:has(use[href="#i-droplet"]){--tile:#0a7cff}
+.row-icon:has(use[href="#i-dumbbell"]){--tile:#ff5a1f}
+.row-icon:has(use[href="#i-moon"]){--tile:#5856d6}
+.row-icon:has(use[href="#i-sunrise"]){--tile:#ff9500}
+.row-icon:has(use[href="#i-calendar"]),.card h2>.i:has(use[href="#i-calendar"]){--tile:#ff3b30}
+.row-icon:has(use[href="#i-clock"]){--tile:#8e8e93}
+.row-icon:has(use[href="#i-music"]){--tile:#ff2d55}
+.row-icon:has(use[href="#i-house"]){--tile:#007aff}
+.row-icon:has(use[href="#i-shopping-basket"]),.card h2>.i:has(use[href="#i-shopping-basket"]){--tile:#34a853}
+.row-icon:has(use[href="#i-check"]),.card h2>.i:has(use[href="#i-list-checks"]){--tile:#30b0c7}
+.card h2>.i:has(use[href="#i-trending-up"]){--tile:#34c759}
+.card h2>.i:has(use[href="#i-pause"]){--tile:#8e8e93}
+/* botones iOS */
+.btnEj,.btn{border-radius:14px;min-height:50px;font-size:17px;font-weight:600;box-shadow:none;display:flex;align-items:center;justify-content:center;gap:7px}
+.btn{background:var(--fill);border:none;color:var(--azulOsc)}
+.btn.grad{background:var(--actionBg);color:var(--actionInk)}
+.btnEj.cancelar,.btnEj.saltar{background:var(--fill);border:none;color:var(--txt)}
+.btnEj .i,.btn .i{width:18px;height:18px;vertical-align:0}
+.btn:active,.btnEj:not(.bloq):active,.linkBtn:active,.celda:active{opacity:.7}
+.estadoEj{border-radius:14px}
+/* selector de día = control segmentado */
+.chipsRow{gap:4px;margin:6px 0 2px}
+.chips{background:var(--fill);border-radius:11px;padding:3px;gap:2px;overflow:hidden}
+.chips button,.chips button.on{flex:1;min-width:0;border:none;border-radius:8px;padding:7px 0;font-size:14px;font-weight:600;
+  background:transparent;color:var(--txt);position:relative;box-shadow:none}
+.chips button.on{background:var(--card);color:var(--txt);box-shadow:0 3px 8px rgba(0,0,0,.12),0 3px 1px rgba(0,0,0,.04)}
+[data-tema="noche"] .chips button.on,[data-tema="galaxia"] .chips button.on{background:var(--fill2)}
+.chips button .i{display:none}
+.chips button:has(.i)::after{content:'';position:absolute;left:50%;bottom:2px;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:var(--badC)}
+.flechaDia{border:none;background:none;box-shadow:none;width:28px;min-width:28px;font-size:26px;font-weight:400;color:var(--azulOsc);margin:0}
+.ingr{border:none;background:var(--fill);color:var(--txt);font-size:14px}
+/* barra de pestañas flotante de cristal */
+nav{bottom:calc(10px + env(safe-area-inset-bottom));width:calc(100% - 20px);max-width:500px;border-radius:32px;padding:5px;
+  border:.5px solid var(--sep);border-top:.5px solid var(--sep);background:var(--mat);
+  -webkit-backdrop-filter:saturate(180%) blur(24px);backdrop-filter:saturate(180%) blur(24px);box-shadow:0 10px 34px rgba(0,0,0,.16)}
+nav button{border-radius:26px;padding:7px 0 5px;font-size:11px;font-weight:600;color:var(--txt2);gap:3px;letter-spacing:0}
+nav button .ic .i{width:23px;height:23px;color:currentColor}
+nav button.on{color:var(--azulOsc)}
+nav button.on::before{top:0;left:0;right:0;bottom:0;width:auto;height:auto;margin:0;border-radius:26px;background:var(--fill)}
+nav button.on .ic{transform:none}
+.toast{bottom:calc(92px + env(safe-area-inset-bottom));background:var(--mat);color:var(--txt);border:.5px solid var(--sep);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);font-size:15px;padding:11px 20px}
+/* hoja de paletas: hoja iOS con asa */
+#temaHoja .velo{background:rgba(0,0,0,.28)}
+#temaHoja .panel{border-radius:28px 28px 0 0;padding-top:6px}
+#temaHoja .asa{width:36px;height:5px;background:var(--fill2);margin:0 auto;box-sizing:content-box;padding:8px 40% 12px;background-clip:content-box;touch-action:none;cursor:grab}
+#temaHoja h2,#temaHoja .subt{touch-action:none}
+.temaOp{border-radius:18px}
+/* login */
+#gate .box2{border:none;border-radius:24px}
+#gate input{border:none;background:var(--fill);border-radius:12px;font-size:17px}
+/* calendario y semana */
+.calDia{border-radius:50%}
+.semDia{border-radius:12px;background:var(--fill)}
+.calNav button,.semNav button{border:none;background:var(--fill);border-radius:50%;width:34px;height:34px;color:var(--azulOsc);font-size:20px;cursor:pointer}
+.nota{border-left:none;border-radius:14px;background:var(--fill);border:none}
+/* cabecera de tarjeta con botón Editar */
+.cardHead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px}
+.cardHead h2{margin:0}
+.linkBtn{background:none;border:none;color:var(--azulOsc);font-size:17px;font-weight:500;padding:6px 2px;cursor:pointer;white-space:nowrap}
+.linkBtn.listo{font-weight:700}
+/* modo edición */
+.editRow{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:.5px solid var(--sep)}
+.editRow .nm{flex:1;font-size:17px}
+.campo{flex:1;min-width:0;font-size:16px;border:none;background:var(--fill);color:var(--txt);border-radius:10px;padding:10px 12px}
+.campo:focus{outline:2px solid color-mix(in srgb,var(--azulOsc) 55%,transparent);outline-offset:0}
+.menos,.btnAdd,.mover{border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex:none}
+.menos{width:26px;height:26px;border-radius:50%;background:var(--badC);color:#fff}
+.menos .i{width:16px;height:16px;stroke-width:3;color:#fff}
+.btnAdd{width:40px;height:40px;border-radius:50%;background:var(--actionBg);color:var(--actionInk)}
+.btnAdd .i{color:currentColor;width:20px;height:20px;stroke-width:2.5}
+.mover{width:32px;height:32px;border-radius:9px;background:var(--fill);color:var(--txt2)}
+.mover .i{color:currentColor;width:18px;height:18px}
+.mover:disabled{opacity:.3}
+.addRow{display:flex;align-items:center;gap:10px;padding:12px 0 4px}
+.sw{appearance:none;-webkit-appearance:none;flex:none;width:51px;height:31px;border-radius:99px;background:var(--fill2);position:relative;cursor:pointer;margin:0;
+  transition:background-color .25s ease}
+.sw::after{content:'';position:absolute;top:2px;left:2px;width:27px;height:27px;border-radius:50%;background:#fff;
+  box-shadow:0 3px 8px rgba(0,0,0,.15),0 3px 1px rgba(0,0,0,.06);transition:transform .3s var(--spring)}
+.sw:checked{background:#34c759}
+.sw:checked::after{transform:translateX(20px)}
+/* tabla semanal */
+.semNav{display:flex;align-items:center;justify-content:space-between;margin:12px 0 10px}
+.semNav div{text-align:center}
+.semNav b{display:block;font-size:17px;font-weight:600}
+.semNav small{font-size:13px;color:var(--txt2)}
+.semNav button:disabled{opacity:.3;cursor:default}
+.semEstado{display:flex;align-items:center;gap:8px;border-radius:12px;padding:10px 12px;font-size:15px;font-weight:600;margin-bottom:12px}
+.semEstado .i{width:20px;height:20px;color:currentColor;flex:none}
+.semEstado.ok{background:color-mix(in srgb,var(--okC) 13%,transparent);color:var(--okC)}
+.semEstado.mal{background:color-mix(in srgb,var(--badC) 11%,transparent);color:var(--badC)}
+.semTabla{width:100%;border-collapse:collapse;table-layout:fixed}
+.semTabla col.cN{width:34%}
+.semTabla thead th{font-size:12px;font-weight:600;color:var(--txt2);padding:0 0 8px;text-align:center}
+.semTabla thead th span{display:block;font-size:13px;color:var(--txt)}
+.semTabla thead th small{display:block;font-size:11px;font-variant-numeric:tabular-nums}
+.semTabla thead th.hoyC span{color:var(--badC)}
+.semTabla .tN{text-align:left;font-size:14px;font-weight:600;color:var(--txt);padding:8px 6px 8px 0;line-height:1.25;overflow-wrap:anywhere}
+.semTabla thead .tN{font-size:12px;color:var(--txt2);font-weight:600}
+.semTabla tbody tr{border-top:.5px solid var(--sep)}
+.semTabla td{text-align:center;padding:5px 0}
+.semTabla td.hoyC,.semTabla th.hoyC{background:var(--fill)}
+.semTabla thead th.hoyC{border-radius:10px 10px 0 0}
+.celda{width:30px;height:30px;border-radius:9px;border:1.5px solid var(--boxB);background:transparent;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0;
+  transition:transform .16s var(--ease-out),background-color .16s ease}
+.celda:active{transform:scale(.9)}
+.celda.x{background:var(--badC);border-color:var(--badC);color:#fff;animation:pop .28s var(--ease-out)}
+.celda .i{width:17px;height:17px;stroke-width:3;color:#fff}
+.celda:disabled{opacity:.28;cursor:default;border-style:dashed}
+@media (prefers-reduced-transparency:reduce){
+  header,nav,.toast{background:var(--card);-webkit-backdrop-filter:none;backdrop-filter:none}
+}
+@media (prefers-contrast:more){.card,nav{border:1px solid var(--txt2)}}
+@media(max-width:390px){header{padding-left:16px;padding-right:16px}header h1{font-size:32px}.perfilBtn{max-width:110px;padding:0 10px}}
 </style>
 </head>
 <body>
+<!-- Lucide icons — MIT License
+Copyright (c) Lucide Contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+Feather-derived icons — ISC License
+Copyright (c) 2013-2023 Cole Bemis
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE. -->
+<svg xmlns="http://www.w3.org/2000/svg" class="icon-sprite" aria-hidden="true" focusable="false">
+<symbol id="i-sunrise" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2m-5.07.93 1.42 1.42M2 12h2m16 0h2M19.07 4.93l-1.42 1.42M2 18h20M2 22h20M12 8v8m-4-4 4-4 4 4"/><path d="M6 18a6 6 0 0 1 12 0"/></symbol>
+<symbol id="i-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4m8-4v4M3 10h18"/><rect x="3" y="4" width="18" height="18" rx="2"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+<symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+<symbol id="i-dumbbell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6.5 6.5 11 11m3.4-3.4 1.4 1.4a1 1 0 0 1 0 1.4l-5.4 5.4a1 1 0 0 1-1.4 0l-1.4-1.4m4.4-8.4 1.4 1.4a1 1 0 0 1 0 1.4l-4.4 4.4a1 1 0 0 1-1.4 0l-1.4-1.4m-4.8-16 1.4 1.4a1 1 0 0 1 0 1.4l-5.4 5.4a1 1 0 0 1-1.4 0L.9 8.1m8.4-4.4 1.4 1.4a1 1 0 0 1 0 1.4l-4.4 4.4a1 1 0 0 1-1.4 0L3.7 9.3"/></symbol>
+<symbol id="i-utensils" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7a4 4 0 0 0 8 0V2M7 2v20M21 15V2c-5 0-5 13 0 13Zm0 0v7"/></symbol>
+<symbol id="i-trending-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 7-8.5 8.5-5-5L2 17M16 7h6v6"/></symbol>
+<symbol id="i-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></symbol>
+<symbol id="i-palette" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 22a10 10 0 1 1 10-10 4 4 0 0 1-4 4h-1.8a1.8 1.8 0 0 0-1.3 3 1.8 1.8 0 0 1-1.4 3Z"/></symbol>
+<symbol id="i-book-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14m-9-3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3Z"/></symbol>
+<symbol id="i-wind" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h12.5A2.5 2.5 0 1 0 13 5.5M2 12h17a3 3 0 1 1-3 3M4 16h5.5A2.5 2.5 0 1 1 7 18.5"/></symbol>
+<symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.463.402.807a6.25 6.25 0 0 0 8.268 8.268c.344-.215.829-.004.803.397"/></symbol>
+<symbol id="i-pencil" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 4 4 4M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.5z"/></symbol>
+<symbol id="i-droplet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 0 0 7-7c0-4-7-13-7-13S5 11 5 15a7 7 0 0 0 7 7Z"/></symbol>
+<symbol id="i-shopping-basket" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 11-1 6m5-6-4-7M2 11h20M3.5 11l1.6 8a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6l1.6-8M5 11l4-7m0 7 1 6"/></symbol>
+<symbol id="i-rotate-ccw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11a9 9 0 1 1 2.7 6.4M3 3v8h8"/></symbol>
+<symbol id="i-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="14" y="3" width="5" height="18" rx="1"/><rect x="5" y="3" width="5" height="18" rx="1"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3a1 1 0 0 1 1.5-.86l14 9a1 1 0 0 1 0 1.72l-14 9A1 1 0 0 1 6 21Z"/></symbol>
+<symbol id="i-skip-forward" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 4 10 8-10 8V4ZM19 4v16"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m20 6-11 11-5-5"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 6-12 12M6 6l12 12"/></symbol>
+<symbol id="i-house" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-8H9v8H4a1 1 0 0 1-1-1Z"/></symbol>
+<symbol id="i-music" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></symbol>
+<symbol id="i-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></symbol>
+<symbol id="i-list-checks" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17 2 2 4-4M3 7l2 2 4-4M13 6h8M13 12h8M13 18h8"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5v14"/></symbol>
+<symbol id="i-minus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></symbol>
+<symbol id="i-chevron-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></symbol>
+<symbol id="i-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></symbol>
+<symbol id="i-lock"viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+</svg>
 
 <div id="gate" style="display:none">
   <div class="box2">
-    <div class="glogo">⚡</div>
+    <div class="glogo"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-sunrise"/></svg></div>
+  <!-- Original: img/gate.svg; embedded so theme variables inherit without a fetch. -->
+  <div class="illustration gate-illustration" data-illustration="img/gate.svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 104" fill="none" role="img" aria-label="Un nuevo día a través de una puerta abierta"><title>Un nuevo día a través de una puerta abierta</title><circle cx="180" cy="45" r="34" fill="var(--azulOsc, #0f6cb4)"/><path d="M135 94V48a45 45 0 0 1 90 0v46h-14V48a31 31 0 0 0-62 0v46Z" fill="var(--verdeOsc, #1e7a2e)"/><circle cx="180" cy="47" r="15" fill="var(--card, #fff)"/><path d="M150 72q30-25 60 0v22h-60Z" fill="var(--verdeOsc, #1e7a2e)"/><path d="m163 104 17-32 17 32" fill="var(--card, #fff)"/><path d="M98 94h164M111 58V42m-7 8h14m128 12V48m-6 7h12" stroke="var(--azulOsc, #0f6cb4)" stroke-width="3" stroke-linecap="round"/></svg></div>
     <h2 id="gateTit">Bienvenido a Mi Día</h2>
     <p id="gateSub">Crea tu perfil para guardar tu progreso.</p>
     <input id="gateNom" placeholder="Tu nombre" autocomplete="off" autocapitalize="words">
@@ -356,36 +628,40 @@ nav button{font-size:11.5px;font-weight:700}
     <div class="err" id="gateErr"></div>
     <button class="btn grad" id="gateBtn" onclick="gateAccion()">Crear perfil</button>
     <div class="alt" id="gateAlt" onclick="gateToggle()">¿Ya tienes perfil? Inicia sesión</div>
-    <div class="aviso">🔒 Tu perfil y progreso se guardan solo en este dispositivo. La contraseña es un candado local para separar perfiles — no la uses igual que la de tu correo o banco.</div>
+    <div class="aviso">Tu perfil y progreso se guardan solo en este dispositivo. La contraseña es un candado local para separar perfiles — no la uses igual que la de tu correo o banco.</div>
   </div>
 </div>
 
 <header>
-  <div class="logo">⚡</div>
+  <div class="logo"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-sunrise"/></svg></div>
   <div>
     <div class="fecha" id="fechaHoy"></div>
     <h1>Mi <em>Día</em></h1>
   </div>
-  <button class="perfilBtn" id="perfilBtn" onclick="menuPerfil()">👤 <span id="perfilNombre"></span></button>
-  <button class="temaBtn" onclick="abrirTemas()" aria-label="Cambiar paleta">🎨</button>
+  <button class="perfilBtn" id="perfilBtn" onclick="menuPerfil()"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-user"/></svg> <span id="perfilNombre"></span></button>
+  <button class="temaBtn" onclick="abrirTemas()" aria-label="Cambiar paleta"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-palette"/></svg></button>
 </header>
 
 <!-- ============ HOY (tareas importantes) ============ -->
 <div class="pag activa" id="pag-hoy">
+  <!-- Original: img/hoy.svg; embedded so theme variables inherit without a fetch. -->
+  <div class="illustration" data-illustration="img/hoy.svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 104" fill="none" role="img" aria-label="Amanecer sobre colinas"><title>Amanecer sobre colinas</title><circle cx="180" cy="55" r="30" fill="var(--verdeOsc, #1e7a2e)"/><path d="M180 8V2m-43 17-5-5m96 0-5 5M119 51h-9m140 0h-9" stroke="var(--verdeOsc, #1e7a2e)" stroke-width="3" stroke-linecap="round"/><path d="M0 85Q70 25 144 85T290 67L360 86v18H0Z" fill="var(--azulOsc, #0f6cb4)"/><path d="M0 94Q90 65 180 92t180-13v25H0Z" fill="var(--verdeOsc, #1e7a2e)"/><path d="M161 104 185 88h18l-21 16" fill="var(--card, #fff)"/></svg></div>
   <div class="card ahora" id="cardAhora"></div>
   <div class="card">
     <div class="prog"><div class="barra"><i id="progBar" style="width:0%"></i></div><span id="progTxt">0%</span></div>
     <div class="racha" id="rachaHoy" style="margin-top:8px"></div>
   </div>
   <div class="card">
-    <h2>🎯 Tareas importantes de hoy</h2>
-    <div class="subt">Lo que estás trabajando por mejorar cada día. Esto es lo que mide tu progreso — de a poco, todos los días. 🌱</div>
+    <div class="cardHead"><h2><svg class="i" aria-hidden="true" focusable="false"><use href="#i-target"/></svg> Tareas importantes</h2><button class="linkBtn" id="btnEditT" onclick="toggleEditT()">Editar</button></div>
+    <div class="subt">Lo que estás trabajando por mejorar cada día. Esto es lo que mide tu progreso — de a poco, todos los días. </div>
     <div id="tareasList"></div>
   </div>
 </div>
 
 <!-- ============ HORARIO (rutina perfecta, referencia) ============ -->
 <div class="pag" id="pag-horario">
+  <!-- Original: img/horario.svg; embedded so theme variables inherit without a fetch. -->
+  <div class="illustration" data-illustration="img/horario.svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 104" fill="none" role="img" aria-label="Calendario y reloj"><title>Calendario y reloj</title><path d="M40 85h72m157-60h48M55 30h35m195 53h35" stroke="var(--azulOsc, #0f6cb4)" stroke-width="3" stroke-linecap="round"/><rect x="112" y="15" width="116" height="78" rx="10" fill="var(--verdeOsc, #1e7a2e)"/><path d="M112 38h116" stroke="var(--card, #fff)" stroke-width="3"/><path d="M136 9v16m64-16v16" stroke="var(--azulOsc, #0f6cb4)" stroke-width="6" stroke-linecap="round"/><path d="M132 54h13m12 0h13m12 0h13m-63 17h13m12 0h13" stroke="var(--card, #fff)" stroke-width="7"/><circle cx="235" cy="70" r="29" fill="var(--azulOsc, #0f6cb4)" stroke="var(--card, #fff)" stroke-width="3"/><path d="M235 51v19l12 8" fill="none" stroke="var(--card, #fff)" stroke-width="3" stroke-linecap="round"/></svg></div>
   <div class="chipsRow">
     <button class="flechaDia" onclick="pasoDia('hor',-1)">‹</button>
     <div class="chips" id="chipsHor"></div>
@@ -400,47 +676,51 @@ nav button{font-size:11.5px;font-weight:700}
 
 <!-- ============ COMIDAS ============ -->
 <div class="pag" id="pag-comidas">
+  <!-- Original: img/comidas.svg; embedded so theme variables inherit without a fetch. -->
+  <div class="illustration" data-illustration="img/comidas.svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 104" fill="none" role="img" aria-label="Plato equilibrado con verduras y acompañamientos"><title>Plato equilibrado con verduras y acompañamientos</title><ellipse cx="180" cy="54" rx="65" ry="45" fill="var(--azulOsc, #0f6cb4)"/><ellipse cx="180" cy="54" rx="55" ry="36" fill="var(--card, #fff)"/><path d="M178 24v59c-55-1-60-54 0-59Z" fill="var(--verdeOsc, #1e7a2e)"/><path d="m144 43 25 15m-30 7 24-22m-14 30 19-7" stroke="var(--card, #fff)" stroke-width="3" stroke-linecap="round"/><path d="M187 26q39 3 37 24h-37Z" fill="var(--azulOsc, #0f6cb4)"/><circle cx="198" cy="68" r="10" fill="var(--verdeOsc, #1e7a2e)"/><circle cx="220" cy="64" r="7" fill="var(--verdeOsc, #1e7a2e)"/><path d="M91 20v25m-8-25v18q8 13 16 0V20m-8 25v43m174 0V20q-17 8-12 36h12" fill="none" stroke="var(--azulOsc, #0f6cb4)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
   <div class="card">
-    <span class="tag">⏱ 5–10 min</span>
-    <h2>🍳 Desayunos rápidos</h2>
+    <span class="tag">5–10 min</span>
+    <h2><svg class="i" aria-hidden="true" focusable="false"><use href="#i-utensils"/></svg> Desayunos rápidos</h2>
     <div id="listaDesayunos"></div>
-    <div class="nota verde" style="margin-bottom:0">🔁 Rota entre estos cinco y ya tienes variedad toda la semana.</div>
+    <div class="nota verde" style="margin-bottom:0">Rota entre estos cinco y ya tienes variedad toda la semana.</div>
   </div>
   <div class="card">
-    <span class="tag nar">🎒 colegio o entre comidas</span>
-    <h2>🍎 Ideas de refacción</h2>
+    <span class="tag nar">colegio o entre comidas</span>
+    <h2><svg class="i" aria-hidden="true" focusable="false"><use href="#i-utensils"/></svg> Ideas de refacción</h2>
     <div id="listaRefacciones"></div>
   </div>
   <div class="card">
-    <span class="tag az">🌙 poco tiempo, buena calidad</span>
-    <h2>🥗 Cenas rápidas</h2>
+    <span class="tag az">poco tiempo, buena calidad</span>
+    <h2><svg class="i" aria-hidden="true" focusable="false"><use href="#i-utensils"/></svg> Cenas rápidas</h2>
     <div class="subt">La clave de la cena: proteína + algo ligero, sin freír mucho ni cocinar elaborado.</div>
     <div id="listaCenas"></div>
   </div>
   <div class="card">
-    <span class="tag az">💧 hidratación</span>
-    <h2>💧 Tomar agua</h2>
-    <div class="subt">Toca un vaso cada vez que tomes agua. Meta: 8 vasos al día. Se reinicia cada día. 🎯 Idea: uno al despertar, uno en cada comida y refacción, y uno antes/después del entreno.</div>
+    <span class="tag az">hidratación</span>
+    <h2><svg class="i" aria-hidden="true" focusable="false"><use href="#i-droplet"/></svg> Tomar agua</h2>
+    <div class="subt">Toca un vaso cada vez que tomes agua. Meta: 8 vasos al día. Se reinicia cada día. Idea: uno al despertar, uno en cada comida y refacción, y uno antes/después del entreno.</div>
     <div class="vasos" id="aguaVasos"></div>
     <div class="subt" id="aguaTxt" style="text-align:center;font-weight:600;color:var(--azulOsc)"></div>
   </div>
   <div class="card">
-    <span class="tag">🧑‍🍳 con lo que tienes</span>
-    <h2>🥘 Crear receta</h2>
+    <span class="tag">con lo que tienes</span>
+    <h2><svg class="i" aria-hidden="true" focusable="false"><use href="#i-utensils"/></svg> Crear receta</h2>
     <div class="subt">Marca lo que tienes en casa y toca el botón — te armo recetas con eso.</div>
     <div class="ingredientes" id="ingredientes"></div>
-    <button class="btn grad" onclick="crearReceta()">🍳 Crear receta</button>
+    <button class="btn grad" onclick="crearReceta()"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-utensils"/></svg> Crear receta</button>
     <div id="recetasResultado" style="margin-top:6px"></div>
   </div>
   <div class="card compra">
-    <h2>🛒 Lista de compra</h2>
+    <h2><svg class="i" aria-hidden="true" focusable="false"><use href="#i-shopping-basket"/></svg> Lista de compra</h2>
     <div id="listaCompra"></div>
-    <button class="btn" onclick="resetCompra()">🔄 Reiniciar lista</button>
+    <button class="btn" onclick="resetCompra()"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-rotate-ccw"/></svg> Reiniciar lista</button>
   </div>
 </div>
 
 <!-- ============ EJERCICIO ============ -->
 <div class="pag" id="pag-ejercicio">
+  <!-- Original: img/ejercicio.svg; embedded so theme variables inherit without a fetch. -->
+  <div class="illustration" data-illustration="img/ejercicio.svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 104" fill="none" role="img" aria-label="Atleta entrenando a solas con un balón de fútbol"><title>Atleta entrenando a solas con un balón de fútbol</title><path d="M24 94h312M44 35h55m-35 12h22" stroke="var(--azulOsc, #0f6cb4)" stroke-width="3" stroke-linecap="round"/><circle cx="176" cy="17" r="10" fill="var(--verdeOsc, #1e7a2e)"/><path d="m169 29-14 27 20 15-7 19h13l11-25-18-15 9-17Z" fill="var(--verdeOsc, #1e7a2e)"/><path d="m177 36 22 10 15-8m-46-3-22 2-14 15m30 6-19 17-23 6" fill="none" stroke="var(--verdeOsc, #1e7a2e)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><circle cx="230" cy="78" r="16" fill="var(--card, #fff)" stroke="var(--azulOsc, #0f6cb4)" stroke-width="3"/><path d="m230 70 8 6-3 9h-10l-3-9Zm-8 6-7-3m10 12-4 6m14-6 5 6m-2-15 7-3m-15-3V62" fill="var(--azulOsc, #0f6cb4)" stroke="var(--azulOsc, #0f6cb4)" stroke-width="2"/><path d="m281 92 9-22 9 22Z" fill="var(--azulOsc, #0f6cb4)"/></svg></div>
   <div class="chipsRow">
     <button class="flechaDia" onclick="pasoDia('ej',-1)">‹</button>
     <div class="chips" id="chipsDias"></div>
@@ -448,25 +728,37 @@ nav button{font-size:11.5px;font-weight:700}
   </div>
   <div id="contEntreno"></div>
   <div class="card">
-    <h2>⏸️ Descansos de referencia</h2>
-    <div class="nota verde" style="margin:6px 0">💪 <b>Fuerza</b> (mancuernas o peso corporal): 60 segundos<br>🧱 <b>Core</b> (plancha, dead bug, etc.): 30–45 segundos<br>⚡ <b>Pliometría y sprints</b>: 60–90 segundos<br>🤸 <b>Técnica y movilidad</b>: descanso libre</div>
-    <div class="nota azul">⚽ <b>Técnica de balón fuera de estos bloques:</b> martes, jueves y sábado — un rato practicando técnica libre. Lunes, miércoles y viernes — 10 min de toques a la pared y control orientado.</div>
-    <div class="nota">📹 <b>Movilidad de referencia</b> (video guardado): <a href="https://vm.tiktok.com/ZMBtjWAcw/" target="_blank" rel="noopener">ver en TikTok</a></div>
+    <h2><svg class="i" aria-hidden="true" focusable="false"><use href="#i-pause"/></svg> Descansos de referencia</h2>
+    <div class="nota verde" style="margin:6px 0"><b>Fuerza</b> (mancuernas o peso corporal): 60 segundos<br><b>Core</b> (plancha, dead bug, etc.): 30–45 segundos<br><b>Pliometría y sprints</b>: 60–90 segundos<br><b>Técnica y movilidad</b>: descanso libre</div>
+    <div class="nota azul"><b>Técnica de balón fuera de estos bloques:</b> martes, jueves y sábado — un rato practicando técnica libre. Lunes, miércoles y viernes — 10 min de toques a la pared y control orientado.</div>
+    <div class="nota"><b>Movilidad de referencia</b> (video guardado): <a href="https://vm.tiktok.com/ZMBtjWAcw/" target="_blank" rel="noopener">ver en TikTok</a></div>
   </div>
   <div class="card">
-    <span class="tag az">🧠 velocidad de decisión</span>
-    <h2>🧠 Ejercicio cognitivo</h2>
+    <span class="tag az">velocidad de decisión</span>
+    <h2><svg class="i" aria-hidden="true" focusable="false"><use href="#i-target"/></svg> Ejercicio cognitivo</h2>
     <div class="subt">Aparece al final de tu sesión los días que toca (<b>lunes, viernes y sábado</b>). Entrena velocidad de procesamiento, visión periférica y decisión bajo presión (dual-task). Elige UN nivel — todo se hace solo.</div>
-    <details><summary>📆 Cuándo y qué necesitas</summary><p>Frecuencia: 3 veces por semana; la ganancia está en la consistencia, no en el volumen. Materiales: 🎾 pelota de tenis, ⚽ balón, 🧱 una pared (nivel intermedio) y 🔶 4–6 conos o botellas (nivel avanzado).</p></details>
-    <details><summary>🟢 Nivel base (solo) — Toque y captura</summary><p>Conduce el balón a ritmo medio mientras lanzas y atrapas una pelota de tenis con la misma mano; la mirada en la pelota, el balón se controla por sensación de pie. 3×1 min.</p></details>
-    <details><summary>🔵 Nivel intermedio (pared) — Pared + pelota</summary><p>Golpea el balón contra la pared con el pie mientras lanzas y atrapas la pelota con la mano contraria al pie que golpea; alterna el pie cada 30 s. 3×1 min.</p></details>
-    <details><summary>🟣 Nivel avanzado (conos) — Slalom + pelota</summary><p>Conduce el balón en zigzag entre 4–6 conos mientras lanzas y atrapas la pelota de tenis; cuando lo domines, sube el ritmo o junta los conos. 3×1 min.</p></details>
+    <details><summary>Cuándo y qué necesitas</summary><p>Frecuencia: 3 veces por semana; la ganancia está en la consistencia, no en el volumen. Materiales: pelota de tenis, balón, una pared (nivel intermedio) y 4–6 conos o botellas (nivel avanzado).</p></details>
+    <details><summary>Nivel base (solo) — Toque y captura</summary><p>Conduce el balón a ritmo medio mientras lanzas y atrapas una pelota de tenis con la misma mano; la mirada en la pelota, el balón se controla por sensación de pie. 3×1 min.</p></details>
+    <details><summary>Nivel intermedio (pared) — Pared + pelota</summary><p>Golpea el balón contra la pared con el pie mientras lanzas y atrapas la pelota con la mano contraria al pie que golpea; alterna el pie cada 30 s. 3×1 min.</p></details>
+    <details><summary>Nivel avanzado (conos) — Slalom + pelota</summary><p>Conduce el balón en zigzag entre 4–6 conos mientras lanzas y atrapas la pelota de tenis; cuando lo domines, sube el ritmo o junta los conos. 3×1 min.</p></details>
   </div>
-  <div class="nota">🏆 <b>Nota — días de torneo (ej. Futeca Cayalá):</b> los días que juegas torneo no haces la sesión personal de ese día ni gimnasio de equipo — vas directo al torneo. Si el torneo implica varios partidos seguidos, prioriza hidratación y algo de energía rápida (fruta, dátiles) entre partidos.</div>
+  <div class="nota"><b>Nota — días de torneo (ej. Futeca Cayalá):</b> los días que juegas torneo no haces la sesión personal de ese día ni gimnasio de equipo — vas directo al torneo. Si el torneo implica varios partidos seguidos, prioriza hidratación y algo de energía rápida (fruta, dátiles) entre partidos.</div>
+</div>
+
+<!-- ============ SEMANA (tabla de acciones buenas) ============ -->
+<div class="pag" id="pag-semana">
+  <div class="card">
+    <div class="cardHead"><h2><svg class="i" aria-hidden="true" focusable="false"><use href="#i-list-checks"/></svg> Mi semana</h2><button class="linkBtn" id="btnEditS" onclick="toggleEditS()">Editar</button></div>
+    <div class="subt">Al final del día marca con una ✗ lo que <b>no</b> hiciste. Tu meta: terminar la semana con la tabla limpia.</div>
+    <div class="semNav"><button id="semAnt" onclick="semPaso(-1)" aria-label="Semana anterior">‹</button><div><b id="semRango"></b><small id="semFechas"></small></div><button id="semSig" onclick="semPaso(1)" aria-label="Semana siguiente">›</button></div>
+    <div id="semCont"></div>
+  </div>
 </div>
 
 <!-- ============ PROGRESO ============ -->
 <div class="pag" id="pag-progreso">
+  <!-- Original: img/progreso.svg; embedded so theme variables inherit without a fetch. -->
+  <div class="illustration" data-illustration="img/progreso.svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 104" fill="none" role="img" aria-label="Escalones ascendentes hacia una montaña"><title>Escalones ascendentes hacia una montaña</title><path d="m149 96 65-80 80 80Z" fill="var(--azulOsc, #0f6cb4)"/><path d="m194 40 20-24 24 24-15-5-9 6-8-8Z" fill="var(--card, #fff)"/><path d="M50 96V79h35V62h35V45h35V28h35v68Z" fill="var(--verdeOsc, #1e7a2e)"/><path d="M190 28V8h25l-8 8h-17" fill="var(--azulOsc, #0f6cb4)"/><path d="M45 97h263" stroke="var(--verdeOsc, #1e7a2e)" stroke-width="3" stroke-linecap="round"/></svg></div>
   <div class="card" style="text-align:center">
     <div class="subt" style="margin-bottom:2px">Progreso de hoy</div>
     <div class="pct" id="pctHoy">0%</div>
@@ -474,9 +766,9 @@ nav button{font-size:11.5px;font-weight:700}
     <div class="racha" id="racha"></div>
   </div>
   <div class="card">
-    <h2>📆 Esta semana</h2>
+    <h2><svg class="i" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg> Esta semana</h2>
     <div class="semRow" id="semRow"></div>
-    <div class="subt" style="margin-top:8px">Cada día se reinicia el checklist, pero tu % queda guardado aquí. La semana empieza de nuevo cada lunes. 💪</div>
+    <div class="subt" style="margin-top:8px">Cada día se reinicia el checklist, pero tu % queda guardado aquí. La semana empieza de nuevo cada lunes. </div>
   </div>
   <div class="card">
     <div class="calNav">
@@ -494,18 +786,19 @@ nav button{font-size:11.5px;font-weight:700}
     </div>
   </div>
   <div class="card">
-    <h2>📈 Mejora de mí mismo</h2>
+    <h2><svg class="i" aria-hidden="true" focusable="false"><use href="#i-trending-up"/></svg> Mejora de mí mismo</h2>
     <div class="subt">Promedio de cumplimiento por mes — aquí ves cómo vas mejorando con el tiempo.</div>
     <div id="mejoraMeses"></div>
   </div>
 </div>
 
 <nav>
-  <button data-pag="hoy" class="on"><span class="ic">🎯</span>Hoy</button>
-  <button data-pag="horario"><span class="ic">📅</span>Horario</button>
-  <button data-pag="ejercicio"><span class="ic">🏋️</span>Ejercicio</button>
-  <button data-pag="comidas"><span class="ic">🍽️</span>Comidas</button>
-  <button data-pag="progreso"><span class="ic">📆</span>Progreso</button>
+  <button data-pag="hoy" class="on"><span class="ic"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-target"/></svg></span>Hoy</button>
+  <button data-pag="horario"><span class="ic"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg></span>Horario</button>
+  <button data-pag="ejercicio"><span class="ic"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-dumbbell"/></svg></span>Ejercicio</button>
+  <button data-pag="comidas"><span class="ic"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-utensils"/></svg></span>Comidas</button>
+  <button data-pag="semana"><span class="ic"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-list-checks"/></svg></span>Semana</button>
+  <button data-pag="progreso"><span class="ic"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-trending-up"/></svg></span>Progreso</button>
 </nav>
 <div class="toast" id="toast"></div>
 
@@ -513,14 +806,16 @@ nav button{font-size:11.5px;font-weight:700}
   <div class="velo" onclick="cerrarTemas()"></div>
   <div class="panel" role="dialog" aria-label="Elegir paleta">
     <div class="asa"></div>
-    <h2>🎨 Elige tu paleta</h2>
+    <h2><svg class="i" aria-hidden="true" focusable="false"><use href="#i-palette"/></svg> Elige tu paleta</h2>
     <div class="subt">Toca una para verla al instante. Se guarda en este celular.</div>
     <div class="temaGrid" id="temaGrid"></div>
-    <button class="btn grad" onclick="cerrarTemas()">Listo ✨</button>
+    <button class="btn grad" onclick="cerrarTemas()">Listo <svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></button>
   </div>
 </div>
 
 <script>
+function icono(nombre){return '<svg class="i" aria-hidden="true" focusable="false"><use href="#i-'+nombre+'"/></svg>'}
+
 /* ================= PALETAS ================= */
 const TEMAS=[
  {id:'logo',n:'Logo',d:'Verde + azul original',bg:'#f3f7fb',c:'#ffffff',g:'linear-gradient(135deg,#7dc242,#3fa63f 40%,#1c8fd6 75%,#39b7f0)',a:'#1c8fd6',meta:'#ffffff'},
@@ -551,221 +846,245 @@ function abrirTemas(){
 }
 function cerrarTemas(){const h=document.getElementById('temaHoja');h.classList.remove('ver');h.setAttribute('aria-hidden','true')}
 aplicarTema(localStorage.getItem('midia_tema')||'logo');
+/* hoja arrastrable: sigue el dedo 1:1, hereda la velocidad y proyecta el impulso (como iOS) */
+(function(){
+  const hoja=document.getElementById('temaHoja'),p=hoja.querySelector('.panel');
+  let y0=0,dy=0,activo=false,hist=[];
+  const goma=x=>{const d=p.offsetHeight||500;return(x*d*.55)/(d+.55*x)};
+  p.addEventListener('pointerdown',e=>{
+    if(!hoja.classList.contains('ver')||!e.target.closest('.asa,h2,.subt'))return;
+    activo=true;y0=e.clientY;dy=0;hist=[{y:e.clientY,t:performance.now()}];
+    p.setPointerCapture(e.pointerId);p.style.transition='none';
+  });
+  p.addEventListener('pointermove',e=>{
+    if(!activo)return;dy=e.clientY-y0;
+    p.style.transform='translate(-50%,'+(dy<0?-goma(-dy):dy)+'px)';
+    hist.push({y:e.clientY,t:performance.now()});if(hist.length>6)hist.shift();
+  });
+  const fin=()=>{
+    if(!activo)return;activo=false;
+    const a=hist[0],b=hist[hist.length-1],v=b.t>a.t?(b.y-a.y)/(b.t-a.t)*1000:0;
+    const proyectado=dy+(v/1000)*.998/(1-.998);
+    p.style.transition='';p.style.transform='';
+    if(proyectado>p.offsetHeight*.5)cerrarTemas();
+  };
+  p.addEventListener('pointerup',fin);p.addEventListener('pointercancel',fin);
+})();
 
 /* ================= DATOS: RUTINA DIARIA (semana completa) ================= */
-/* item = [emoji, hora, texto, ini, fin] (minutos desde medianoche) */
+/* item = [icono, hora, texto, ini, fin] (minutos desde medianoche) */
 const MAN_LV=[
- ['⏰','6:00','Levantarme',360,360],
- ['📖','6:00–6:10','Leer libro',360,370,'LEER'],
- ['🧘','6:10–6:15','Meditar',370,375],
- ['🍳','6:15–6:30','Desayunar',375,390],
- ['🪥','6:30–6:45','Higiene (lavarme cara, cepillarme, cambiarme, perfume, crema)',390,405],
- ['🚌','6:45–7:00','Traslado al colegio',405,420],
- ['🏫','7:00','Llego al colegio',420,450],
- ['📚','7:30','Empiezo clases',450,855]];
+ ['clock','6:00','Levantarme',360,360],
+ ['book-open','6:00–6:10','Leer libro',360,370,'LEER'],
+ ['wind','6:10–6:15','Meditar',370,375],
+ ['utensils','6:15–6:30','Desayunar',375,390],
+ ['droplet','6:30–6:45','Higiene (lavarme cara, cepillarme, cambiarme, perfume, crema)',390,405],
+ ['arrow-right','6:45–7:00','Traslado al colegio',405,420],
+ ['book-open','7:00','Llego al colegio',420,450],
+ ['book-open','7:30','Empiezo clases',450,855]];
 const TARDE_LUN=[
- ['🎒','2:15','Salgo del colegio',855,870],
- ['🍽️','2:30–3:00','Almuerzo',870,900],
- ['✏️','3:00–4:00','Tareas (bloque 1)',900,960],
- ['🥣','4:00–4:10','Snack pre-entreno: yogurt griego + miel',960,970],
- ['👕','4:10–4:40','Transición / cambiarme / traslado a la cancha',970,1000],
- ['⚽','4:40–6:00','Primer entreno (personal — ver Ejercicio)',1000,1080],
- ['🧠','6:00–6:15','Entrenamiento cognitivo — visión periférica (ver Mental)',1080,1095],
- ['💧','6:15–6:30','Descanso / hidratación',1095,1110],
- ['👟','6:30–6:45','Cambiarme y alistarme para el entreno de equipo',1110,1125],
- ['🚶','6:45','Salgo hacia el entreno',1125,1140],
- ['🥅','7:00–8:00','Segundo entreno (equipo)',1140,1200],
- ['✅','8:00','Termina entreno',1200,1225],
- ['🏠','8:25','Llego a casa',1225,1225],
- ['🥛','8:25–8:40','Ceno + kéfir',1225,1240],
- ['🚿','8:40–8:55','Me baño',1240,1255],
- ['📓','8:55–9:10','Termino tarea (bloque 2, si queda algo pendiente)',1255,1270],
- ['🌙','9:10–9:25','Rutina mental nocturna (respiración + visualización + registro breve)',1270,1285],
- ['🎒','9:25–9:40','Preparo todo para mañana / desconecto pantallas',1285,1300],
- ['😌','9:40–10:00','Tiempo libre / relajarte',1300,1320],
- ['😴','10:00','Duermo',1320,1320]];
+ ['book-open','2:15','Salgo del colegio',855,870],
+ ['utensils','2:30–3:00','Almuerzo',870,900],
+ ['pencil','3:00–4:00','Tareas (bloque 1)',900,960],
+ ['utensils','4:00–4:10','Snack pre-entreno: yogurt griego + miel',960,970],
+ ['user','4:10–4:40','Transición / cambiarme / traslado a la cancha',970,1000],
+ ['target','4:40–6:00','Primer entreno (personal — ver Ejercicio)',1000,1080],
+ ['target','6:00–6:15','Entrenamiento cognitivo — visión periférica (ver Mental)',1080,1095],
+ ['droplet','6:15–6:30','Descanso / hidratación',1095,1110],
+ ['arrow-right','6:30–6:45','Cambiarme y alistarme para el entreno de equipo',1110,1125],
+ ['arrow-right','6:45','Salgo hacia el entreno',1125,1140],
+ ['target','7:00–8:00','Segundo entreno (equipo)',1140,1200],
+ ['check','8:00','Termina entreno',1200,1225],
+ ['house','8:25','Llego a casa',1225,1225],
+ ['utensils','8:25–8:40','Ceno + kéfir',1225,1240],
+ ['droplet','8:40–8:55','Me baño',1240,1255],
+ ['pencil','8:55–9:10','Termino tarea (bloque 2, si queda algo pendiente)',1255,1270],
+ ['moon','9:10–9:25','Rutina mental nocturna (respiración + visualización + registro breve)',1270,1285],
+ ['book-open','9:25–9:40','Preparo todo para mañana / desconecto pantallas',1285,1300],
+ ['moon','9:40–10:00','Tiempo libre / relajarte',1300,1320],
+ ['moon','10:00','Duermo',1320,1320]];
 const TARDE_MJ=[
- ['🎒','2:15','Salgo del colegio',855,870],
- ['🍽️','2:30–3:00','Almuerzo',870,900],
- ['✏️','3:00–4:00','Tareas (bloque 1)',900,960],
- ['🥣','4:00–4:10','Snack pre-entreno: yogurt griego + miel',960,970],
- ['👕','4:10–4:40','Transición / cambiarme / traslado a la cancha',970,1000],
- ['⚽','4:40–6:00','Primer entreno (personal + gimnasio de equipo — ver Ejercicio)',1000,1080],
- ['💧','6:00–6:30','Transición entre entrenos (hidratación; si sientes que te faltan piernas, fruta o dátiles)',1080,1110],
- ['🥅','6:30–8:00','Segundo entreno (equipo: partido, táctica o técnico según el día)',1110,1200],
- ['✅','8:00','Termina entreno',1200,1225],
- ['🏠','8:25','Llego a casa',1225,1225],
- ['🥛','8:25–8:40','Ceno + kéfir',1225,1240],
- ['🚿','8:40–8:55','Me baño',1240,1255],
- ['📓','8:55–9:10','Termino tarea (bloque 2, si queda algo pendiente)',1255,1270],
- ['🌙','9:10–9:25','Rutina mental nocturna (respiración + visualización + registro breve)',1270,1285],
- ['🎒','9:25–9:40','Preparo todo para mañana / desconecto pantallas',1285,1300],
- ['😌','9:40–10:00','Tiempo libre / relajarte',1300,1320],
- ['😴','10:00','Duermo',1320,1320]];
+ ['book-open','2:15','Salgo del colegio',855,870],
+ ['utensils','2:30–3:00','Almuerzo',870,900],
+ ['pencil','3:00–4:00','Tareas (bloque 1)',900,960],
+ ['utensils','4:00–4:10','Snack pre-entreno: yogurt griego + miel',960,970],
+ ['user','4:10–4:40','Transición / cambiarme / traslado a la cancha',970,1000],
+ ['target','4:40–6:00','Primer entreno (personal + gimnasio de equipo — ver Ejercicio)',1000,1080],
+ ['droplet','6:00–6:30','Transición entre entrenos (hidratación; si sientes que te faltan piernas, fruta o dátiles)',1080,1110],
+ ['target','6:30–8:00','Segundo entreno (equipo: partido, táctica o técnico según el día)',1110,1200],
+ ['check','8:00','Termina entreno',1200,1225],
+ ['house','8:25','Llego a casa',1225,1225],
+ ['utensils','8:25–8:40','Ceno + kéfir',1225,1240],
+ ['droplet','8:40–8:55','Me baño',1240,1255],
+ ['pencil','8:55–9:10','Termino tarea (bloque 2, si queda algo pendiente)',1255,1270],
+ ['moon','9:10–9:25','Rutina mental nocturna (respiración + visualización + registro breve)',1270,1285],
+ ['book-open','9:25–9:40','Preparo todo para mañana / desconecto pantallas',1285,1300],
+ ['moon','9:40–10:00','Tiempo libre / relajarte',1300,1320],
+ ['moon','10:00','Duermo',1320,1320]];
 const TARDE_VIE=[
- ['🎒','2:15','Salgo del colegio',855,870],
- ['🍽️','2:30–3:00','Almuerzo',870,900],
- ['✏️','3:00–4:00','Tareas (bloque 1)',900,960],
- ['📚','4:00–4:30','Tareas adicionales si tienes pendiente',960,990],
- ['🎸','4:30–5:00','Tocar el bajo',990,1020],
- ['🥣','5:00–5:10','Snack pre-entreno: yogurt griego + miel',1020,1030],
- ['👕','5:10–5:30','Transición / cambiarme / traslado a la cancha',1030,1050],
- ['⚽','5:30–8:00','Entreno',1050,1200],
- ['✅','8:00','Termina entreno',1200,1205],
- ['🏠','8:05','Llego a casa (entrenas en el condominio, el traslado es corto)',1205,1205],
- ['🥛','8:05–8:35','Ceno + kéfir',1205,1235],
- ['🚿','8:40–8:55','Me baño',1240,1255],
- ['🌙','8:55–9:10','Rutina mental nocturna (respiración + visualización + registro breve)',1255,1270],
- ['🎶','9:10–10:00','Leer / tocar el bajo / relajarte — tú eliges',1270,1320],
- ['😴','10:00','Duermo',1320,1320]];
+ ['book-open','2:15','Salgo del colegio',855,870],
+ ['utensils','2:30–3:00','Almuerzo',870,900],
+ ['pencil','3:00–4:00','Tareas (bloque 1)',900,960],
+ ['book-open','4:00–4:30','Tareas adicionales si tienes pendiente',960,990],
+ ['music','4:30–5:00','Tocar el bajo',990,1020],
+ ['utensils','5:00–5:10','Snack pre-entreno: yogurt griego + miel',1020,1030],
+ ['user','5:10–5:30','Transición / cambiarme / traslado a la cancha',1030,1050],
+ ['target','5:30–8:00','Entreno',1050,1200],
+ ['check','8:00','Termina entreno',1200,1205],
+ ['house','8:05','Llego a casa (entrenas en el condominio, el traslado es corto)',1205,1205],
+ ['utensils','8:05–8:35','Ceno + kéfir',1205,1235],
+ ['droplet','8:40–8:55','Me baño',1240,1255],
+ ['moon','8:55–9:10','Rutina mental nocturna (respiración + visualización + registro breve)',1255,1270],
+ ['music','9:10–10:00','Leer / tocar el bajo / relajarte — tú eliges',1270,1320],
+ ['moon','10:00','Duermo',1320,1320]];
 const DIA_SAB=[
- ['⏰','6:45','Levantarme',405,405],
- ['🍳','6:45–7:10','Desayunar',405,430],
- ['👕','7:10–7:40','Alistarme',430,470],
- ['📖','7:40–7:50','Leer libro',470,480,'LEER'],
- ['🚶','7:50','Salgo a clase de música (llegas en ~5 min)',480,480],
- ['🎵','8:00–10:00','Clase de música',480,600],
- ['🚗','10:00–10:30','Traslado a casa',600,630],
- ['⚽','11:00–11:45','Entreno personal (activación + técnica; incluye 10–15 min de ejercicio cognitivo)',660,705],
- ['🌤️','11:45','Empieza la tarde libre',705,705],
- ['🍽️','2:30–3:00','Almuerzo',870,900],
- ['🎸','tarde libre','Tocar el bajo',900,1200],
- ['📚','tarde libre','Tarea o Progrentis',900,1200],
- ['🥛','8:00–8:20','Ceno + kéfir',1200,1220],
- ['🚿','8:40–8:55','Me baño',1240,1255],
- ['🌙','8:55–9:10','Rutina mental nocturna (respiración + visualización + registro breve)',1255,1270],
- ['😌','9:10–10:00','Tiempo libre',1270,1320],
- ['😴','10:00','Duermo',1320,1320]];
+ ['clock','6:45','Levantarme',405,405],
+ ['utensils','6:45–7:10','Desayunar',405,430],
+ ['user','7:10–7:40','Alistarme',430,470],
+ ['book-open','7:40–7:50','Leer libro',470,480,'LEER'],
+ ['arrow-right','7:50','Salgo a clase de música (llegas en ~5 min)',480,480],
+ ['music','8:00–10:00','Clase de música',480,600],
+ ['arrow-right','10:00–10:30','Traslado a casa',600,630],
+ ['target','11:00–11:45','Entreno personal (activación + técnica; incluye 10–15 min de ejercicio cognitivo)',660,705],
+ ['sunrise','11:45','Empieza la tarde libre',705,705],
+ ['utensils','2:30–3:00','Almuerzo',870,900],
+ ['music','tarde libre','Tocar el bajo',900,1200],
+ ['book-open','tarde libre','Tarea o Progrentis',900,1200],
+ ['utensils','8:00–8:20','Ceno + kéfir',1200,1220],
+ ['droplet','8:40–8:55','Me baño',1240,1255],
+ ['moon','8:55–9:10','Rutina mental nocturna (respiración + visualización + registro breve)',1255,1270],
+ ['moon','9:10–10:00','Tiempo libre',1270,1320],
+ ['moon','10:00','Duermo',1320,1320]];
 const DIA_DOM=[
- ['⏰','7:00','Levantarme',420,420],
- ['🍳','7:00–7:30','Desayunar',420,450],
- ['😌','7:30–9:00','Tiempo libre / calentamiento si tienes partido',450,540],
- ['⚽','9:00–11:00','Partido (si tienes) — horario aproximado, ajusta según la liga',540,660],
- ['👕','11:00–12:00','Alistarme',660,720],
- ['🚗','12:00–12:30','Traslado a la iglesia',720,750],
- ['⛪','12:30–1:30','Iglesia',750,810],
- ['👨‍👩‍👦','1:30–4:00','Tiempo con la familia (variable) — regresas ~4:00pm',810,960],
- ['🍽️','2:30–3:00','Almuerzo',870,900],
- ['😌','4:00–4:30','Descansar al llegar',960,990],
- ['🎸','4:30–5:00','Tocar el bajo',990,1020],
- ['📚','5:00–5:45','Tareas o proyectos pendientes / Progrentis',1020,1065],
- ['🤸','5:45–6:15','Movilidad de recuperación (caminata suave, movilidad, respiración)',1065,1095],
- ['😌','6:15–8:00','Descansar / tiempo libre',1095,1200],
- ['🥛','8:00–8:20','Ceno + kéfir',1200,1220],
- ['🚿','8:40–8:55','Me baño',1240,1255],
- ['🌙','8:55–9:10','Rutina mental nocturna (respiración + visualización + registro breve)',1255,1270],
- ['😌','9:10–9:30','Tiempo libre',1270,1290],
- ['🎒','9:30–10:00','Preparar todo para la semana / desconectar pantallas',1290,1320],
- ['😴','10:00','Duermo',1320,1320]];
+ ['clock','7:00','Levantarme',420,420],
+ ['utensils','7:00–7:30','Desayunar',420,450],
+ ['moon','7:30–9:00','Tiempo libre / calentamiento si tienes partido',450,540],
+ ['target','9:00–11:00','Partido (si tienes) — horario aproximado, ajusta según la liga',540,660],
+ ['user','11:00–12:00','Alistarme',660,720],
+ ['arrow-right','12:00–12:30','Traslado a la iglesia',720,750],
+ ['house','12:30–1:30','Iglesia',750,810],
+ ['user','1:30–4:00','Tiempo con la familia (variable) — regresas ~4:00pm',810,960],
+ ['utensils','2:30–3:00','Almuerzo',870,900],
+ ['moon','4:00–4:30','Descansar al llegar',960,990],
+ ['music','4:30–5:00','Tocar el bajo',990,1020],
+ ['book-open','5:00–5:45','Tareas o proyectos pendientes / Progrentis',1020,1065],
+ ['dumbbell','5:45–6:15','Movilidad de recuperación (caminata suave, movilidad, respiración)',1065,1095],
+ ['moon','6:15–8:00','Descansar / tiempo libre',1095,1200],
+ ['utensils','8:00–8:20','Ceno + kéfir',1200,1220],
+ ['droplet','8:40–8:55','Me baño',1240,1255],
+ ['moon','8:55–9:10','Rutina mental nocturna (respiración + visualización + registro breve)',1255,1270],
+ ['moon','9:10–9:30','Tiempo libre',1270,1290],
+ ['book-open','9:30–10:00','Preparar todo para la semana / desconectar pantallas',1290,1320],
+ ['moon','10:00','Duermo',1320,1320]];
 
 const RUTINA={
- lun:{sec:[['🌅 Mañana',MAN_LV],['🌆 Tarde / Noche',TARDE_LUN]]},
- mar:{sec:[['🌅 Mañana',MAN_LV],['🌆 Tarde / Noche',TARDE_MJ]]},
- mie:{sec:[['🌅 Mañana',MAN_LV],['🌆 Tarde / Noche',TARDE_MJ]]},
- jue:{sec:[['🌅 Mañana',MAN_LV],['🌆 Tarde / Noche',TARDE_MJ]]},
- vie:{sec:[['🌅 Mañana',MAN_LV],['🌆 Tarde / Noche',TARDE_VIE]]},
- sab:{sec:[['🗓️ Día completo',DIA_SAB]]},
- dom:{sec:[['🗓️ Día completo',DIA_DOM]]}
+ lun:{sec:[['Mañana',MAN_LV,'sunrise'],['Tarde / Noche',TARDE_LUN,'moon']]},
+ mar:{sec:[['Mañana',MAN_LV,'sunrise'],['Tarde / Noche',TARDE_MJ,'moon']]},
+ mie:{sec:[['Mañana',MAN_LV,'sunrise'],['Tarde / Noche',TARDE_MJ,'moon']]},
+ jue:{sec:[['Mañana',MAN_LV,'sunrise'],['Tarde / Noche',TARDE_MJ,'moon']]},
+ vie:{sec:[['Mañana',MAN_LV,'sunrise'],['Tarde / Noche',TARDE_VIE,'moon']]},
+ sab:{sec:[['Día completo',DIA_SAB,'calendar']]},
+ dom:{sec:[['Día completo',DIA_DOM,'calendar']]}
 };
 const NOTAS={
- lun:['<div class="nota verde">😴 <b>Nota sobre el sueño:</b> duermes 8h00 (10:00pm–6:00am), 10 minutos menos que antes por el espacio de lectura a las 6:00am. Es un margen justo — sé estricto con la hora de dormir (10:00pm) y no la corras más tarde.</div>'],
+ lun:['<div class="nota verde"><b>Nota sobre el sueño:</b> duermes 8h00 (10:00pm–6:00am), 10 minutos menos que antes por el espacio de lectura a las 6:00am. Es un margen justo — sé estricto con la hora de dormir (10:00pm) y no la corras más tarde.</div>'],
  mar:[],mie:[],jue:[],
- vie:['<div class="nota azul">🎵 <b>Recordatorio:</b> mañana (sábado) tienes clase de música de 8:00 a 10:00am — duerme a tiempo para poder desayunar con calma antes de salir.</div>',
-      '<div class="nota">🏆 <b>Excepción — días de torneo (ej. Futeca Cayalá):</b> toda la tarde desde la salida del colegio se reemplaza por el torneo. Prioriza hidratación y energía rápida (fruta, dátiles) entre partidos.</div>'],
- sab:['<div class="nota verde">🌤️ <b>Tarde libre desde las 11:45</b> — recordatorios: tocar el bajo 🎸 y tarea o Progrentis 📚 (están en tu checklist).</div>'],
- dom:['<div class="nota azul">☀️ Si no tienes partido esa semana, aprovecha la mañana (7:30–12:00) con más calma: desayuno tranquilo, descanso extra o algo de movilidad adicional.</div>']
+ vie:['<div class="nota azul"><b>Recordatorio:</b> mañana (sábado) tienes clase de música de 8:00 a 10:00am — duerme a tiempo para poder desayunar con calma antes de salir.</div>',
+      '<div class="nota"><b>Excepción — días de torneo (ej. Futeca Cayalá):</b> toda la tarde desde la salida del colegio se reemplaza por el torneo. Prioriza hidratación y energía rápida (fruta, dátiles) entre partidos.</div>'],
+ sab:['<div class="nota verde"><b>Tarde libre desde las 11:45</b> — recordatorios: tocar el bajo y tarea o Progrentis (están en tu checklist).</div>'],
+ dom:['<div class="nota azul">Si no tienes partido esa semana, aprovecha la mañana (7:30–12:00) con más calma: desayuno tranquilo, descanso extra o algo de movilidad adicional.</div>']
 };
 NOTAS.mar=NOTAS.lun;NOTAS.mie=NOTAS.lun;NOTAS.jue=NOTAS.lun;
 
 /* ================= DATOS: EJERCICIO ================= */
-const OLISE='Elige UN nivel según cómo vayas hoy — todo se hace solo: 🟢 Base — conduce el balón a ritmo medio mientras lanzas y atrapas una pelota de tenis con la misma mano; mirada en la pelota, el balón se controla por sensación de pie (3×1 min). 🔵 Intermedio (pared) — golpea el balón contra la pared mientras lanzas y atrapas la pelota con la mano contraria al pie que golpea, alternando pie cada 30 segundos (3×1 min). 🟣 Avanzado (conos) — coloca 4–6 conos o botellas en línea y conduce el balón en zigzag entre ellos mientras lanzas y atrapas la pelota de tenis; cuando logres pasarlos sin perder el balón ni la pelota, sube el ritmo o junta más los conos (3×1 min).';
+const OLISE='Elige UN nivel según cómo vayas hoy — todo se hace solo: Base — conduce el balón a ritmo medio mientras lanzas y atrapas una pelota de tenis con la misma mano; mirada en la pelota, el balón se controla por sensación de pie (3×1 min). Intermedio (pared) — golpea el balón contra la pared mientras lanzas y atrapas la pelota con la mano contraria al pie que golpea, alternando pie cada 30 segundos (3×1 min). Avanzado (conos) — coloca 4–6 conos o botellas en línea y conduce el balón en zigzag entre ellos mientras lanzas y atrapas la pelota de tenis; cuando logres pasarlos sin perder el balón ni la pelota, sube el ritmo o junta más los conos (3×1 min).';
 const ENTRENO={
-lun:{titulo:'Fuerza completa',emoji:'💪',sub:'Piernas + Core intenso · Aprovechamos que no hay gimnasio de equipo para meter buena carga',tiempo:'55–60 min',bloques:[
- {b:'🦵 Piernas (fuerza + control)',d:60,ej:[
+lun:{titulo:'Fuerza completa',icon:'dumbbell',sub:'Piernas + Core intenso · Aprovechamos que no hay gimnasio de equipo para meter buena carga',tiempo:'55–60 min',bloques:[
+ {icon:'dumbbell',b:'Piernas (fuerza + control)',d:60,ej:[
   {n:'Sentadillas a una pierna (pistol squats)',s:'4×8 por pierna',c:'Parado en una pierna, brazos extendidos al frente para balance, baja el glúteo hacia el talón manteniendo el pecho arriba y la rodilla alineada con el pie. La otra pierna se extiende al frente sin tocar el piso. Sube empujando con el talón.',d:'Sostén el disco pegado al pecho (estilo goblet) para añadir resistencia una vez que domines el movimiento sin peso.'},
   {n:'Zancadas inversas con mancuerna (controlando la bajada)',s:'3×10 por pierna',c:'Un paso largo hacia atrás, baja la rodilla trasera casi hasta tocar el piso manteniendo el torso recto, controla 2-3 segundos en la bajada. Empuja con el talón delantero para volver arriba.',d:'Sostén el disco con ambas manos frente al pecho en vez de las mancuernas.'},
   {n:'Peso muerto a una pierna con mancuerna',s:'3×8 por pierna',c:'Parado en una pierna con ligera flexión de rodilla, inclina el torso hacia adelante mientras la pierna libre se eleva atrás en línea recta con la espalda. Baja el peso cerca del piso y regresa controlando el equilibrio.',d:'Sostén el disco con ambas manos frente al cuerpo en vez de la mancuerna.'},
   {n:'Sentadilla con pausa de 3 segundos abajo (con mancuernas)',s:'3×10',c:'Baja a sentadilla completa manteniendo el pecho arriba y las rodillas alineadas con los pies, pausa 3 segundos abajo sin perder tensión, sube explosivo pero controlado.',d:'El disco tipo goblet (pegado al pecho) es una alternativa natural y muy efectiva para este ejercicio.'}]},
- {b:'🧱 Core (estabilidad + fuerza)',d:40,ej:[
+ {icon:'dumbbell',b:'Core (estabilidad + fuerza)',d:40,ej:[
   {n:'Plancha frontal (isométrica)',s:'3×45-50s',c:'Apoyo en antebrazos y puntas de pie, cuerpo en línea recta de cabeza a talones, abdomen y glúteos contraídos, sin dejar caer la cadera.'},
   {n:'Bird Dog con pausa de 2 segundos',s:'3×10 por lado',c:'En cuatro apoyos, extiende brazo y pierna contrarios al mismo tiempo, mantén cadera y hombros nivelados, pausa 2 segundos en extensión completa antes de regresar.'},
   {n:'Elevaciones de piernas lentas',s:'3×15',c:'Acostado boca arriba, manos bajo la cadera para proteger la zona lumbar, sube las piernas rectas hasta 90°, baja lento y controlado sin tocar el piso entre repeticiones.'},
   {n:'Dead bug con mancuerna',s:'3×20',c:'Boca arriba, rodillas y brazos elevados en 90°, extiende brazo y pierna opuestos hacia el piso sin arquear la espalda baja, regresa y alterna.',d:'Sostén el disco con ambas manos extendidas hacia el techo en vez de una mancuerna en cada mano — la tensión en el core se mantiene igual.'},
   {n:'Plancha lateral con elevación de pierna',s:'3×30s por lado',c:'Apoyo en un antebrazo, cuerpo en línea recta lateral, eleva la pierna de arriba manteniendo la cadera estable sin rotar el torso.'},
   {n:'Russian Twists con mancuerna',s:'3×20 (10 por lado)',c:'Sentado con rodillas flexionadas, torso inclinado ligeramente atrás, rota el torso de lado a lado tocando el piso con el peso a cada lado.',d:'Sostén el disco con ambas manos al centro del pecho — el disco reemplaza directamente la mancuerna y funciona muy bien aquí.'}]},
- {b:'🧠 Ejercicio cognitivo + técnica (6:00–6:15pm)',d:30,ej:[
+ {icon:'target',b:'Ejercicio cognitivo + técnica (6:00–6:15pm)',d:30,ej:[
   {n:'Técnica: toques a la pared y control orientado',s:'10 min',c:'La técnica que te toca hoy: toques contra la pared con ambos pies y control orientado del rebote, a ritmo cómodo, priorizando la calidad del toque.'},
   {n:'Ejercicio cognitivo — elige tu nivel',s:'3×1 min',c:'Va en el hueco de 6:00–6:15pm, después del primer entreno y antes de alistarte para el de equipo. '+OLISE}]}]},
-mar:{titulo:'Resistencia intermitente neuromuscular',emoji:'🫀',sub:'Área: Resistencia',tiempo:'50–55 min',bloques:[
- {b:'🔥 Calentamiento (10 min)',ej:[
+mar:{titulo:'Resistencia intermitente neuromuscular',icon:'dumbbell',sub:'Área: Resistencia',tiempo:'50–55 min',bloques:[
+ {icon:'sunrise',b:'Calentamiento (10 min)',ej:[
   {n:'Trote, movilidad, skipping, desplazamientos laterales',s:'10 min',c:'Trote suave para elevar el pulso, luego movilidad articular de tobillo/cadera, skipping de rodillas altas y desplazamientos laterales para activar cadera y tobillos antes del trabajo explosivo.'}]},
- {b:'⚡ Parte principal (30–35 min)',d:60,ej:[
+ {icon:'sunrise',b:'Parte principal (30–35 min)',d:60,ej:[
   {n:'Bloque 1: 15s sprint ida y vuelta + 15s regate técnico + 30s trote/caminata',s:'',c:'Sprint al máximo esfuerzo ida y vuelta durante 15s, luego 15s de regates técnicos con el balón a ritmo controlado, y recupera 30s trotando o caminando antes de repetir.'},
   {n:'Bloque 2: 5 saltos laterales + 15m conducción rápida + 10s recuperación estática',s:'',c:'5 saltos laterales explosivos de lado a lado, después conduce el balón a máxima velocidad 15 metros, y recupera 10s parado sin moverte.'},
   {n:'Bloque 3: 10s cambios de dirección + 10s conducción media + 10s trote',s:'',c:'10s de cambios de dirección explosivos (sin balón), 10s conduciendo el balón a ritmo medio, y 10s de trote suave de recuperación.'},
   {n:'Bloque 4: 20m sprint + tiro/pase largo + caminata de regreso',s:'',c:'Sprint de 20 metros a máxima velocidad, al llegar ejecuta un tiro o pase largo con precisión, y camina de regreso al punto de inicio para recuperar.'}]},
- {b:'🧊 Vuelta a la calma (10 min)',ej:[
+ {icon:'wind',b:'Vuelta a la calma (10 min)',ej:[
   {n:'Caminata suave + estiramientos',s:'10 min',c:'Baja el ritmo cardiaco caminando, luego estira cuádriceps, isquiotibiales, gemelos y cadera manteniendo cada posición 20-30 segundos.'}]},
- {b:'⚽ Técnica libre (dentro del primer entreno)',d:30,ej:[
+ {icon:'target',b:'Técnica libre (dentro del primer entreno)',d:30,ej:[
   {n:'Técnica libre con balón',s:'libre',c:'Hoy te toca técnica libre: regates, fintas y cambios de ritmo a tu aire, priorizando la calidad del toque.'}]}]},
-mie:{titulo:'Fuerza y Core (Adaptada)',emoji:'🏋️',sub:'Fuerza tren superior + Core',tiempo:'45–50 min',bloques:[
- {b:'💪 Fuerza tren superior',d:60,ej:[
+mie:{titulo:'Fuerza y Core (Adaptada)',icon:'dumbbell',sub:'Fuerza tren superior + Core',tiempo:'45–50 min',bloques:[
+ {icon:'dumbbell',b:'Fuerza tren superior',d:60,ej:[
   {n:'Plancha dinámica',s:'3×12',c:'Desde plancha alta (brazos extendidos) baja a plancha en antebrazos uno a la vez y regresa a plancha alta, manteniendo la cadera estable sin balancear.'},
   {n:'Dominadas',s:'4×6',c:'Agarre pronado un poco más ancho que los hombros, sube hasta que la barbilla pase la barra, baja controlado hasta extensión completa de brazos.'},
   {n:'Fondos en banco o silla',s:'4×10',c:'Manos en el borde del banco, piernas extendidas al frente, baja el cuerpo flexionando codos a 90°, empuja de regreso sin encoger los hombros.'},
   {n:'Press de hombro unilateral con mancuerna',s:'3×6 por brazo',c:'De pie o sentado, empuja el peso desde la altura del hombro hasta la extensión completa arriba, controla la bajada sin arquear la espalda.',d:'Sostén el disco con ambas manos y haz press de hombro a dos manos en vez de unilateral — mismo patrón, estímulo bilateral.'},
   {n:'Remo a 2 apoyos con mancuerna',s:'3×8 por brazo',c:'Una mano y rodilla apoyadas en el banco, espalda recta y paralela al piso, jala el peso hacia la cadera llevando el codo hacia atrás, baja controlado.'},
   {n:'Flexiones con variaciones (normales, inclinadas, diamante)',s:'3×12',c:'Cuerpo en línea recta, baja el pecho hacia el piso controlando el core, empuja de regreso. Alterna manos al ancho de hombros (normal), pies elevados (inclinada) o manos juntas bajo el pecho (diamante).'}]},
- {b:'🧱 Core',d:40,ej:[
+ {icon:'dumbbell',b:'Core',d:40,ej:[
   {n:'Elevaciones de piernas',s:'3×15',c:'Misma técnica que el lunes: manos bajo la cadera, piernas rectas hasta 90°, bajada lenta sin tocar el piso.'},
-  {n:'Bird Dog con mancuerna',s:'3×10 por lado',c:'Igual que bird dog normal, pero sostén una mancuerna ligera en la mano que se extiende al frente para sumar estabilidad activa del hombro.',d:'⚠️ No uses el disco de 25lb aquí — es demasiado peso para un movimiento de estabilidad unilateral. Mantenlo con mancuerna ligera o sin peso.'},
+  {n:'Bird Dog con mancuerna',s:'3×10 por lado',c:'Igual que bird dog normal, pero sostén una mancuerna ligera en la mano que se extiende al frente para sumar estabilidad activa del hombro.',d:'No uses el disco de 25lb aquí — es demasiado peso para un movimiento de estabilidad unilateral. Mantenlo con mancuerna ligera o sin peso.'},
   {n:'Dead bugs',s:'3×14',c:'Misma técnica que el lunes, sin peso adicional: rodillas y brazos en 90°, extiende brazo y pierna opuestos sin arquear la espalda baja.'}]}]},
-jue:{titulo:'Velocidad + Cambio de Dirección + Técnica',emoji:'💨',sub:'Área: Velocidad + Pliometría + Técnica',tiempo:'55–60 min',bloques:[
- {b:'⚡ Velocidad + potencia',d:75,ej:[
+jue:{titulo:'Velocidad + Cambio de Dirección + Técnica',icon:'wind',sub:'Área: Velocidad + Pliometría + Técnica',tiempo:'55–60 min',bloques:[
+ {icon:'sunrise',b:'Velocidad + potencia',d:75,ej:[
   {n:'Power Skips',s:'3×20 m',c:'Skipping explosivo elevando la rodilla al máximo con cada paso mientras el brazo contrario empuja hacia arriba, buscando altura y no solo velocidad.'},
   {n:'Doble o triple hop adelante (misma pierna)',s:'3×10',c:'En una pierna, salta hacia adelante 2 o 3 veces seguidas sin perder el equilibrio, aterrizando suave y absorbiendo con la rodilla ligeramente flexionada antes del siguiente salto.'},
   {n:'Bounds horizontales',s:'3×20 m',c:'Saltos largos alternando piernas como zancadas explosivas en el aire, buscando distancia en cada salto mientras avanzas.'},
   {n:'Sprints de 20-30 m',s:'5 reps',c:'Salida explosiva desde posición baja o de pie, aceleración máxima manteniendo buena mecánica de brazos y postura ligeramente inclinada al frente los primeros metros.'}]},
- {b:'🔀 Cambio de dirección',d:75,ej:[
+ {icon:'arrow-right',b:'Cambio de dirección',d:75,ej:[
   {n:'Lateral bound + broad jump (una pierna)',s:'3×10',c:'Salta lateralmente en una pierna aterrizando estable, inmediatamente después ejecuta un salto largo hacia adelante en la misma pierna.'},
   {n:'Salto a una pierna + lateral bound',s:'3×8 por pierna',c:'Salto vertical en una pierna, al aterrizar enlaza inmediatamente un salto lateral en la misma pierna sin pausa entre ambos.'},
   {n:'Hop + lateral bound',s:'3×10',c:'Pequeño salto hacia adelante en una pierna seguido de un salto lateral, enlazando ambos movimientos sin detenerte.'},
   {n:'Triple lateral hop',s:'3×6 por lado',c:'Tres saltos laterales consecutivos en la misma pierna, manteniendo el equilibrio y la rodilla estable en cada aterrizaje.'}]},
- {b:'⚽ Técnica + movilidad',d:30,ej:[
+ {icon:'target',b:'Técnica + movilidad',d:30,ej:[
   {n:'Técnica con balón (regates, fintas, ritmo)',s:'20 min',c:'Hoy te toca técnica: trabaja regates a ritmo variable, cambios de ritmo y fintas, priorizando calidad de toque sobre velocidad al inicio, aumentando el ritmo conforme ganas control.'},
   {n:'Estiramientos dinámicos y movilidad',s:'10-15 min',c:'Movimientos activos de cadera, tobillo e isquiotibiales (balanceos de pierna, círculos de cadera, zancadas con rotación) sin quedarte estático — el objetivo es preparar el rango de movimiento, no relajar.'}]}]},
-vie:{titulo:'Fuerza explosiva + Pliometría + Sprints + Core potente',emoji:'🚀',sub:'⚠️ Los días de torneo (Futeca Cayalá) esta sesión se salta por completo',tiempo:'55–60 min',bloques:[
- {b:'💥 Fuerza explosiva',d:60,ej:[
+vie:{titulo:'Fuerza explosiva + Pliometría + Sprints + Core potente',icon:'trending-up',sub:'Los días de torneo (Futeca Cayalá) esta sesión se salta por completo',tiempo:'55–60 min',bloques:[
+ {icon:'dumbbell',b:'Fuerza explosiva',d:60,ej:[
   {n:'Swing con mancuerna',s:'4×12',c:'Pies al ancho de hombros, bisagra de cadera hacia atrás con el peso entre las piernas, extiende la cadera explosivo para llevar el peso hasta la altura del pecho, controla la bajada.',d:'Sostén el disco con ambas manos frente al cuerpo en vez de la mancuerna — el patrón de bisagra de cadera es el mismo.'},
   {n:'Sentadilla con salto + pausa de 2 segundos antes de subir',s:'3×8',c:'Baja a sentadilla, pausa 2 segundos sin perder tensión, luego salta explosivo lo más alto posible, aterriza suave y vuelve a bajar.'},
   {n:'Press con giro de torso (rotación explosiva)',s:'3×8 por lado',c:'Sostén el peso a la altura del pecho, rota el torso y empuja el peso hacia adelante y al lado con potencia, usando la cadera para generar la fuerza, no solo el brazo.',d:'Sostén el disco con ambas manos al pecho y ejecuta el mismo giro explosivo — funciona muy bien con disco por el agarre a dos manos.'}]},
- {b:'🦘 Pliometría (enfocada y efectiva)',d:75,ej:[
+ {icon:'dumbbell',b:'Pliometría (enfocada y efectiva)',d:75,ej:[
   {n:'Lateral bound + broad jump (una pierna)',s:'3×8',c:'Misma técnica que el jueves: salta lateral en una pierna aterrizando estable, enlaza inmediatamente un salto largo hacia adelante en la misma pierna.'},
   {n:'Hop + lateral bound',s:'3×8',c:'Misma técnica que el jueves: pequeño salto hacia adelante en una pierna seguido de un salto lateral, sin detenerte entre ambos.'}]},
- {b:'🏃 Sprints',d:75,ej:[
+ {icon:'dumbbell',b:'Sprints',d:75,ej:[
   {n:'Aceleración desde estático',s:'3×20 m',c:'Parado, sin impulso previo, arranca lo más explosivo posible manteniendo la postura inclinada al frente en los primeros pasos.'},
   {n:'Con cambio de dirección a los 10 m',s:'2×20 m',c:'Sprint recto los primeros 10m, luego corta en un ángulo de 45-90° sin perder velocidad de base, continúa acelerando en la nueva dirección.'},
   {n:'Sprint máximo',s:'1×30 m',c:'Sprint completo a máxima velocidad sostenida, enfocado en mantener la técnica de carrera (brazos, postura) incluso cuando llega la fatiga en los últimos metros.'}]},
- {b:'🧱 Core potente',d:40,ej:[
+ {icon:'dumbbell',b:'Core potente',d:40,ej:[
   {n:'Plancha con toques de hombro',s:'3×20',c:'En plancha alta, toca el hombro contrario con una mano sin rotar la cadera, alterna manos manteniendo el core rígido.'},
   {n:'Bird dog en plancha (plancha contralateral)',s:'3×12',c:'Desde plancha alta, extiende brazo y pierna contrarios simultáneamente sin perder el nivel de la cadera, regresa y alterna.'},
   {n:'Elevaciones de piernas',s:'3×15',c:'Misma técnica que el lunes.'},
   {n:'Russian Twists con mancuerna',s:'3×20',c:'Misma técnica que el lunes.',d:'Igual que en lunes — el disco funciona muy bien aquí.'},
   {n:'Plancha frontal',s:'3×50-60s',c:'Misma técnica que el lunes.'}]},
- {b:'🧠 Ejercicio cognitivo + técnica (al final de la sesión)',d:30,ej:[
+ {icon:'target',b:'Ejercicio cognitivo + técnica (al final de la sesión)',d:30,ej:[
   {n:'Técnica: toques a la pared y control orientado',s:'10 min',c:'La técnica que te toca hoy: toques contra la pared con ambos pies y control orientado del rebote, a ritmo cómodo, priorizando la calidad del toque.'},
   {n:'Ejercicio cognitivo — elige tu nivel',s:'3×1 min',c:OLISE}]}]},
-sab:{titulo:'Activación Ligera y Técnica',emoji:'🌤️',sub:'Activar sin sobrecargar · 11:00–11:45am, después de la clase de música',tiempo:'30–40 min',bloques:[
- {b:'🌤️ Sesión',d:30,ej:[
+sab:{titulo:'Activación Ligera y Técnica',icon:'sunrise',sub:'Activar sin sobrecargar · 11:00–11:45am, después de la clase de música',tiempo:'30–40 min',bloques:[
+ {icon:'sunrise',b:'Sesión',d:30,ej:[
   {n:'Saltos con una pierna',s:'3×10 por pierna',c:'Saltos pequeños y controlados en una pierna, sin buscar máxima altura — el objetivo es activar, no fatigar.'},
   {n:'Escalera + cambios de dirección suaves',s:'3 rondas',c:'Trabajo de pies en escalera de agilidad a ritmo controlado, enfocado en la coordinación y no en la velocidad máxima.'},
   {n:'Técnica con balón (regates suaves, toques controlados, cambios de ritmo)',s:'15 min',c:'Hoy te toca técnica: trabaja el balón a ritmo bajo-medio, priorizando el control y la calidad del toque sobre la velocidad.'},
   {n:'Estiramientos dinámicos ligeros',s:'10-15 min',c:'Movimientos suaves de piernas, caderas, espalda y hombros sin llegar a estiramiento estático profundo — mantener el cuerpo activo pero liviano.'},
   {n:'Movilidad general sin equipo',s:'10 min',c:'Círculos de cadera, tobillo y hombro, enfocándote en rango de movimiento completo y controlado.'}]},
- {b:'🧠 Ejercicio cognitivo (dentro del bloque de técnica)',d:30,ej:[
+ {icon:'target',b:'Ejercicio cognitivo (dentro del bloque de técnica)',d:30,ej:[
   {n:'Ejercicio cognitivo — elige tu nivel',s:'3×1 min',c:OLISE}]}]},
-dom:{titulo:'Movilidad + Descanso Activo',emoji:'🧘',sub:'Recuperación · 5:45–6:15pm',tiempo:'30–40 min',bloques:[
- {b:'🧘 Sesión',ej:[
+dom:{titulo:'Movilidad + Descanso Activo',icon:'wind',sub:'Recuperación · 5:45–6:15pm',tiempo:'30–40 min',bloques:[
+ {icon:'wind',b:'Sesión',ej:[
   {n:'Caminata ligera o bici suave',s:'15-30 min',c:'Ritmo cómodo y conversacional, sin buscar esfuerzo cardiovascular — el objetivo es circulación, no rendimiento.'},
   {n:'Movilidad general: estiramientos',s:'20 min',c:'Estiramientos estáticos sostenidos 20-30s por grupo muscular (cuádriceps, isquiotibiales, cadera, espalda, hombros), respirando profundo en cada posición.'},
   {n:'Respiración profunda / relajación',s:'10 min',c:'Acostado o sentado cómodo, respira profundo por la nariz 4 segundos, sostén 4 segundos, exhala 6-8 segundos por la boca. Repite relajando conscientemente cada grupo muscular.'}]}]}
@@ -774,53 +1093,53 @@ const DIAS=[['lun','Lunes'],['mar','Martes'],['mie','Miércoles'],['jue','Jueves
 
 /* ================= DATOS: MENTAL ================= */
 const MENTAL_PASOS=[
- ['🫁','1. Respiración de caja','3 min','Inhala 4 segundos, sostén 4 segundos, exhala 4 segundos, sostén 4 segundos con los pulmones vacíos. Repite el ciclo durante 3 minutos.'],
- ['🎯','2. Visualización','5 min','Cierra los ojos y visualiza una jugada específica saliendo perfecta: un regate, un pase, una definición. Siente el movimiento como si ya estuviera pasando, no como un deseo.'],
- ['📝','3. Registro breve','5 min','Escribe 1 cosa que hiciste bien hoy (en cancha o fuera) y 1 cosa concreta que vas a mejorar mañana. Dos líneas, no un diario largo. (Libreta o notas del teléfono.)']];
+ ['wind','1. Respiración de caja','3 min','Inhala 4 segundos, sostén 4 segundos, exhala 4 segundos, sostén 4 segundos con los pulmones vacíos. Repite el ciclo durante 3 minutos.'],
+ ['target','2. Visualización','5 min','Cierra los ojos y visualiza una jugada específica saliendo perfecta: un regate, un pase, una definición. Siente el movimiento como si ya estuviera pasando, no como un deseo.'],
+ ['pencil','3. Registro breve','5 min','Escribe 1 cosa que hiciste bien hoy (en cancha o fuera) y 1 cosa concreta que vas a mejorar mañana. Dos líneas, no un diario largo. (Libreta o notas del teléfono.)']];
 const DIAS_COGNITIVO=['lun','vie','sab'];
 
 /* ================= DATOS: COMIDAS ================= */
 const DESAYUNOS=[
- ['🥣','Yogurt griego + miel + avena cruda + banano','Cero cocción, listo en 2 min.'],
- ['🍌','Avena cocida con banano y maní','5 min en olla o micro.'],
- ['🍳','Huevos revueltos con espinaca y tomate + tortilla','Rápido y con proteína.'],
- ['🥑','Pan de masa madre con aguacate y huevo','Tostas, fríes huevo, listo.'],
- ['🥤','Batido: leche, banano, avena, maní, miel','Todo a la licuadora.']];
+ ['utensils','Yogurt griego + miel + avena cruda + banano','Cero cocción, listo en 2 min.'],
+ ['utensils','Avena cocida con banano y maní','5 min en olla o micro.'],
+ ['utensils','Huevos revueltos con espinaca y tomate + tortilla','Rápido y con proteína.'],
+ ['utensils','Pan de masa madre con aguacate y huevo','Tostas, fríes huevo, listo.'],
+ ['utensils','Batido: leche, banano, avena, maní, miel','Todo a la licuadora.']];
 const REFACCIONES=[
- ['🍎','Manzana + puño de almendras','Fibra + grasa buena, te aguanta hasta el almuerzo.'],
- ['🧀','Pan de masa madre con queso mozzarella','Fácil de llevar, proteína + carbo.'],
- ['🍯','Yogurt griego con miel','Rápido, alta proteína.'],
- ['🥚','Huevo duro + banano','Si dejas huevos cocidos listos, se arma en segundos.'],
- ['🌮','Tortilla con frijol y queso','Si sobra frijol de la cena/almuerzo, se recalienta o va fría.'],
- ['🥜','Banano con maní / mantequilla de maní','Carbo + grasa, buena energía sostenida.'],
- ['🧃','Batido pequeño (leche, banano, avena) en termo','Si sales temprano y no quieres cargar fruta suelta.']];
+ ['utensils','Manzana + puño de almendras','Fibra + grasa buena, te aguanta hasta el almuerzo.'],
+ ['utensils','Pan de masa madre con queso mozzarella','Fácil de llevar, proteína + carbo.'],
+ ['utensils','Yogurt griego con miel','Rápido, alta proteína.'],
+ ['utensils','Huevo duro + banano','Si dejas huevos cocidos listos, se arma en segundos.'],
+ ['utensils','Tortilla con frijol y queso','Si sobra frijol de la cena/almuerzo, se recalienta o va fría.'],
+ ['utensils','Banano con maní / mantequilla de maní','Carbo + grasa, buena energía sostenida.'],
+ ['utensils','Batido pequeño (leche, banano, avena) en termo','Si sales temprano y no quieres cargar fruta suelta.']];
 const CENAS=[
- ['🍳','Huevos revueltos o tortilla de huevo con queso y tomate','5 min.'],
- ['🍓','Yogurt griego con fruta y avena','Igual que desayuno, sirve perfecto de cena ligera.'],
- ['🥑','Pan de masa madre con aguacate y huevo duro','Si dejas huevos cocidos listos, es instantáneo.'],
- ['🫘','Frijol volteado con queso y tortilla','Rapidísimo si el frijol ya está hecho.'],
- ['🥤','Batido de leche con fruta + yogurt','Cuando llegas tarde y sin ganas de cocinar.'],
- ['🫓','Quesadilla de tortilla con mozzarella y espinaca','5 min en sartén.']];
+ ['utensils','Huevos revueltos o tortilla de huevo con queso y tomate','5 min.'],
+ ['utensils','Yogurt griego con fruta y avena','Igual que desayuno, sirve perfecto de cena ligera.'],
+ ['utensils','Pan de masa madre con aguacate y huevo duro','Si dejas huevos cocidos listos, es instantáneo.'],
+ ['utensils','Frijol volteado con queso y tortilla','Rapidísimo si el frijol ya está hecho.'],
+ ['utensils','Batido de leche con fruta + yogurt','Cuando llegas tarde y sin ganas de cocinar.'],
+ ['utensils','Quesadilla de tortilla con mozzarella y espinaca','5 min en sartén.']];
 const COMPRA={
- '🥚 Proteínas':['Huevos (cartón de 30)','Yogurt griego','Queso mozzarella','Frijol negro','Leche'],
- '🌾 Carbohidratos':['Avena','Pan de masa madre','Tortilla de maíz'],
- '🍌 Frutas':['Banano','Manzana','Fruta para picar/batir (papaya o fresa)'],
- '🥬 Verduras':['Espinaca','Tomate'],
- '🥑 Grasas buenas':['Aguacate','Maní / mantequilla de maní','Almendras'],
- '🍯 Extras':['Miel']};
+ 'Proteínas':['Huevos (cartón de 30)','Yogurt griego','Queso mozzarella','Frijol negro','Leche'],
+ 'Carbohidratos':['Avena','Pan de masa madre','Tortilla de maíz'],
+ 'Frutas':['Banano','Manzana','Fruta para picar/batir (papaya o fresa)'],
+ 'Verduras':['Espinaca','Tomate'],
+ 'Grasas buenas':['Aguacate','Maní / mantequilla de maní','Almendras'],
+ 'Extras':['Miel']};
 
 /* ================= TAREAS IMPORTANTES (lo que mide el progreso) ================= */
 const TAREAS=[
- {id:'LEER',emo:'📖',label:'Leer',desc:'10 minutos de lectura',t:600},
- {id:'t_medita',emo:'🧘',label:'Meditar',desc:'5 min de meditación tranquila',t:300},
- {id:'t_respira',emo:'🫁',label:'Respiración de caja',desc:'Inhala 4 · sostén 4 · exhala 4 · sostén 4, 3 min',t:180,caja:true},
- {id:'t_visual',emo:'🎯',label:'Visualización',desc:'5 min visualizando una jugada saliendo perfecta',t:300},
- {id:'t_registro',emo:'📝',label:'Registro nocturno',desc:'1 cosa que hiciste bien + 1 a mejorar mañana'},
- {id:'t_kefir',emo:'🥛',label:'Tomar kéfir',desc:'Con la cena'},
- {id:'t_comer',emo:'🥗',label:'Comer bien hoy',desc:'Desayuno, almuerzo y cena de calidad'},
- {id:'t_agua',emo:'💧',label:'Tomar agua (8 vasos)',desc:'Regístralos en Comidas',reflect:'agua',goto:'comidas'},
- {id:'t_entreno',emo:'🏋️',label:'Entreno de hoy',desc:'Completa tu sesión en Ejercicio',reflect:'entreno',goto:'ejercicio'},
- {id:'t_dormir',emo:'😴',label:'Dormir a las 10pm',desc:'Clave para descansar 8 horas'}
+ {id:'LEER',icon:'book-open',label:'Leer',desc:'10 minutos de lectura',t:600},
+ {id:'t_medita',icon:'wind',label:'Meditar',desc:'5 min de meditación tranquila',t:300},
+ {id:'t_respira',icon:'wind',label:'Respiración de caja',desc:'Inhala 4 · sostén 4 · exhala 4 · sostén 4, 3 min',t:180,caja:true},
+ {id:'t_visual',icon:'target',label:'Visualización',desc:'5 min visualizando una jugada saliendo perfecta',t:300},
+ {id:'t_registro',icon:'pencil',label:'Registro nocturno',desc:'1 cosa que hiciste bien + 1 a mejorar mañana'},
+ {id:'t_kefir',icon:'utensils',label:'Tomar kéfir',desc:'Con la cena'},
+ {id:'t_comer',icon:'utensils',label:'Comer bien hoy',desc:'Desayuno, almuerzo y cena de calidad'},
+ {id:'t_agua',icon:'droplet',label:'Tomar agua (8 vasos)',desc:'Regístralos en Comidas',reflect:'agua',goto:'comidas'},
+ {id:'t_entreno',icon:'dumbbell',label:'Entreno de hoy',desc:'Completa tu sesión en Ejercicio',reflect:'entreno',goto:'ejercicio'},
+ {id:'t_dormir',icon:'moon',label:'Dormir a las 10pm',desc:'Clave para descansar 8 horas'}
 ];
 
 /* ================= ESTADO + PERFIL ================= */
@@ -837,6 +1156,13 @@ let checks=JSON.parse(localStorage.getItem(K('checks_'+HOYKEY))||'{}');
 let hist=JSON.parse(localStorage.getItem(K('hist'))||'{}');
 let compra=JSON.parse(localStorage.getItem(K('compras'))||'{}');
 let calMes=hoy.getMonth(),calAno=hoy.getFullYear();
+/* tareas editables: ocultar las de fábrica, renombrar/agregar propias */
+let TCFG=(()=>{try{const c=JSON.parse(localStorage.getItem(K('tareas_cfg')));if(c&&Array.isArray(c.ocultas)&&Array.isArray(c.extra))return c}catch(e){}return{ocultas:[],extra:[]}})();
+function tareasActivas(){
+  return TAREAS.filter(t=>!TCFG.ocultas.includes(t.id))
+    .concat(TCFG.extra.map(e=>({id:e.id,icon:'check',label:e.label,desc:'Tarea personal'})));
+}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 
 /* reflect: agua>=8 ; entreno: todos los ejercicios de hoy hechos */
 function ejerciciosDelDia(){const ids=[];ENTRENO[DKEY].bloques.forEach((bl,bi)=>bl.ej.forEach((_,ei)=>ids.push('e_'+DKEY+'_'+bi+'_'+ei)));return ids}
@@ -847,9 +1173,9 @@ function tareaHecha(t){
 }
 function guardar(){
   localStorage.setItem(K('checks_'+HOYKEY),JSON.stringify(checks));
-  const done=TAREAS.filter(tareaHecha).length;
-  const p=Math.round(done/TAREAS.length*100);
-  hist[HOYKEY]={d:done,t:TAREAS.length,p:p};
+  const LT=tareasActivas(),done=LT.filter(tareaHecha).length;
+  const p=LT.length?Math.round(done/LT.length*100):0;
+  hist[HOYKEY]={d:done,t:LT.length,p:p};
   localStorage.setItem(K('hist'),JSON.stringify(hist));
   refrescarProgreso();
 }
@@ -909,6 +1235,7 @@ document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
   else if(p==='horario')pintarHorario(diaHor);
   else if(p==='ejercicio')pintarEntreno(diaEj);
   else if(p==='comidas'){pintarComidas();pintarAgua();pintarDespensa()}
+  else if(p==='semana')pintarSemana();
   else if(p==='progreso')pintarCalendario();
   window.scrollTo(0,0);
 });
@@ -927,46 +1254,82 @@ function pintarAhora(){
     if(typeof it[3]==='number'&&mins>=it[3]&&mins<Math.max(it[4],it[3]+1))actual=it;
     if(typeof it[3]==='number'&&it[3]>mins&&!sig)sig=it;
   }
-  let h='<span class="lbl">⏳ AHORA · '+nombresDia[dow].toUpperCase()+'</span>';
-  h+=actual?'<div class="act">'+actual[0]+' '+actual[2]+'</div><div class="hor">'+actual[1]+'</div>'
-           :'<div class="act">😌 Sin actividad programada</div>';
-  if(sig)h+='<div class="sig">Siguiente: <b>'+sig[0]+' '+sig[2]+'</b> · '+sig[1]+'</div>';
+  let h='<span class="lbl">AHORA · '+nombresDia[dow].toUpperCase()+'</span>';
+  h+=actual?'<div class="act">'+icono(actual[0])+' '+actual[2]+'</div><div class="hor">'+actual[1]+'</div>'
+           :'<div class="act">Sin actividad programada</div>';
+  if(sig)h+='<div class="sig">Siguiente: <b>'+icono(sig[0])+' '+sig[2]+'</b> · '+sig[1]+'</div>';
   document.getElementById('cardAhora').innerHTML=h;
 }
 
 /* ================= HOY (tareas importantes) ================= */
+let editT=false;
+function toggleEditT(){editT=!editT;pintarHoy()}
+function guardarTCFG(){localStorage.setItem(K('tareas_cfg'),JSON.stringify(TCFG));guardar()}
+function pintarEditT(cont){
+  let h='<div class="subt">Apaga las tareas que no quieras medir, cambia nombres o agrega las tuyas. Lo que apagues no cuenta para tu %.</div>';
+  TAREAS.forEach(t=>{
+    const on=!TCFG.ocultas.includes(t.id);
+    h+='<label class="editRow"><div class="row-icon">'+icono(t.icon)+'</div><span class="nm">'+esc(t.label)+'</span>'+
+       '<input type="checkbox" class="sw" data-tid="'+t.id+'"'+(on?' checked':'')+' aria-label="Medir '+esc(t.label)+'"></label>';
+  });
+  TCFG.extra.forEach(e=>{
+    h+='<div class="editRow"><button class="menos" data-del="'+e.id+'" aria-label="Eliminar '+esc(e.label)+'">'+icono('minus')+'</button>'+
+       '<input class="campo" data-eid="'+e.id+'" value="'+esc(e.label)+'" maxlength="60" aria-label="Nombre de la tarea"></div>';
+  });
+  h+='<div class="addRow"><input class="campo" id="nuevaT" placeholder="Nueva tarea (ej. Tocar el bajo)" maxlength="60" enterkeyhint="done">'+
+     '<button class="btnAdd" id="addT" aria-label="Agregar tarea">'+icono('plus')+'</button></div>';
+  cont.innerHTML=h;
+  cont.querySelectorAll('.sw').forEach(s=>s.onchange=()=>{
+    const id=s.dataset.tid;TCFG.ocultas=TCFG.ocultas.filter(x=>x!==id);if(!s.checked)TCFG.ocultas.push(id);guardarTCFG();
+  });
+  cont.querySelectorAll('input[data-eid]').forEach(i=>i.onchange=()=>{
+    const e=TCFG.extra.find(x=>x.id===i.dataset.eid),v=i.value.trim();
+    if(e&&v){e.label=v;guardarTCFG()}else if(e)i.value=e.label;
+  });
+  cont.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{
+    TCFG.extra=TCFG.extra.filter(x=>x.id!==b.dataset.del);delete checks[b.dataset.del];guardarTCFG();pintarHoy();toast('Tarea eliminada');
+  });
+  const add=()=>{const i=document.getElementById('nuevaT'),v=i.value.trim();if(!v)return;
+    TCFG.extra.push({id:'x_'+Date.now().toString(36),label:v});guardarTCFG();pintarHoy();document.getElementById('nuevaT').focus()};
+  document.getElementById('addT').onclick=add;
+  document.getElementById('nuevaT').onkeydown=e=>{if(e.key==='Enter')add()};
+}
 function pintarHoy(){
   pintarAhora();
   const cont=document.getElementById('tareasList');
+  const be=document.getElementById('btnEditT');be.textContent=editT?'Listo':'Editar';be.classList.toggle('listo',editT);
+  if(editT){pintarEditT(cont);refrescarProgreso();return}
+  const LISTA=tareasActivas();
   let h='';
-  TAREAS.forEach(t=>{
+  if(!LISTA.length)h='<div class="subt">No tienes tareas activas. Toca Editar para agregar o encender algunas.</div>';
+  LISTA.forEach(t=>{
     const done=tareaHecha(t);
     const esTimer=!!t.t, esRef=!!t.reflect;
     let ctrl='';
     if(esTimer&&!done){
       if(mSes.id===t.id){
         ctrl=t.caja
-          ?'<div class="estadoEj corriendo" style="text-align:center"><b id="mFase">…</b> · <span id="mTimer"></span></div><button class="btnEj cancelar" onclick="cancelarMental()">✕ Cancelar</button>'
-          :'<div class="estadoEj corriendo">⏳ <span id="mTimer"></span></div><button class="btnEj cancelar" onclick="cancelarMental()">✕ Cancelar</button>';
+          ?'<div class="estadoEj corriendo" style="text-align:center"><b id="mFase">…</b> · <span id="mTimer"></span></div><button class="btnEj cancelar" onclick="cancelarMental()"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-x"/></svg> Cancelar</button>'
+          :'<div class="estadoEj corriendo"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg> <span id="mTimer"></span></div><button class="btnEj cancelar" onclick="cancelarMental()"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-x"/></svg> Cancelar</button>';
       }else{
-        ctrl='<button class="btnEj" onclick="empezarMental(\''+t.id+'\','+t.t+','+(!!t.caja)+')">▶ Empezar ('+Math.round(t.t/60)+' min)</button>';
+        ctrl='<button class="btnEj" onclick="empezarMental(\''+t.id+'\','+t.t+','+(!!t.caja)+')"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-play"/></svg> Empezar ('+Math.round(t.t/60)+' min)</button>';
       }
     }
     const tap=(!esTimer&&!esRef);
     const cls='tarea'+(done?' hecho':'')+(tap?' tap':'')+(esRef?' goto':'');
     const hint=esRef?' <small style="color:var(--azulOsc);font-weight:600">· toca para ir →</small>':'';
     h+='<div class="'+cls+'" data-id="'+t.id+'"'+(esRef?' data-goto="'+t.goto+'"':'')+'>'+
-       '<div class="tareaBox">'+(done?'✓':'')+'</div>'+
-       '<div class="emo">'+t.emo+'</div>'+
+       '<div class="tareaBox">'+(done?icono('check'):'')+'</div>'+
+       '<div class="row-icon">'+icono(t.icon)+'</div>'+
        '<div class="tx"><b>'+t.label+'</b><div class="d">'+t.desc+hint+'</div>'+ctrl+'</div></div>';
   });
   cont.innerHTML=h;
   cont.querySelectorAll('.tarea').forEach(el=>{
-    const t=TAREAS.find(x=>x.id===el.dataset.id);
+    const t=LISTA.find(x=>x.id===el.dataset.id);
     if(el.dataset.goto){el.onclick=()=>irTab(el.dataset.goto);return}
     if(!t.t&&!t.reflect){
       const box=el.querySelector('.tareaBox');
-      const marca=()=>{toggle(t.id);const d=tareaHecha(t);el.classList.toggle('hecho',d);box.textContent=d?'✓':''};
+      const marca=()=>{toggle(t.id);const d=tareaHecha(t);el.classList.toggle('hecho',d);box.innerHTML=d?icono('check'):''};
       el.onclick=marca;
     }
   });
@@ -979,7 +1342,7 @@ function calcRacha(){
   return r;
 }
 function refrescarProgreso(){
-  const done=TAREAS.filter(tareaHecha).length,total=TAREAS.length;
+  const LT=tareasActivas(),done=LT.filter(tareaHecha).length,total=LT.length;
   const p=total?Math.round(done/total*100):0;
   const pb=document.getElementById('progBar');if(pb)pb.style.width=p+'%';
   const pt=document.getElementById('progTxt');if(pt)pt.textContent=p+'% · '+done+'/'+total;
@@ -987,13 +1350,90 @@ function refrescarProgreso(){
   const dh=document.getElementById('detHoy');if(dh)dh.textContent=done+' de '+total+' tareas importantes';
   const r=calcRacha();
   const rh=document.getElementById('rachaHoy');
-  if(rh)rh.textContent=r>0?'🔥 Racha: '+r+(r===1?' día cumplido':' días cumplidos')+' (≥80%)':'🌱 Cumple ≥80% hoy para empezar tu racha';
+  if(rh)rh.textContent=r>0?'Racha: '+r+(r===1?' día cumplido':' días cumplidos')+' (≥80%)':'Cumple ≥80% hoy para empezar tu racha';
 }
+/* ================= SEMANA (tabla de acciones buenas) ================= */
+const NOMBRES_DIA_L=['lunes','martes','miércoles','jueves','viernes','sábado','domingo'];
+function accLista(){
+  try{const a=JSON.parse(localStorage.getItem(K('acciones')));if(Array.isArray(a))return a}catch(e){}
+  return TAREAS.map(t=>({id:'a_'+t.id,n:t.label})).concat([{id:'a_bajo',n:'Tocar el bajo'},{id:'a_tarea',n:'Tarea o Progrentis'}]);
+}
+function accGuardar(a){localStorage.setItem(K('acciones'),JSON.stringify(a))}
+let semOff=0,semEdit=false;
+function lunesDe(d){const x=new Date(d.getFullYear(),d.getMonth(),d.getDate());x.setDate(x.getDate()-(x.getDay()+6)%7);return x}
+function semLunes(){const l=lunesDe(hoy);l.setDate(l.getDate()+semOff*7);return l}
+function marcasDe(l){try{return JSON.parse(localStorage.getItem(K('semana_'+fkey(l))))||{}}catch(e){return{}}}
+function semPaso(n){semOff=Math.min(0,semOff+n);pintarSemana()}
+function toggleEditS(){semEdit=!semEdit;pintarSemana()}
+function pintarSemana(){
+  const box=document.getElementById('semCont');if(!box)return;
+  const l=semLunes(),m=marcasDe(l),acc=accLista();
+  const fin=new Date(l);fin.setDate(l.getDate()+6);
+  const m3=d=>nombresMes[d.getMonth()].slice(0,3);
+  document.getElementById('semRango').textContent=semOff===0?'Esta semana':semOff===-1?'Semana pasada':'Hace '+(-semOff)+' semanas';
+  document.getElementById('semFechas').textContent=l.getDate()+' '+m3(l)+' – '+fin.getDate()+' '+m3(fin);
+  document.getElementById('semSig').disabled=semOff>=0;
+  const be=document.getElementById('btnEditS');be.textContent=semEdit?'Listo':'Editar';be.classList.toggle('listo',semEdit);
+  if(semEdit){pintarEditS(box,acc);return}
+  if(!acc.length){box.innerHTML='<div class="subt">No tienes acciones. Toca Editar para agregar las tuyas.</div>';return}
+  const lim=semOff===0?(dow+6)%7:6;
+  let x=0;acc.forEach(a=>{if(m[a.id])x+=Object.keys(m[a.id]).filter(k=>+k<=lim).length});
+  let h=x===0
+    ?'<div class="semEstado ok">'+icono('check')+(semOff<0?'¡Semana limpia! Lo lograste.':'Tabla limpia — sigue así.')+'</div>'
+    :'<div class="semEstado mal">'+icono('x')+x+(x===1?' acción sin hacer':' acciones sin hacer')+(semOff<0?' esa semana':' esta semana')+'</div>';
+  const DL=['L','M','X','J','V','S','D'];
+  const hoyCol=i=>semOff===0&&i===lim?' class="hoyC"':'';
+  h+='<table class="semTabla"><colgroup><col class="cN">'+DL.map(()=>'<col>').join('')+'</colgroup><thead><tr><th scope="col" class="tN">Acción</th>';
+  DL.forEach((d,i)=>{const f=new Date(l);f.setDate(l.getDate()+i);h+='<th scope="col"'+hoyCol(i)+'><span>'+d+'</span><small>'+f.getDate()+'</small></th>'});
+  h+='</tr></thead><tbody>';
+  acc.forEach(a=>{
+    h+='<tr><th scope="row" class="tN">'+esc(a.n)+'</th>';
+    for(let i=0;i<7;i++){
+      const on=!!(m[a.id]&&m[a.id][i]);
+      h+='<td'+hoyCol(i)+'><button class="celda'+(on?' x':'')+'" data-a="'+a.id+'" data-d="'+i+'"'+(i>lim?' disabled':'')+
+         ' aria-pressed="'+on+'" aria-label="'+esc(a.n)+', '+NOMBRES_DIA_L[i]+(on?': no la hiciste':'')+'">'+(on?icono('x'):'')+'</button></td>';
+    }
+    h+='</tr>';
+  });
+  box.innerHTML=h+'</tbody></table>';
+  box.querySelectorAll('.celda').forEach(b=>b.onclick=()=>{
+    const mm=marcasDe(l),a=b.dataset.a,d=b.dataset.d;mm[a]=mm[a]||{};
+    if(mm[a][d])delete mm[a][d];else mm[a][d]=1;
+    if(!Object.keys(mm[a]).length)delete mm[a];
+    localStorage.setItem(K('semana_'+fkey(l)),JSON.stringify(mm));
+    if(navigator.vibrate)navigator.vibrate(8);
+    pintarSemana();
+  });
+}
+function pintarEditS(box,acc){
+  let h='<div class="subt">Cambia nombres, el orden o quita acciones. Se guarda solo.</div>';
+  acc.forEach((a,i)=>{
+    h+='<div class="editRow"><button class="menos" data-del="'+i+'" aria-label="Quitar '+esc(a.n)+'">'+icono('minus')+'</button>'+
+       '<input class="campo" data-i="'+i+'" value="'+esc(a.n)+'" maxlength="60" aria-label="Nombre de la acción">'+
+       '<button class="mover" data-up="'+i+'"'+(i===0?' disabled':'')+' aria-label="Subir">'+icono('chevron-up')+'</button>'+
+       '<button class="mover" data-dn="'+i+'"'+(i===acc.length-1?' disabled':'')+' aria-label="Bajar">'+icono('chevron-down')+'</button></div>';
+  });
+  h+='<div class="addRow"><input class="campo" id="nuevaA" placeholder="Nueva acción (ej. Estirar 10 min)" maxlength="60" enterkeyhint="done">'+
+     '<button class="btnAdd" id="addA" aria-label="Agregar acción">'+icono('plus')+'</button></div>'+
+     '<button class="btn" id="resetA" style="margin-top:14px">'+icono('rotate-ccw')+' Volver a la lista original</button>';
+  box.innerHTML=h;
+  box.querySelectorAll('input[data-i]').forEach(i=>i.onchange=()=>{const v=i.value.trim(),a=acc[+i.dataset.i];if(v){a.n=v;accGuardar(acc)}else i.value=a.n});
+  box.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{acc.splice(+b.dataset.del,1);accGuardar(acc);pintarSemana();toast('Acción quitada')});
+  const mover=(i,j)=>{[acc[i],acc[j]]=[acc[j],acc[i]];accGuardar(acc);pintarSemana()};
+  box.querySelectorAll('[data-up]').forEach(b=>b.onclick=()=>{const i=+b.dataset.up;if(i>0)mover(i,i-1)});
+  box.querySelectorAll('[data-dn]').forEach(b=>b.onclick=()=>{const i=+b.dataset.dn;if(i<acc.length-1)mover(i,i+1)});
+  const add=()=>{const i=document.getElementById('nuevaA'),v=i.value.trim();if(!v)return;
+    acc.push({id:'a_'+Date.now().toString(36),n:v});accGuardar(acc);pintarSemana();document.getElementById('nuevaA').focus()};
+  document.getElementById('addA').onclick=add;
+  document.getElementById('nuevaA').onkeydown=e=>{if(e.key==='Enter')add()};
+  document.getElementById('resetA').onclick=()=>{if(confirm('¿Volver a la lista original de acciones? Tus marcas se conservan.')){localStorage.removeItem(K('acciones'));pintarSemana()}};
+}
+
 /* ================= HORARIO (rutina perfecta, referencia) ================= */
 let diaHor=DKEY;
 function pintarChipsHor(){
   document.getElementById('chipsHor').innerHTML=DIAS.map(([k,n])=>
-    '<button class="'+(k===diaHor?'on':'')+'" data-d="'+k+'">'+n.slice(0,3)+(k===DKEY?' ⭐':'')+'</button>').join('');
+    '<button class="'+(k===diaHor?'on':'')+'" data-d="'+k+'">'+n.slice(0,3)+(k===DKEY?' <svg class="i" aria-hidden="true" focusable="false"><use href="#i-target"/></svg>':'')+'</button>').join('');
   document.querySelectorAll('#chipsHor button').forEach(b=>b.onclick=()=>pintarHorario(b.dataset.d));
 }
 function pasoDia(cual,n){
@@ -1006,14 +1446,14 @@ function pintarHorario(d){
   const esHoy=d===DKEY;
   const m=new Date();const mins=m.getHours()*60+m.getMinutes();
   document.getElementById('subtHor').innerHTML=esHoy
-    ?'🗓️ <b>Tu día perfecto</b> — cómo se vería tu día ideal. Es una referencia, aquí no se marca nada; lo que cuenta son las <b>Tareas importantes</b> en 🎯 Hoy.'
-    :'🗓️ Rutina ideal del '+DIAS.find(x=>x[0]===d)[1].toLowerCase()+' (referencia, no se marca).';
+    ?'<b>Tu día perfecto</b> — cómo se vería tu día ideal. Es una referencia, aquí no se marca nada; lo que cuenta son las <b>Tareas importantes</b> en Hoy.'
+    :'Rutina ideal del '+DIAS.find(x=>x[0]===d)[1].toLowerCase()+' (referencia, no se marca).';
   let h='';
   RUTINA[d].sec.forEach((s)=>{
-    h+='<h3>'+s[0]+'</h3>';
+    h+='<h3>'+icono(s[2])+' '+s[0]+'</h3>';
     s[1].forEach((it)=>{
       const act=esHoy&&typeof it[3]==='number'&&mins>=it[3]&&mins<Math.max(it[4],it[3]+1)?' actual':'';
-      h+='<div class="chk soloVer'+act+'"><div class="emo">'+it[0]+'</div><div class="tx"><div class="h">'+it[1]+'</div>'+it[2]+'</div></div>';
+      h+='<div class="chk soloVer'+act+'"><div class="row-icon">'+icono(it[0])+'</div><div class="tx"><div class="h">'+it[1]+'</div>'+it[2]+'</div></div>';
     });
   });
   document.getElementById('contHor').innerHTML=h;
@@ -1024,7 +1464,7 @@ function pintarHorario(d){
 let diaEj=DKEY;
 function pintarChipsEj(){
   document.getElementById('chipsDias').innerHTML=DIAS.map(([k,n])=>
-    '<button class="'+(k===diaEj?'on':'')+'" data-d="'+k+'">'+ENTRENO[k].emoji+' '+n.slice(0,3)+(k===DKEY?' ⭐':'')+'</button>').join('');
+    '<button class="'+(k===diaEj?'on':'')+'" data-d="'+k+'">'+icono(ENTRENO[k].icon)+' '+n.slice(0,3)+(k===DKEY?' <svg class="i" aria-hidden="true" focusable="false"><use href="#i-target"/></svg>':'')+'</button>').join('');
   document.querySelectorAll('#chipsDias button').forEach(b=>b.onclick=()=>pintarEntreno(b.dataset.d));
 }
 function pintarEntreno(d){
@@ -1032,10 +1472,10 @@ function pintarEntreno(d){
   const e=ENTRENO[d];
   const nombre=DIAS.find(x=>x[0]===d)[1];
   const esHoy=d===DKEY;
-  let h='<div class="card"><span class="tag">'+nombre+' · ⏱ '+e.tiempo+'</span><h2>'+e.emoji+' '+e.titulo+'</h2><div class="subt">'+e.sub+'</div>';
+  let h='<div class="card"><span class="tag">'+nombre+' · '+e.tiempo+'</span><h2>'+icono(e.icon)+' '+e.titulo+'</h2><div class="subt">'+e.sub+'</div>';
   e.bloques.forEach((bl,bi)=>{
     const dur=bl.d||0;
-    h+='<h3>'+bl.b+(dur?' <span class="h3desc">· ⏸ descanso '+dur+'s</span>':'')+'</h3>';
+    h+='<h3>'+icono(bl.icon)+' '+bl.b+(dur?' <span class="h3desc">· descanso '+dur+'s</span>':'')+'</h3>';
     bl.ej.forEach((ej,ei)=>{
       const id='e_'+d+'_'+bi+'_'+ei;
       const on=(esHoy&&checks[id])?' hecho':'';
@@ -1046,28 +1486,28 @@ function pintarEntreno(d){
           if(sesion.fase==='rest'){
             const s=Math.max(0,Math.ceil((sesion.fin-Date.now())/1000));
             const sigue=sesion.set<sesion.sets?' · sigue serie '+(sesion.set+1)+'/'+sesion.sets:' · luego el siguiente ejercicio';
-            extra='<div class="estadoEj desc">😮‍💨 Descanso · <span id="timerEj">'+fmtSeg(s)+'</span>'+sigue+'</div><button class="btnEj saltar" onclick="saltar()">⏭ Saltar descanso</button>';
+            extra='<div class="estadoEj desc"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-wind"/></svg> Descanso · <span id="timerEj">'+fmtSeg(s)+'</span>'+sigue+'</div><button class="btnEj saltar" onclick="saltar()"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-skip-forward"/></svg> Saltar descanso</button>';
           }else if(sesion.work>0){
             const el=Math.floor((Date.now()-sesion.ini)/1000);
             if(sesion.unlocked){
-              extra='<div class="estadoEj corriendo">🏃 Haciendo'+serie+' · <span id="timerEj">'+fmtSeg(el)+'</span></div><button class="btnEj ya" onclick="yaEj()">✅ ¡Ya!</button><button class="btnEj cancelar" onclick="cancelarEj()">✕ Cancelar</button>';
+              extra='<div class="estadoEj corriendo"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-dumbbell"/></svg> Haciendo'+serie+' · <span id="timerEj">'+fmtSeg(el)+'</span></div><button class="btnEj ya" onclick="yaEj()"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg> ¡Ya!</button><button class="btnEj cancelar" onclick="cancelarEj()"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-x"/></svg> Cancelar</button>';
             }else{
-              extra='<div class="estadoEj corriendo">🏃 Haciendo'+serie+' · <span id="timerEj">'+fmtSeg(el)+'</span> <small style="opacity:.7">/ mín '+fmtSeg(sesion.workMin)+'</small></div><button class="btnEj bloq" disabled>⏳ Puedes terminar a los '+fmtSeg(sesion.workMin)+'</button><button class="btnEj cancelar" onclick="cancelarEj()">✕ Cancelar</button>';
+              extra='<div class="estadoEj corriendo"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-dumbbell"/></svg> Haciendo'+serie+' · <span id="timerEj">'+fmtSeg(el)+'</span> <small style="opacity:.7">/ mín '+fmtSeg(sesion.workMin)+'</small></div><button class="btnEj bloq" disabled><svg class="i" aria-hidden="true" focusable="false"><use href="#i-clock"/></svg> Puedes terminar a los '+fmtSeg(sesion.workMin)+'</button><button class="btnEj cancelar" onclick="cancelarEj()"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-x"/></svg> Cancelar</button>';
             }
           }else{
-            extra='<div class="estadoEj haciendo">🏃 Haciendo ejercicio'+serie+'…</div><button class="btnEj ya" onclick="yaEj()">✅ ¡Ya!</button><button class="btnEj cancelar" onclick="cancelarEj()">✕ Cancelar</button>';
+            extra='<div class="estadoEj haciendo"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-dumbbell"/></svg> Haciendo ejercicio'+serie+'…</div><button class="btnEj ya" onclick="yaEj()"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg> ¡Ya!</button><button class="btnEj cancelar" onclick="cancelarEj()"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-x"/></svg> Cancelar</button>';
           }
         }else if(checks[id]){
           extra='';
         }else{
           const p=parseEj(ej.s,dur);
           let hint=p.sets>1?p.sets+' series':'';
-          if(p.work>0)hint+=(hint?' · ':'')+'⏱ '+(p.workMin<p.work?fmtSeg(p.workMin)+'–'+fmtSeg(p.work):fmtSeg(p.work));
-          extra='<button class="btnEj" onclick="empezarEj(\''+id+'\')">▶ Empezar'+(hint?' <small style="opacity:.8;font-weight:600">('+hint+')</small>':'')+'</button>';
+          if(p.work>0)hint+=(hint?' · ':'')+''+(p.workMin<p.work?fmtSeg(p.workMin)+'–'+fmtSeg(p.work):fmtSeg(p.work));
+          extra='<button class="btnEj" onclick="empezarEj(\''+id+'\')"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-play"/></svg> Empezar'+(hint?' <small style="opacity:.8;font-weight:600">('+hint+')</small>':'')+'</button>';
         }
       }
       h+='<div class="ej'+on+'" id="'+id+'"><div class="top">'+
-         (on?'<div class="okdot">✓</div>':'')+'<div class="nom">'+ej.n+'</div>'+(ej.s?'<div class="ser">'+ej.s+'</div>':'')+'</div>'+
+         (on?'<div class="okdot">'+icono('check')+'</div>':'')+'<div class="nom">'+ej.n+'</div>'+(ej.s?'<div class="ser">'+ej.s+'</div>':'')+'</div>'+
          '<details><summary>Cómo se hace</summary><p>'+ej.c+'</p></details>'+
          (ej.d?'<details class="disco"><summary>Alternativa con disco 25lb</summary><p>'+ej.d+'</p></details>':'')+
          extra+'</div>';
@@ -1136,7 +1576,7 @@ function yaEj(){if(sesion.fase==='work'&&sesion.work>0&&!sesion.unlocked)return;
 function saltar(){ensureAudio();sesion.fase==='work'?finTrabajo():finDescanso()}
 function completarEj(){
   const id=sesion.id;if(id&&!checks[id]){checks[id]=true;guardar()}
-  liberarWakeLock();sesionCero();beep(2);toast('💪 ¡Ejercicio completo!');
+  liberarWakeLock();sesionCero();beep(2);toast('¡Ejercicio completo!');
   pintarEntreno(diaEj);
 }
 function cancelarEj(){liberarWakeLock();sesionCero();pintarEntreno(diaEj)}
@@ -1157,7 +1597,7 @@ document.addEventListener('visibilitychange',()=>{if(document.visibilityState===
 /* ================= MENTAL ================= */
 /* --- Temporizadores de tareas (respiración de caja, visualización, meditar, lectura) --- */
 let mSes={id:null,ini:0,total:0,caja:false,fase:-1,timer:null};
-const CAJA=['🫁 Inhala','⏸️ Sostén','😮‍💨 Exhala','⏸️ Sostén vacío'];
+const CAJA=['Inhala','Sostén','Exhala','Sostén vacío'];
 function empezarMental(id,total,caja){
   pararMTimer();ensureAudio();pedirWakeLock();
   mSes={id:id,ini:Date.now(),total:total,caja:!!caja,fase:-1,timer:setInterval(mTick,200)};
@@ -1181,7 +1621,7 @@ function mFin(){
   mSes={id:null,ini:0,total:0,caja:false,fase:-1,timer:null};
   if(id&&!checks[id]){checks[id]=true;guardar()}
   liberarWakeLock();beepSuave();setTimeout(beepSuave,260);
-  toast('✅ ¡Listo!');
+  toast('¡Listo!');
   pintarHoy();
 }
 function cancelarMental(){pararMTimer();liberarWakeLock();mSes={id:null,ini:0,total:0,caja:false,fase:-1,timer:null};pintarHoy()}
@@ -1207,65 +1647,65 @@ function pintarAgua(){
     localStorage.setItem(K('agua_'+HOYKEY),agua);
     pintarAgua();guardar(); // la tarea "tomar agua" cuenta al llegar a 8
   });
-  document.getElementById('aguaTxt').textContent=agua+' / 8 vasos'+(agua>=8?' · ¡meta cumplida! 🎉':'');
+  document.getElementById('aguaTxt').textContent=agua+' / 8 vasos'+(agua>=8?' · ¡meta cumplida! ':'');
 }
 
 /* ================= CREAR RECETA ================= */
-const INGR=[['huevos','🥚','Huevos'],['tomate','🍅','Tomate'],['queso','🧀','Queso'],['espinaca','🥬','Espinaca'],['aguacate','🥑','Aguacate'],['pan','🍞','Pan'],['tortilla','🫓','Tortilla'],['frijol','🫘','Frijol'],['yogurt','🥛','Yogurt'],['avena','🌾','Avena'],['banano','🍌','Banano'],['manzana','🍎','Manzana'],['miel','🍯','Miel'],['mani','🥜','Maní'],['almendras','🌰','Almendras'],['leche','🥛','Leche']];
+const INGR=[['huevos','utensils','Huevos'],['tomate','utensils','Tomate'],['queso','utensils','Queso'],['espinaca','utensils','Espinaca'],['aguacate','utensils','Aguacate'],['pan','utensils','Pan'],['tortilla','utensils','Tortilla'],['frijol','utensils','Frijol'],['yogurt','utensils','Yogurt'],['avena','utensils','Avena'],['banano','utensils','Banano'],['manzana','utensils','Manzana'],['miel','utensils','Miel'],['mani','utensils','Maní'],['almendras','utensils','Almendras'],['leche','utensils','Leche']];
 const RECETAS=[
- {n:'Huevos revueltos con espinaca y tomate',e:'🍳',r:['huevos','espinaca','tomate'],p:'Sofríe el tomate y la espinaca 2 min, agrega los huevos batidos y revuelve. Va con tortilla si tienes.'},
- {n:'Tortilla de huevo con queso y tomate',e:'🍳',r:['huevos','queso','tomate'],p:'Bate los huevos, viértelos, agrega queso y tomate picado, dobla y listo (5 min).'},
- {n:'Pan con aguacate y huevo',e:'🥑',r:['pan','aguacate','huevos'],p:'Tuesta el pan, unta aguacate y fríe un huevo encima. Sal y pimienta.'},
- {n:'Quesadilla de espinaca y queso',e:'🫓',r:['tortilla','queso','espinaca'],p:'Rellena la tortilla con queso y espinaca, dóblala y dórala 3 min.'},
- {n:'Frijol volteado con queso y tortilla',e:'🫘',r:['frijol','queso','tortilla'],p:'Calienta el frijol hasta espesar, sirve con queso y tortilla.'},
- {n:'Yogurt con avena, banano y miel',e:'🥣',r:['yogurt','avena','banano','miel'],p:'Mezcla yogurt con avena cruda, banano en rodajas y un chorrito de miel (2 min).'},
- {n:'Avena con banano y maní',e:'🍌',r:['avena','banano','mani'],p:'Cocina la avena 5 min con leche o agua, agrega banano y maní.'},
- {n:'Batido energético',e:'🥤',r:['leche','banano','avena'],p:'Licúa leche, banano y avena (suma maní/miel si tienes) hasta cremoso.'},
- {n:'Tostada de aguacate y tomate',e:'🥑',r:['pan','aguacate','tomate'],p:'Tuesta el pan, unta aguacate y pon rodajas de tomate con sal.'},
- {n:'Huevo duro con banano',e:'🥚',r:['huevos','banano'],p:'Cuece los huevos 10 min, pélalos y acompaña con banano.'},
- {n:'Pan con queso',e:'🧀',r:['pan','queso'],p:'Pon queso sobre el pan y fúndelo en sartén o micro.'},
- {n:'Manzana con maní',e:'🍎',r:['manzana','mani'],p:'Corta la manzana y acompáñala con maní. Fibra + grasa buena.'},
- {n:'Manzana con almendras',e:'🍎',r:['manzana','almendras'],p:'Manzana en gajos con un puño de almendras. Te aguanta hasta el almuerzo.'},
- {n:'Yogurt griego con miel',e:'🍯',r:['yogurt','miel'],p:'Yogurt griego con un chorrito de miel. Alta proteína, 1 min.'},
- {n:'Tortilla con frijol y queso',e:'🌮',r:['tortilla','frijol','queso'],p:'Calienta la tortilla, rellena con frijol y queso, dobla.'}
+ {n:'Huevos revueltos con espinaca y tomate',icon:'utensils',r:['huevos','espinaca','tomate'],p:'Sofríe el tomate y la espinaca 2 min, agrega los huevos batidos y revuelve. Va con tortilla si tienes.'},
+ {n:'Tortilla de huevo con queso y tomate',icon:'utensils',r:['huevos','queso','tomate'],p:'Bate los huevos, viértelos, agrega queso y tomate picado, dobla y listo (5 min).'},
+ {n:'Pan con aguacate y huevo',icon:'utensils',r:['pan','aguacate','huevos'],p:'Tuesta el pan, unta aguacate y fríe un huevo encima. Sal y pimienta.'},
+ {n:'Quesadilla de espinaca y queso',icon:'utensils',r:['tortilla','queso','espinaca'],p:'Rellena la tortilla con queso y espinaca, dóblala y dórala 3 min.'},
+ {n:'Frijol volteado con queso y tortilla',icon:'utensils',r:['frijol','queso','tortilla'],p:'Calienta el frijol hasta espesar, sirve con queso y tortilla.'},
+ {n:'Yogurt con avena, banano y miel',icon:'utensils',r:['yogurt','avena','banano','miel'],p:'Mezcla yogurt con avena cruda, banano en rodajas y un chorrito de miel (2 min).'},
+ {n:'Avena con banano y maní',icon:'utensils',r:['avena','banano','mani'],p:'Cocina la avena 5 min con leche o agua, agrega banano y maní.'},
+ {n:'Batido energético',icon:'utensils',r:['leche','banano','avena'],p:'Licúa leche, banano y avena (suma maní/miel si tienes) hasta cremoso.'},
+ {n:'Tostada de aguacate y tomate',icon:'utensils',r:['pan','aguacate','tomate'],p:'Tuesta el pan, unta aguacate y pon rodajas de tomate con sal.'},
+ {n:'Huevo duro con banano',icon:'utensils',r:['huevos','banano'],p:'Cuece los huevos 10 min, pélalos y acompaña con banano.'},
+ {n:'Pan con queso',icon:'utensils',r:['pan','queso'],p:'Pon queso sobre el pan y fúndelo en sartén o micro.'},
+ {n:'Manzana con maní',icon:'utensils',r:['manzana','mani'],p:'Corta la manzana y acompáñala con maní. Fibra + grasa buena.'},
+ {n:'Manzana con almendras',icon:'utensils',r:['manzana','almendras'],p:'Manzana en gajos con un puño de almendras. Te aguanta hasta el almuerzo.'},
+ {n:'Yogurt griego con miel',icon:'utensils',r:['yogurt','miel'],p:'Yogurt griego con un chorrito de miel. Alta proteína, 1 min.'},
+ {n:'Tortilla con frijol y queso',icon:'utensils',r:['tortilla','frijol','queso'],p:'Calienta la tortilla, rellena con frijol y queso, dobla.'}
 ];
 let despensa=JSON.parse(localStorage.getItem(K('despensa'))||'{}');
 function pintarDespensa(){
   const c=document.getElementById('ingredientes');if(!c)return;
-  c.innerHTML=INGR.map(([id,e,n])=>'<button class="ingr'+(despensa[id]?' on':'')+'" data-i="'+id+'">'+e+' '+n+'</button>').join('');
+  c.innerHTML=INGR.map(([id,e,n])=>'<button class="ingr'+(despensa[id]?' on':'')+'" data-i="'+id+'">'+n+'</button>').join('');
   c.querySelectorAll('.ingr').forEach(b=>b.onclick=()=>{const i=b.dataset.i;despensa[i]=!despensa[i];if(!despensa[i])delete despensa[i];localStorage.setItem(K('despensa'),JSON.stringify(despensa));b.classList.toggle('on')});
 }
 function nombreIngr(id){const x=INGR.find(i=>i[0]===id);return x?x[2]:id}
 function recetaHTML(rc,falta){
   const ing=rc.r.map(nombreIngr).join(' · ');
-  const f=falta?' <small style="color:#93600c">· te falta '+nombreIngr(falta[0])+'</small>':'';
-  return '<div class="receta"><div class="emo">'+rc.e+'</div><div><b>'+rc.n+'</b>'+f+'<p style="color:var(--dim)">🧺 '+ing+'</p><p>'+rc.p+'</p></div></div>';
+  const f=falta?' <small style="color:var(--azulOsc)">· te falta '+nombreIngr(falta[0])+'</small>':'';
+  return '<div class="receta"><div class="row-icon">'+icono(rc.icon)+'</div><div><b>'+rc.n+'</b>'+f+'<p style="color:var(--dim)">'+ing+'</p><p>'+rc.p+'</p></div></div>';
 }
 function crearReceta(){
   const out=document.getElementById('recetasResultado');
   const tengo=Object.keys(despensa).filter(k=>despensa[k]);
-  if(!tengo.length){out.innerHTML='<div class="nota">👆 Marca al menos un ingrediente.</div>';return}
+  if(!tengo.length){out.innerHTML='<div class="nota">Marca al menos un ingrediente.</div>';return}
   const sc=RECETAS.map(rc=>({rc,falta:rc.r.filter(x=>!despensa[x])}));
   const listas=sc.filter(s=>s.falta.length===0);
   const casi=sc.filter(s=>s.falta.length===1).slice(0,3);
   let h='';
-  if(listas.length)h+='<h3>✅ Puedes hacer ahora</h3>'+listas.map(s=>recetaHTML(s.rc)).join('');
-  if(casi.length)h+='<h3>🛒 Casi — te falta 1</h3>'+casi.map(s=>recetaHTML(s.rc,s.falta)).join('');
+  if(listas.length)h+='<h3><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg> Puedes hacer ahora</h3>'+listas.map(s=>recetaHTML(s.rc)).join('');
+  if(casi.length)h+='<h3><svg class="i" aria-hidden="true" focusable="false"><use href="#i-shopping-basket"/></svg> Casi — te falta 1</h3>'+casi.map(s=>recetaHTML(s.rc,s.falta)).join('');
   if(!listas.length&&!casi.length)h='<div class="nota">Con eso todavía no armo una receta. Prueba con huevos, tomate, queso, pan o tortilla.</div>';
   out.innerHTML=h;
 }
 /* ================= COMIDAS ================= */
 function pintarComidas(){
-  const f=arr=>arr.map(r=>'<div class="receta"><div class="emo">'+r[0]+'</div><div><b>'+r[1]+'</b><p>'+r[2]+'</p></div></div>').join('');
+  const f=arr=>arr.map(r=>'<div class="receta"><div class="row-icon">'+icono(r[0])+'</div><div><b>'+r[1]+'</b><p>'+r[2]+'</p></div></div>').join('');
   document.getElementById('listaDesayunos').innerHTML=f(DESAYUNOS);
   document.getElementById('listaRefacciones').innerHTML=f(REFACCIONES);
   document.getElementById('listaCenas').innerHTML=f(CENAS);
   let h='';
   Object.entries(COMPRA).forEach(([cat,items])=>{
-    h+='<h3>'+cat+'</h3>';
+    h+='<h3>'+icono('shopping-basket')+' '+cat+'</h3>';
     items.forEach(it=>{
       const id='c_'+it;
-      h+='<div class="chk'+(compra[id]?' hecho':'')+'" data-id="'+id+'"><div class="box">'+(compra[id]?'✓':'')+'</div><div class="tx">'+it+'</div></div>';
+      h+='<div class="chk'+(compra[id]?' hecho':'')+'" data-id="'+id+'"><div class="box">'+(compra[id]?icono('check'):'')+'</div><div class="tx">'+it+'</div></div>';
     });
   });
   document.getElementById('listaCompra').innerHTML=h;
@@ -1274,7 +1714,7 @@ function pintarComidas(){
     localStorage.setItem(K('compras'),JSON.stringify(compra));pintarComidas();
   });
 }
-function resetCompra(){compra={};localStorage.setItem(K('compras'),'{}');pintarComidas();toast('🛒 Lista reiniciada')}
+function resetCompra(){compra={};localStorage.setItem(K('compras'),'{}');pintarComidas();toast('Lista reiniciada')}
 
 /* ================= CALENDARIO ================= */
 function clasePct(p){
@@ -1310,7 +1750,7 @@ function pintarCalendario(){
   if(!(hist[hk]&&hist[hk].p>=80))dd2.setDate(dd2.getDate()-1); // si hoy aún no llega, no rompe la racha
   while(true){const k=fkey(dd2);if(hist[k]&&hist[k].p>=80){r++;dd2.setDate(dd2.getDate()-1)}else break}
   const rEl=document.getElementById('racha');
-  rEl.textContent=r>0?'🔥 Racha: '+r+(r===1?' día cumplido':' días cumplidos')+' (≥80%)':'🌱 Empieza tu racha: cumple ≥80% hoy';
+  rEl.textContent=r>0?'Racha: '+r+(r===1?' día cumplido':' días cumplidos')+' (≥80%)':'Empieza tu racha: cumple ≥80% hoy';
   // mejora por meses
   const porMes={};
   Object.entries(hist).forEach(([k,e])=>{
@@ -1322,7 +1762,7 @@ function pintarCalendario(){
     const arr=porMes[mk];const avg=Math.round(arr.reduce((a,b)=>a+b,0)/arr.length);
     const[y,m]=mk.split('-');
     return'<div class="mesBar"><div class="lbl"><span>'+nombresMes[+m-1]+' '+y+'</span><span>'+avg+'% · '+arr.length+(arr.length===1?' día':' días')+'</span></div><div class="barra"><i style="width:'+avg+'%"></i></div></div>';
-  }).join(''):'<div class="nota verde">🌱 Todavía no hay datos — empieza a marcar tu checklist y aquí verás tu progreso mes a mes.</div>';
+  }).join(''):'<div class="nota verde">Todavía no hay datos — empieza a marcar tu checklist y aquí verás tu progreso mes a mes.</div>';
 }
 function moverMes(n){calMes+=n;if(calMes<0){calMes=11;calAno--}if(calMes>11){calMes=0;calAno++}pintarCalendario()}
 
