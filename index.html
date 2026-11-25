@@ -10,7 +10,7 @@
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
   --verde:#3fa63f; --verde2:#7dc242; --verdeOsc:#1e7a2e;
@@ -178,7 +178,7 @@ nav button.on .ic{filter:none;opacity:1}
 .btn{display:block;width:100%;background:var(--card);border:1.5px solid var(--line);color:var(--txt);
   padding:12px;border-radius:13px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Poppins';margin-top:10px}
 .btn.grad{background:var(--grad);color:#fff;border:none}
-a{color:var(--azul)}
+a{color:var(--azulOsc)}
 .subt{color:var(--dim);font-size:13px;margin:2px 0 8px;line-height:1.5}
 .toast{position:fixed;bottom:96px;left:50%;transform:translateX(-50%);background:var(--txt);
   color:var(--bg);padding:10px 18px;border-radius:99px;font-size:13px;
@@ -289,6 +289,54 @@ header .perfilBtn{margin-left:auto}
 .temaOp .mini s{display:block;height:7px;border-radius:99px;width:45%}
 .temaOp b{display:block;font-size:13.5px;margin:7px 2px 0}
 .temaOp small{display:block;font-size:12px;color:var(--dim);margin:0 2px 2px;font-family:'Inter'}
+/* ===== TEXTO MÁS FUERTE ===== */
+body{font-size:15.5px;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+header h1{font-size:30px;font-weight:800;letter-spacing:-.8px;line-height:1.05}
+header .fecha{font-size:13px;font-weight:600;color:var(--txt2);text-transform:none}
+header .fecha::first-letter{text-transform:uppercase}
+.card h2{font-size:20px;font-weight:700;letter-spacing:-.35px;line-height:1.25;margin-bottom:10px}
+.card h3{font-size:13px;font-weight:700;letter-spacing:.9px;background:none;-webkit-text-fill-color:currentColor;color:var(--verdeOsc);margin:20px 0 8px}
+.subt{font-size:14px;color:var(--txt2);line-height:1.55}
+.tag{font-size:12px;font-weight:700;letter-spacing:.2px}
+.ahora .lbl{font-size:12px;font-weight:700;letter-spacing:1.6px;opacity:1}
+.ahora .act{font-size:23px;font-weight:700;letter-spacing:-.4px;line-height:1.2;margin:5px 0 4px}
+.ahora .hor{font-size:14px;font-weight:600;opacity:.95}
+.ahora .sig{font-size:14px;line-height:1.45}
+.prog span{font-size:15px;font-weight:700;color:var(--txt)}
+.pct{font-size:32px;font-weight:800;letter-spacing:-.6px}
+.racha{font-size:14.5px;font-weight:700}
+.tarea .tx b{font-size:16.5px;font-weight:700;letter-spacing:-.2px}
+.tarea .tx .d{font-size:13.5px;color:var(--txt2)}
+.chk .tx{font-size:15px;font-weight:500}
+.chk .tx .h{font-size:12.5px;font-weight:700}
+.chips button{font-size:14px}
+nav button{font-size:11.5px;font-weight:700}
+.ej .nom{font-size:16px;font-weight:700;letter-spacing:-.2px}
+.ej .ser{font-size:13.5px;font-weight:800}
+.ej summary{font-size:13px;font-weight:700}
+.ej details p{font-size:13.5px;color:var(--txt2)}
+.nota{font-size:13.5px}
+.btnEj{font-size:15px;letter-spacing:.1px}
+.btn{font-size:15px;font-weight:700}
+.estadoEj{font-size:15.5px;font-weight:700}
+.estadoEj.corriendo,.estadoEj.desc{font-size:20px;font-weight:800}
+.receta b{font-size:15.5px;font-weight:700}
+.receta p{font-size:13.5px;color:var(--txt2)}
+.calNav b{font-size:18px;font-weight:700}
+.calGrid .dow{font-size:11.5px;font-weight:800}
+.calDia{font-size:14px;font-weight:700}
+.calDia small{font-size:10px;font-weight:800}
+.leyenda{font-size:12px;font-weight:600}
+.semDia .d{font-size:11.5px;font-weight:800}
+.semDia .p{font-size:14px;font-weight:800}
+.mesBar .lbl{font-size:13.5px;font-weight:700}
+.perfilBtn{font-size:13px;font-weight:700}
+#gate h2{font-size:24px;font-weight:800;letter-spacing:-.5px}
+#gate p{font-size:14px}
+#gate .aviso{font-size:12px}
+.toast{font-size:14px;font-weight:600}
+.temaOp b{font-size:14.5px;font-weight:700}
+.temaOp small{font-size:12.5px}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important}
   #temaHoja .panel{transition:none}
@@ -868,7 +916,7 @@ document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{
 /* ================= CABECERA / AHORA ================= */
 const nombresDia=['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
 const nombresMes=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
-document.getElementById('fechaHoy').textContent=nombresDia[dow]+' '+hoy.getDate()+' de '+nombresMes[hoy.getMonth()];
+document.getElementById('fechaHoy').textContent=nombresDia[dow]+' '+hoy.getDate()+' '+nombresMes[hoy.getMonth()].slice(0,3)+'.';
 
 function itemsPlanos(d){const out=[];RUTINA[d].sec.forEach(s=>s[1].forEach(it=>out.push(it)));return out}
 function pintarAhora(){
