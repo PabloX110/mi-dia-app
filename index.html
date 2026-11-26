@@ -553,6 +553,12 @@ nav button.on .ic{transform:none}
 }
 @media (prefers-contrast:more){.card,nav{border:1px solid var(--txt2)}}
 @media(max-width:390px){header{padding-left:16px;padding-right:16px}header h1{font-size:32px}.perfilBtn{max-width:110px;padding:0 10px}}
+.ejCard{position:relative}
+.modoEj{position:absolute;top:12px;right:12px;display:flex;padding:2px;border-radius:999px;background:color-mix(in srgb,var(--dim) 16%,transparent)}
+.modoEj button{border:0;background:none;font:inherit;font-size:13px;font-weight:700;color:var(--dim);padding:5px 11px;border-radius:999px;cursor:pointer;transition:transform .12s ease-out}
+.modoEj button:active{transform:scale(.96)}
+.modoEj button.on{background:var(--card,#fff);color:var(--txt);box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.ej .ej-ref+.ej-ref{margin-top:8px}
 </style>
 </head>
 <body>
@@ -965,78 +971,165 @@ NOTAS.mar=NOTAS.lun;NOTAS.mie=NOTAS.lun;NOTAS.jue=NOTAS.lun;
 /* ================= DATOS: EJERCICIO ================= */
 const OLISE='Elige UN nivel según cómo vayas hoy — todo se hace solo: Base — conduce el balón a ritmo medio mientras lanzas y atrapas una pelota de tenis con la misma mano; mirada en la pelota, el balón se controla por sensación de pie (3×1 min). Intermedio (pared) — golpea el balón contra la pared mientras lanzas y atrapas la pelota con la mano contraria al pie que golpea, alternando pie cada 30 segundos (3×1 min). Avanzado (conos) — coloca 4–6 conos o botellas en línea y conduce el balón en zigzag entre ellos mientras lanzas y atrapas la pelota de tenis; cuando logres pasarlos sin perder el balón ni la pelota, sube el ritmo o junta más los conos (3×1 min).';
 const CALENT={icon:'sunrise',b:'Calentamiento',d:15,ej:[
-  {img:'calentamiento',n:'Calentamiento: movilidad de cadera y tobillo, puente de glúteo y saltitos suaves',s:'10 min',c:'Círculos y balanceos de cadera, rodilla hacia la pared para el tobillo, 2 series de puente de glúteo y saltitos suaves en el lugar para subir el pulso.'}]};
+  {img:'C1',n:'Calentamiento: movilidad de cadera y tobillo, puente de glúteo y saltitos suaves',s:'10 min',c:'Círculos y balanceos de cadera, rodilla hacia la pared para el tobillo, 2 series de puente de glúteo y saltitos suaves en el lugar para subir el pulso.'}]};
+const CALENT_G={icon:'sunrise',b:'Calentamiento',d:15,ej:[
+  {img:'G1',n:'Calentamiento: 5 min de bici + movilidad',s:'10 min',c:'5 minutos de bici suave y después movilidad de cadera y tobillo.'}]};
 const ESTIRA={icon:'wind',b:'Estiramiento final',d:5,ej:[
-  {img:'estiramiento',n:'Estiramiento',s:'5-10 min',c:'Cuádriceps, isquiotibiales, gemelos, cadera y espalda: 20–30 segundos por posición, respirando profundo.'}]};
+  {img:'C10',n:'Estiramiento',s:'5-10 min',c:'Cuádriceps, isquiotibiales, gemelos, cadera y espalda: 20–30 segundos por posición, respirando profundo.'}]};
 const COGN={icon:'target',b:'Ejercicio cognitivo (al final)',d:30,ej:[
-  {img:'cognitivo',n:'Ejercicio cognitivo — elige tu nivel',s:'3×1 min',c:OLISE}]};
+  {n:'Ejercicio cognitivo — elige tu nivel',s:'3×1 min',c:OLISE}]};
 const ENTRENO={
 lun:{titulo:'Recuperación + core',icon:'wind',sub:'Intensidad baja · el día después de los partidos. Si llegas muy golpeado, haz solo la movilidad.',tiempo:'1 h',bloques:[CALENT,
  {icon:'wind',b:'Movilidad',d:15,ej:[
-  {img:'movilidad-90-90',n:'Movilidad: 90/90 de cadera, world\'s greatest stretch y tobillos',s:'15 min',c:'90/90: sentado con las dos rodillas a 90° (una al frente y otra al lado), gira la cadera de un lado al otro con el pecho alto. World\'s greatest stretch: zancada larga, codo hacia el empeine por dentro y luego abre el brazo hacia el techo. Tobillos: lleva la rodilla hacia la pared sin despegar el talón. Reparte el tiempo entre los tres.'}]},
+  {img:['C2','C3','C4'],n:'Movilidad: 90/90 de cadera, world\'s greatest stretch y tobillos',s:'15 min',c:'90/90: sentado con las dos rodillas a 90° (una al frente y otra al lado), inclina el torso sobre la pierna de adelante y luego gira las rodillas al otro lado. World\'s greatest stretch: zancada larga, mano del mismo lado del pie adelantado al piso, gira el torso y lleva ese brazo al techo. Tobillo: pie a un palmo de la pared, lleva la rodilla a tocarla sin despegar el talón. Reparte el tiempo entre los tres.'}]},
  {icon:'dumbbell',b:'Core',d:40,ej:[
-  {img:'plancha-dinamica',n:'Plancha dinámica',s:'3×12',c:'Desde plancha alta (brazos extendidos) baja a plancha en antebrazos un brazo a la vez y regresa a plancha alta, con la cadera estable sin balancear.'},
-  {img:'elevaciones-piernas',n:'Elevaciones de piernas',s:'3×15',c:'Boca arriba, manos bajo la cadera, sube las piernas rectas hasta 90° y baja lento sin tocar el piso entre repeticiones.'},
-  {img:'bird-dog-mancuerna',n:'Bird dog con mancuerna',s:'3×10 por lado',c:'En cuatro apoyos, extiende el brazo (con una mancuerna ligera) y la pierna contraria al mismo tiempo, con cadera y hombros nivelados; regresa y cambia de lado.',d:'No uses el disco aquí: es demasiado peso para este ejercicio. Mancuerna ligera o sin peso.'},
-  {img:'dead-bug',n:'Dead bug',s:'3×14',c:'Boca arriba, rodillas y brazos elevados a 90°; extiende el brazo y la pierna contrarios hacia el piso sin arquear la espalda baja, regresa y alterna.'},
-  {img:'y-t-w',n:'Y-T-W boca abajo',s:'2×8',c:'Boca abajo con la frente apoyada y los pulgares hacia arriba: eleva los brazos formando una Y, luego una T y luego una W, apretando las escápulas. Cada ciclo Y-T-W es una repetición.'}]},
+  {img:'C5',n:'Plancha dinámica',s:'3×12',c:'Desde plancha alta (brazos extendidos) baja a plancha en antebrazos un brazo a la vez y regresa a plancha alta, con la cadera estable sin balancear.'},
+  {img:'C6',n:'Elevaciones de piernas',s:'3×15',c:'Boca arriba, manos bajo la cadera, sube las piernas rectas hasta 90° y baja lento sin tocar el piso entre repeticiones.'},
+  {img:'C7',n:'Bird dog con mancuerna',s:'3×10 por lado',c:'En cuatro apoyos, estira brazo y pierna contrarios sin mover la cadera. Pausa 2 segundos y cambia de lado.',d:'No uses el disco aquí: es demasiado peso para este ejercicio. Mancuerna ligera o sin peso.'},
+  {img:'C8',n:'Dead bug',s:'3×14',c:'Boca arriba, brazos al techo y rodillas a 90°. Baja brazo y pierna contrarios sin despegar la espalda baja, regresa y alterna.'},
+  {img:'C9',n:'Y-T-W boca abajo',s:'2×8',c:'Boca abajo con la frente en la alfombra: levanta los brazos formando una Y, luego una T y luego una W, apretando los omóplatos. Cada ciclo Y-T-W es una repetición.'}]},
  COGN,ESTIRA]},
 mar:{titulo:'Tren inferior A: fuerza + saltos',icon:'dumbbell',sub:'Intensidad alta. Si llegas al club sin piernas, intercambia el martes con el miércoles.',tiempo:'1 h',bloques:[CALENT,
  {icon:'trending-up',b:'Saltos (descanso completo)',d:90,ej:[
-  {img:'salto-sentadilla',n:'Salto con sentadilla',s:'4×5',c:'Baja a media sentadilla y salta lo más alto posible; aterriza suave con las rodillas alineadas con los pies. Descanso completo: cada salto al máximo.'},
-  {img:'salto-una-pierna',n:'Salto a una pierna hacia adelante (aguanta 2 s la caída)',s:'3×4 por pierna',c:'Salta hacia adelante con una pierna y cae sobre la misma; congela la posición 2 segundos con la rodilla alineada sobre el pie.'}]},
+  {img:'C11',n:'Salto con sentadilla',s:'4×5',c:'Baja a media sentadilla y salta lo más alto posible; aterriza suave con las rodillas alineadas con los pies. Descanso completo: cada salto al máximo.'},
+  {img:'C12',n:'Salto a una pierna hacia adelante (aguanta 2 s la caída)',s:'3×4 por pierna',c:'Salta adelante con una pierna y aterriza con la misma. Quédate quieto 2 segundos, con la rodilla alineada con el pie.'}]},
  {icon:'dumbbell',b:'Fuerza',d:75,ej:[
-  {img:'sentadilla-bulgara',n:'Sentadilla búlgara con dos mancuernas (bajando en 3 s)',s:'4×8 por pierna',c:'Pie de atrás sobre una silla o el sofá; baja en 3 segundos hasta que la rodilla de atrás casi toque el piso, con el torso un poco inclinado. Sube empujando con el talón de adelante.',d:'Sostén el disco pegado al pecho en vez de las mancuernas.'},
-  {img:'peso-muerto-una-pierna',n:'Peso muerto rumano a una pierna',s:'3×8 por pierna',c:'En una pierna con la rodilla un poco flexionada, inclina el torso hacia adelante mientras la otra pierna sube atrás en línea con la espalda. Baja el peso cerca del piso y regresa sin perder el equilibrio.',d:'Sostén el disco con las dos manos frente al cuerpo.'},
-  {img:'nordic-curl',n:'Nordic curl (pies bajo el sofá)',s:'3×4-6',c:'De rodillas sobre un cojín con los talones trabados bajo el sofá y el cuerpo recto de rodillas a cabeza. Déjate caer hacia adelante lo más lento posible frenando con la parte de atrás del muslo; amortigua con las manos y empuja para volver.'},
-  {img:'gemelo-una-pierna',n:'Gemelo a una pierna',s:'3×12',c:'En el borde de un escalón, sube en puntas con una pierna lo más alto posible, pausa arriba y baja lento por debajo del nivel del escalón.'}]},
+  {img:'C13',n:'Sentadilla búlgara con dos mancuernas (bajando en 3 s)',s:'4×8 por pierna',c:'Pie de atrás sobre una silla o el sofá; baja en 3 segundos hasta que la rodilla de atrás casi toque el piso, con el torso un poco inclinado. Sube empujando con el talón de adelante.',d:'Sostén el disco pegado al pecho en vez de las mancuernas.'},
+  {img:'C14',n:'Peso muerto rumano a una pierna',s:'3×8 por pierna',c:'En una pierna con la rodilla un poco flexionada, inclina el torso hacia adelante mientras la otra pierna sube atrás en línea con la espalda. Baja el peso cerca del piso y regresa sin perder el equilibrio.',d:'Sostén el disco con las dos manos frente al cuerpo.'},
+  {img:'C15',n:'Nordic curl (pies bajo el sofá)',s:'3×4-6',c:'De rodillas sobre la alfombra, pies trabados bajo el sofá y cuerpo recto de rodillas a cabeza. Déjate caer lo más lento posible, frena con las manos y empuja para volver.'},
+  {img:'C16',n:'Gemelo a una pierna con mancuerna',s:'3×12',c:'En el borde de un escalón, sube en puntas con una pierna lo más alto posible, pausa arriba y baja lento por debajo del nivel del escalón.'}]},
  {icon:'dumbbell',b:'Core',d:40,ej:[
-  {img:'plancha-lateral',n:'Plancha lateral',s:'3×30 s por lado',c:'Apoyo en un antebrazo y el cuerpo en línea recta de lado, con la cadera arriba y sin rotar.'}]},
+  {img:'C17',n:'Plancha lateral',s:'3×30 s por lado',c:'Apoyo en un antebrazo y el cuerpo en línea recta de lado, con la cadera arriba y sin rotar.'}]},
  ESTIRA]},
 mie:{titulo:'Velocidad + tren superior',icon:'wind',sub:'Intensidad media. Los ejercicios se hacen de dos en dos (superseries): uno y enseguida el otro, todo solo.',tiempo:'1 h',bloques:[CALENT,
  {icon:'trending-up',b:'Velocidad',d:75,ej:[
-  {img:'sprint',n:'Sprints de 15–20 m al 100 % (1–1,5 min de descanso)',s:'6×15-20 m',c:'Salida explosiva y máxima velocidad hasta la marca; frena suave. Descansa 1 a 1,5 minutos para que cada sprint sea al 100 %.'}]},
+  {img:'C18',n:'Sprints de 15–20 m al 100 % (1–1,5 min de descanso)',s:'6×15-20 m',c:'Salida explosiva y máxima velocidad hasta la marca; frena suave. Si hay cuesta, haz la mitad en subida.'}]},
  {icon:'trending-up',b:'Sprints de 10 s',d:45,ej:[
-  {img:'sprint',n:'Sprints de 10 s (40–50 s caminando entre cada uno)',s:'6×10 s',c:'Corre fuerte 10 segundos y luego camina 40–50 segundos para recuperar.'}]},
+  {img:'C18',n:'Sprints de 10 s (40–50 s caminando entre cada uno)',s:'6×10 s',c:'Corre fuerte 10 segundos y luego camina 40–50 segundos para recuperar.'}]},
  {icon:'dumbbell',b:'Fuerza tren superior',d:60,ej:[
-  {img:'dominadas-fondos',n:'Superserie A: dominadas + fondos en silla',s:'4 rondas',c:'A1 Dominadas 4×6 (si no tienes barra, remo a una mano 4×10) y enseguida A2 Fondos en silla 4×10 con los hombros abajo. Toca «Ya» cuando termines los dos y descansa 60 s.'},
-  {img:'press-hombro-remo',n:'Superserie B: press de hombro unilateral + remo a 2 apoyos',s:'3 rondas',c:'B1 Press de hombro unilateral 3×6 por brazo y enseguida B2 Remo a 2 apoyos 3×8 por brazo (una mano y una rodilla en el banco, jala hacia la cadera). Toca «Ya» cuando termines los dos.',d:'Haz el press de hombro a dos manos con el disco.'},
-  {img:'flexiones',n:'Flexiones (normales, inclinadas y diamante)',s:'3×12',c:'Cuerpo en línea recta; baja el pecho hacia el piso y empuja. Alterna manos al ancho de hombros (normal), pies elevados (inclinada) o manos juntas bajo el pecho (diamante).'}]},
+  {img:['C19','C20'],n:'Superserie A: dominadas + fondos en silla',s:'4 rondas',c:'A1 Dominadas 4×6 (si no tienes barra, remo a una mano 4×10) y enseguida A2 Fondos en silla 4×10 con los hombros abajo. Toca «Ya» cuando termines los dos y descansa 60 s.'},
+  {img:['C21','C22'],n:'Superserie B: press de hombro unilateral + remo a 2 apoyos',s:'3 rondas',c:'B1 Press de hombro unilateral 3×6 por brazo y enseguida B2 Remo a 2 apoyos 3×8 por brazo (una mano y una rodilla en el banco, jala hacia la cadera). Toca «Ya» cuando termines los dos.',d:'Haz el press de hombro a dos manos con el disco.'},
+  {img:'C23',n:'Flexiones (normales, inclinadas y diamante)',s:'3×12',c:'Cuerpo en línea recta; baja el pecho hacia el piso y empuja. Alterna manos al ancho de hombros (normal), pies elevados (inclinada) o manos juntas bajo el pecho (diamante).'}]},
  {icon:'dumbbell',b:'Core',d:40,ej:[
-  {img:'plancha-copenhague',n:'Plancha Copenhague',s:'3×20 s por lado',c:'De lado, antebrazo en el piso y el pie de arriba sobre una silla o el sofá; sube la cadera hasta quedar en línea recta. Si cuesta mucho, apoya la rodilla en vez del pie.'}]},
+  {img:'C24',n:'Plancha Copenhague',s:'3×20 s por lado',c:'De lado, rodilla (o tobillo, más difícil) de la pierna de arriba sobre el sofá y antebrazo en el piso. Levanta la cadera y mantén el cuerpo en línea.'}]},
  ESTIRA]},
 jue:{titulo:'Tren inferior B: potencia y trabajo lateral',icon:'trending-up',sub:'Intensidad media-alta.',tiempo:'1 h',bloques:[CALENT,
  {icon:'trending-up',b:'Saltos',d:75,ej:[
-  {img:'saltos-patinador',n:'Saltos laterales tipo patinador',s:'3×5 por lado',c:'Impúlsate de lado con una pierna y cae en la otra; frena y aguanta 1 segundo antes del siguiente salto.'},
-  {img:'salto-horizontal',n:'Salto horizontal',s:'3×4',c:'Con los dos pies, balancea los brazos y salta lo más lejos posible; cae suave y estable. Camina de regreso.'}]},
+  {img:'C25',n:'Saltos laterales tipo patinador',s:'3×5 por lado',c:'Impúlsate de lado con una pierna y cae en la otra; frena y aguanta 1 segundo antes del siguiente salto.'},
+  {img:'C26',n:'Salto horizontal',s:'3×4',c:'Con los dos pies, balancea los brazos y salta lo más lejos posible; cae suave y estable. Camina de regreso.'}]},
  {icon:'dumbbell',b:'Fuerza',d:60,ej:[
-  {img:'zancada-lateral-disco',n:'Zancada lateral con el disco',s:'3×8 por lado',c:'Disco pegado al pecho; da un paso amplio hacia un lado y flexiona esa rodilla con la otra pierna recta y la cadera atrás. Empuja para volver.'},
-  {img:'subida-escalon',n:'Subida a escalón con mancuernas (subiendo explosivo)',s:'3×8 por pierna',c:'Pie completo sobre un escalón o banco firme; sube explosivo empujando con esa pierna sin impulsarte con la de abajo, y baja controlado.',d:'Sostén el disco pegado al pecho.'},
-  {img:'hip-thrust-una-pierna',n:'Hip thrust a una pierna',s:'3×10',c:'Espalda alta apoyada en el sofá, un pie en el piso y la otra pierna arriba; sube la cadera apretando el glúteo hasta quedar en línea recta, pausa 1 segundo y baja.'}]},
+  {img:'C27',n:'Zancada lateral con el disco al pecho',s:'3×8 por lado',c:'Disco pegado al pecho; da un paso amplio hacia un lado y flexiona esa rodilla con la otra pierna recta y la cadera atrás. Empuja para volver.'},
+  {img:'C28',n:'Subida a escalón con mancuernas (subiendo explosivo)',s:'3×8 por pierna',c:'Pie completo sobre un escalón o banco firme; sube explosivo empujando con esa pierna sin impulsarte con la de abajo, y baja controlado.',d:'Sostén el disco pegado al pecho.'},
+  {img:'C29',n:'Hip thrust a una pierna',s:'3×10',c:'Espalda alta apoyada en el sofá, un pie en el piso y la otra pierna arriba; sube la cadera apretando el glúteo hasta quedar en línea recta, pausa 1 segundo y baja.'}]},
  {icon:'dumbbell',b:'Core',d:40,ej:[
-  {img:'plancha-disco',n:'Plancha pasando el disco de un lado al otro',s:'3×8 por lado',c:'En plancha alta con el disco a un lado, pásalo por debajo del cuerpo al otro lado con una mano, sin rotar la cadera.'}]},
+  {img:'C30',n:'Plancha pasando el disco de un lado al otro',s:'3×8 por lado',c:'En plancha alta con el disco a un lado, pásalo por debajo del cuerpo al otro lado con una mano, sin rotar la cadera.'}]},
  ESTIRA]},
-vie:{titulo:'Activación + técnica',icon:'sunrise',sub:'Intensidad baja.',tiempo:'1 h',bloques:[CALENT,
- {icon:'sunrise',b:'Activación',d:30,ej:[
-  {img:'activacion-gluteo',n:'Movilidad dinámica y activación de glúteo',s:'10 min',c:'Balanceos de pierna, círculos de cadera, puente de glúteo y pasos laterales con las rodillas hacia afuera.'}]},
- {icon:'trending-up',b:'Aceleraciones y pies',d:60,ej:[
-  {img:'sprint',n:'Aceleraciones de 10–15 m al 90 %',s:'4 reps',c:'4 aceleraciones rápidas pero sin llegar al máximo (si te sientes bien, haz hasta 6). Camina de regreso.'},
-  {img:'coordinacion-conos',n:'Coordinación de pies con conos',s:'10 min',c:'Pasos cortos y rápidos entre conos o botellas: adentro-afuera, laterales y zigzag. Primero calidad, luego velocidad.'}]},
- {icon:'target',b:'Técnica con balón',d:30,ej:[
-  {img:'tecnica-balon',n:'Técnica con balón',s:'15 min',c:'Toques a la pared, control orientado, regates y cambios de ritmo, cuidando la calidad del toque.'}]},
- COGN,ESTIRA]},
-sab:{titulo:'Activación corta o descanso',icon:'sunrise',sub:'Intensidad muy baja · 11:00, después de la clase de música. Si estás cansado, descanso total.',tiempo:'20–25 min',bloques:[
- {icon:'wind',b:'Activación corta',d:30,ej:[
-  {img:'movilidad-90-90',n:'Movilidad',s:'20 min',c:'Cadera, tobillos, isquiotibiales y espalda con movimientos suaves y controlados.'},
-  {img:'sprint',n:'Aceleraciones cortas',s:'3 reps',c:'3 aceleraciones de unos 10 m, empezando suave y terminando rápido.'}]},
+vie:{titulo:'Activación + técnica',icon:'sunrise',sub:'Intensidad baja · en casa o el condominio. Regla: terminar sintiéndote mejor que al empezar.',tiempo:'≈45 min',bloques:[
+ {icon:'wind',b:'Movilidad dinámica (8 min)',d:15,ej:[
+  {img:'C31',n:'Balanceo de pierna adelante-atrás y lateral',s:'10 por pierna',c:'Con una mano en la pared, balancea la pierna adelante y atrás, y luego de lado a lado. 10 de cada uno por pierna.'},
+  {img:'C32',n:'Círculos de cadera',s:'10 por lado',c:'De pie, sube la rodilla al frente y ábrela hacia el lado dibujando un círculo grande.'},
+  {img:'C3',n:'World\'s greatest stretch',s:'4 por lado',c:'Zancada larga, mano del mismo lado del pie adelantado al piso, gira el torso y lleva ese brazo hacia el techo.'},
+  {img:'C4',n:'Tobillo contra la pared',s:'10 por lado',c:'Pie a un palmo de la pared, lleva la rodilla a tocarla sin despegar el talón.'},
+  {img:'C33',n:'Gato-camello',s:'8 veces',c:'En cuatro apoyos, redondea la espalda hacia arriba y luego arquéala hacia abajo, lento y con la respiración.'}]},
+ {icon:'dumbbell',b:'Activación de glúteo y core (7 min)',d:30,ej:[
+  {img:'C34',n:'Puente de glúteo',s:'2×12',c:'Boca arriba, rodillas dobladas: sube la cadera hasta una línea recta de hombros a rodillas y aprieta el glúteo.'},
+  {img:'C35',n:'Puente a una pierna',s:'2×8 por lado',c:'Igual que el puente, con una pierna estirada en el aire en línea con el muslo de apoyo.'},
+  {img:'C36',n:'Almeja (clamshell)',s:'2×12 por lado',c:'De lado, rodillas dobladas y pies juntos. Abre la rodilla de arriba sin separar los pies ni rotar la cadera.'},
+  {img:'C37',n:'Plancha',s:'2×30 s',c:'Antebrazos y puntas de los pies, cuerpo en línea recta, codos debajo de los hombros.'},
+  {img:'C24',n:'Copenhague corta',s:'2×15 s por lado',c:'De lado, rodilla de la pierna de arriba sobre el sofá y antebrazo en el piso; sube la cadera y mantén el cuerpo en línea.'}]},
+ {icon:'trending-up',b:'Técnica de carrera (6 min) · tramos de 15 m',d:30,ej:[
+  {img:'C38',n:'Skipping bajo ×2 y skipping alto ×2',s:'4×15 m',c:'Dos tramos de skipping bajo (pasos cortos y rápidos en la punta del pie) y dos de skipping alto (rodilla a la altura de la cadera). Vuelve caminando.'},
+  {img:'C39',n:'Talones al glúteo',s:'2×15 m',c:'Trota llevando el talón a tocar el glúteo, brazos a 90°. Vuelve caminando.'},
+  {img:'C40',n:'Desplazamiento lateral (uno hacia cada lado)',s:'2×15 m',c:'Postura atlética con las rodillas dobladas, desplázate de lado sin cruzar los pies.'}]},
+ {icon:'trending-up',b:'Pies rápidos (5 min)',d:30,ej:[
+  {img:'C41',n:'Pies rápidos con conos: dentro-fuera, lateral, zigzag y adelante-atrás',s:'4 min',c:'Conos o escalera pintada con tiza. 2 pasadas de cada patrón: primero calidad, luego velocidad.'},
+  {img:'C42',n:'Pogos (saltitos de tobillo)',s:'2×10',c:'Saltitos rápidos solo con el tobillo, rodillas casi rectas y contacto corto con el piso. Suaves.'}]},
+ {icon:'trending-up',b:'Aceleraciones (5 min)',d:50,ej:[
+  {img:'C18',n:'Aceleraciones de 10–15 m al 90 %',s:'5×10-15 m',c:'Rápido pero sin llegar al máximo. Vuelve caminando (45–60 s).'}]},
+ {icon:'target',b:'Técnica con balón (15 min)',d:30,ej:[
+  {img:'C43',n:'Pase contra la pared con control orientado',s:'8 min',c:'3 minutos con cada pie y 2 minutos extra con la izquierda. Recibe orientando el balón hacia un lado con el primer toque.'},
+  {img:'C44',n:'Conducción con cambios de dirección entre conos',s:'4 min',c:'Toques cortos, balón cerca del pie y cambios de dirección en cada cono.'},
+  {img:'C45',n:'Recibir y girar',s:'3 min',c:'Recibe de espaldas, como si te presionaran por detrás, gira con el balón controlado y sal conduciendo.'},
+  {img:'C46',n:'Remates para cerrar',s:'unos 10',c:'Unos 10 remates con buena técnica. Nada de sesión larga de tiro.'}]},
+ COGN]},
+sab:{titulo:'Activación corta',icon:'sunrise',sub:'Intensidad muy baja · 11:00, después de la clase de música. En la noche: cena con carbohidratos (arroz, pasta o papa), buena hidratación, mochila lista y a dormir temprano.',tiempo:'≈20 min',bloques:[
+ {icon:'wind',b:'Movilidad (8 min)',d:15,ej:[
+  {img:['C31','C32','C33'],n:'Movilidad: la misma del viernes',s:'8 min',c:'Balanceo de pierna, círculos de cadera, world\'s greatest stretch, tobillo contra la pared y gato-camello.'}]},
+ {icon:'dumbbell',b:'Activación (5 min)',d:30,ej:[
+  {img:'C34',n:'Puente de glúteo',s:'2×10',c:'Sube la cadera hasta una línea recta de hombros a rodillas y aprieta el glúteo.'},
+  {img:'C36',n:'Almeja',s:'2×10 por lado',c:'De lado, rodillas dobladas y pies juntos; abre la rodilla de arriba sin rotar la cadera.'},
+  {img:'C37',n:'Plancha',s:'2×20 s',c:'Antebrazos y puntas de los pies, cuerpo en línea recta.'}]},
+ {icon:'trending-up',b:'Técnica de carrera y aceleraciones',d:50,ej:[
+  {img:['C38','C40'],n:'Skipping bajo, skipping alto y desplazamiento lateral',s:'3×15 m',c:'Un tramo de cada uno, volviendo caminando.'},
+  {img:'C18',n:'Aceleraciones de 10 m al 80–85 %',s:'3×10 m',c:'Empieza suave y termina rápido, sin llegar al máximo.'}]},
+ {icon:'target',b:'Opcional',d:0,ej:[
+  {img:'C43',n:'Toques y control con balón',s:'5 min',c:'Toques suaves y control, sin cansarte.'}]},
  COGN]},
 dom:{titulo:'2 partidos',icon:'target',sub:'Desayuno con carbohidratos. Entre partidos: carbohidratos fáciles de digerir, electrolitos y movilidad suave. Después del segundo: carbohidratos + proteína en las siguientes 1–2 horas.',tiempo:'día de partido',bloques:[
  {icon:'target',b:'Partidos',d:10,ej:[
-  {img:'partido',n:'Partido 1',s:'partido',c:'Calienta 10–15 minutos antes de empezar.'},
-  {img:'entre-partidos',n:'Entre partidos: carbohidratos + electrolitos + movilidad suave',s:'',c:'Fruta, pan, dátiles o bebida con electrolitos; camina y mueve cadera y tobillos suave.'},
-  {img:'partido',n:'Partido 2',s:'partido',c:'Vuelve a activarte 5–10 minutos antes.'},
-  {img:'recuperacion-nutricion',n:'Recuperación: carbohidratos + proteína (1–2 h después)',s:'',c:'Por ejemplo arroz o pasta con pollo o huevo, o un batido de leche con banano y avena.'}]}]}
+  {n:'Partido 1',s:'partido',c:'Calienta 10–15 minutos antes de empezar.'},
+  {n:'Entre partidos: carbohidratos + electrolitos + movilidad suave',s:'',c:'Fruta, pan, dátiles o bebida con electrolitos; camina y mueve cadera y tobillos suave.'},
+  {n:'Partido 2',s:'partido',c:'Vuelve a activarte 5–10 minutos antes.'},
+  {n:'Recuperación: carbohidratos + proteína (1–2 h después)',s:'',c:'Por ejemplo arroz o pasta con pollo o huevo, o un batido de leche con banano y avena.'}]}]}
 };
+/* Versión gimnasio (lun–jue). Viernes, sábado y domingo se quedan igual que en casa. r = descanso propio del ejercicio (s) */
+const ENTRENO_GYM={
+lun:{titulo:'Recuperación + core',icon:'wind',sub:'Intensidad baja · gimnasio. Primeras 4 semanas: peso ligero y técnica perfecta. Termina cada serie pudiendo hacer 2–3 repeticiones más.',tiempo:'1 h',bloques:[
+ {icon:'wind',b:'Bici + movilidad',d:15,ej:[
+  {img:'G1',n:'Bici suave + movilidad',s:'15-20 min',c:'Bici a ritmo cómodo y después 90/90 de cadera, world\'s greatest stretch y tobillo contra la pared. Este bloque ya es tu calentamiento del lunes.'}]},
+ {icon:'dumbbell',b:'Core y hombro sano',d:40,ej:[
+  {img:'G2',n:'Rueda abdominal',s:'3×10',c:'De rodillas sobre una colchoneta, la rueda debajo de los hombros. Rueda hacia adelante con el abdomen apretado y vuelve antes de que la espalda baja se hunda. Al principio, recorridos cortos.'},
+  {img:'G3',n:'Elevaciones de piernas colgado',s:'3×12',c:'Cuélgate de la barra sin balancearte. Sube las rodillas al pecho (más avanzado: piernas rectas) y baja lento en 2–3 segundos.'},
+  {img:'G4',n:'Pallof press en polea',s:'3×10 por lado',c:'Polea a la altura del pecho. De lado, sujeta el agarre con las dos manos pegado al pecho, extiende los brazos al frente y aguanta 2 segundos sin dejar que la polea te gire el tronco.'},
+  {img:'G5',n:'Dead bug con disco',s:'3×12',c:'Boca arriba, disco sujeto con los brazos estirados hacia el techo y rodillas a 90°. Baja una pierna estirada hacia el piso sin despegar la espalda baja. Alterna.'},
+  {img:'G6',n:'Face pull en polea',s:'3×15',c:'Polea alta con cuerda. Jala hacia tu cara separando las manos, con los codos altos, y aprieta los omóplatos al final. Peso ligero, movimiento limpio.'}]},
+ COGN,ESTIRA]},
+mar:{titulo:'Tren inferior A: fuerza + saltos',icon:'dumbbell',sub:'Intensidad alta · gimnasio. Sentadilla siempre con barras de seguridad en el rack. Sube 2,5–5 lb por lado cuando completes todas las series bien.',tiempo:'1 h',bloques:[CALENT_G,
+ {icon:'trending-up',b:'Saltos',d:90,ej:[
+  {img:'G7',n:'Salto al cajón',s:'4×4',c:'Cajón de altura moderada: debes aterrizar en media sentadilla, no en sentadilla profunda. Brazos atrás, salta explosivo y aterriza suave y en silencio. Baja caminando, no saltando.'},
+  {img:'G8',n:'Saltos de valla (o salto a una pierna aguantando la caída)',s:'3×4 por pierna',r:60,c:'Vallas bajas en fila. Salta por encima con los dos pies, con el contacto en el piso lo más corto posible, como si quemara.'}]},
+ {icon:'dumbbell',b:'Fuerza',d:90,ej:[
+  {img:'G9',n:'Sentadilla trasera con barra',s:'4×5',r:150,c:'Barra sobre la parte alta de la espalda, no sobre el cuello. Pies al ancho de los hombros y puntas un poco hacia afuera. Toma aire, aprieta el abdomen y baja como si te sentaras atrás, hasta que los muslos queden paralelos al piso. Sube empujando el suelo, con el pecho arriba.'},
+  {img:'C13',n:'Sentadilla búlgara con mancuernas pesadas',s:'3×6 por pierna',c:'Empeine del pie de atrás sobre un banco y paso largo al frente. Baja recto hasta que la rodilla de atrás casi toque el piso; el peso va en la pierna de adelante.'},
+  {img:'G10',n:'Peso muerto rumano con barra',s:'3×6',r:120,c:'Manos al ancho de los hombros, rodillas un poco dobladas y fijas. Lleva la cadera hacia atrás con la barra pegada a los muslos y la espalda recta, hasta sentir el estiramiento de los isquiotibiales. Sube apretando el glúteo.'},
+  {img:'G11',n:'Nordic curl (o curl femoral en máquina)',s:'3×5 (o 3×10)',c:'Nordic: de rodillas sobre una almohadilla con los tobillos trabados en la máquina, déjate caer lo más lento posible y frena con las manos. Curl femoral: almohadilla sobre los tobillos, flexiona controlado y baja en 3 segundos.'},
+  {img:'G12',n:'Gemelo en máquina de pie',s:'3×12',r:60,c:'Punta del pie en el borde del escalón. Baja el talón por debajo del escalón, sube lo más alto posible y aguanta 1 segundo arriba.'}]},
+ {icon:'dumbbell',b:'Core',d:40,ej:[
+  {img:'G13',n:'Plancha lateral con disco',s:'3×30 s por lado',c:'Disco apoyado sobre la cadera de arriba. Cuerpo en línea recta, sin que la cadera caiga.'}]},
+ ESTIRA]},
+mie:{titulo:'Velocidad + tren superior',icon:'wind',sub:'Intensidad media · gimnasio. Si no te alcanza la hora, haz el trineo o los sprints repetidos, no los dos. Press banca siempre con barras de seguridad o alguien que te asista.',tiempo:'1 h',bloques:[CALENT_G,
+ {icon:'trending-up',b:'Velocidad',d:75,ej:[
+  {img:'C18',n:'Sprints en pista o cancha (1–1,5 min de descanso)',s:'6×15-20 m',c:'Salida explosiva y máxima velocidad hasta la marca; frena suave.'},
+  {img:'G14',n:'Empuje de trineo',s:'4×15 m',r:90,c:'Manos en los postes, brazos estirados o un poco doblados y cuerpo inclinado unos 45°. Pasos cortos y potentes: el peso debe dejarte moverte rápido, no arrastrarte.'},
+  {img:'C18',n:'Sprints repetidos (40–50 s caminando)',s:'6×10 s',r:45,c:'Corre fuerte 10 segundos y luego camina 40–50 segundos para recuperar.'}]},
+ {icon:'dumbbell',b:'Fuerza tren superior',d:60,ej:[
+  {img:['G15','G16'],n:'Superserie A: dominadas con lastre (o jalón al pecho) + fondos en paralelas',s:'4 rondas',c:'A1 Dominadas 4×5: palmas hacia adelante, baja hasta estirar los brazos y sube hasta que la barbilla pase la barra; añade lastre cuando hagas 8 limpias sin peso (si aún no haces dominadas, jalón al pecho). Enseguida A2 Fondos en paralelas 4×8: baja hasta que los codos queden a unos 90° (menos si te molesta el hombro). Toca «Ya» al terminar los dos y descansa 60 s.'},
+  {img:['G17','G18'],n:'Superserie B: press militar con mancuernas + remo con barra (o en polea)',s:'3 rondas',c:'B1 Press militar 3×6: de pie o sentado con respaldo, empuja hacia arriba sin arquear la espalda. Enseguida B2 Remo 3×8: torso inclinado unos 45°, espalda recta, jala la barra hacia el ombligo llevando los codos atrás (en polea sentado: pecho alto, sin balancear el torso). Toca «Ya» al terminar los dos.'},
+  {img:'G19',n:'Press banca',s:'3×6',r:120,c:'Ojos debajo de la barra y pies firmes en el piso. Junta los omóplatos y llévalos hacia abajo, agarre un poco más ancho que los hombros. Baja la barra controlada a la parte media-baja del pecho y empuja. Siempre con barras de seguridad o alguien que te asista.'}]},
+ {icon:'dumbbell',b:'Core',d:40,ej:[
+  {img:'C24',n:'Copenhague en banco',s:'3×20 s por lado',c:'De lado, antebrazo en el piso y la pierna de arriba apoyada en el banco (rodilla para empezar, tobillo cuando sea fácil). Levanta la cadera y mantén el cuerpo en línea.'}]},
+ ESTIRA]},
+jue:{titulo:'Tren inferior B: potencia y trabajo lateral',icon:'trending-up',sub:'Intensidad media-alta · gimnasio.',tiempo:'1 h',bloques:[CALENT_G,
+ {icon:'trending-up',b:'Saltos',d:60,ej:[
+  {img:'G20',n:'Salto lateral al cajón (o patinador)',s:'3×5 por lado',c:'Cajón bajo a un costado. Salta de lado y aterriza estable sobre él. Baja caminando y repite hacia el otro lado.'},
+  {img:'G21',n:'Salto con barra hexagonal ligera',s:'3×4',r:90,c:'Dentro de la barra hexagonal, con solo el 20–30 % de lo que levantas en peso muerto. Media sentadilla rápida y salta lo más alto posible; aterriza suave con las rodillas dobladas, recoloca y repite.'}]},
+ {icon:'dumbbell',b:'Fuerza',d:90,ej:[
+  {img:'G22',n:'Zancada lateral con mancuerna pesada',s:'3×6 por lado',c:'Mancuerna pegada al pecho y paso amplio hacia un lado. Baja sobre esa pierna llevando la cadera atrás, con la otra pierna recta, y empuja para volver al centro.'},
+  {img:'G23',n:'Step-up con mancuernas pesadas',s:'3×6 por pierna',c:'Cajón a la altura de la rodilla, todo el pie arriba. Sube empujando con la pierna de arriba (sin impulsarte con la de abajo) y baja controlado.'},
+  {img:'G24',n:'Hip thrust con barra',s:'3×8',c:'Espalda alta en el borde de un banco, justo debajo de los omóplatos, y barra sobre la cadera con almohadilla. Sube hasta que la cadera quede en línea con hombros y rodillas y aprieta el glúteo 1 segundo arriba.'}]},
+ {icon:'dumbbell',b:'Core',d:40,ej:[
+  {img:'G4',n:'Pallof press en polea',s:'3×10 por lado',c:'Polea a la altura del pecho, de lado. Extiende los brazos al frente y aguanta 2 segundos sin dejar que la polea te gire el tronco.'}]},
+ ESTIRA]}
+};
+function modoEj(){return localStorage.getItem(K('modo_ej'))==='gym'?'gym':'casa'}
+function ent(d){return (modoEj()==='gym'&&ENTRENO_GYM[d])||ENTRENO[d]}
+function pfx(d){return (modoEj()==='gym'&&ENTRENO_GYM[d])?'g':'e'}
+function setModoEj(m){
+  if(sesion.id)cancelarEj();
+  localStorage.setItem(K('modo_ej'),m);
+  pintarEntreno(diaEj);
+  guardar();pintarHoy();
+}
 const DIAS=[['lun','Lunes'],['mar','Martes'],['mie','Miércoles'],['jue','Jueves'],['vie','Viernes'],['sab','Sábado'],['dom','Domingo']];
 
 /* ================= DATOS: MENTAL ================= */
@@ -1113,7 +1206,7 @@ function tareasActivas(){
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 
 /* reflect: agua>=8 ; entreno: todos los ejercicios de hoy hechos */
-function ejerciciosDelDia(){const ids=[];ENTRENO[DKEY].bloques.forEach((bl,bi)=>bl.ej.forEach((_,ei)=>ids.push('e_'+DKEY+'_'+bi+'_'+ei)));return ids}
+function ejerciciosDelDia(){const ids=[],px=pfx(DKEY);ent(DKEY).bloques.forEach((bl,bi)=>bl.ej.forEach((_,ei)=>ids.push(px+'_'+DKEY+'_'+bi+'_'+ei)));return ids}
 function tareaHecha(t){
   if(t.reflect==='agua')return agua>=8;
   if(t.reflect==='entreno'){const ids=ejerciciosDelDia();return ids.length>0&&ids.every(i=>checks[i])}
@@ -1412,20 +1505,20 @@ function pintarHorario(d){
 let diaEj=DKEY;
 function pintarChipsEj(){
   document.getElementById('chipsDias').innerHTML=DIAS.map(([k,n])=>
-    '<button class="'+(k===diaEj?'on':'')+'" data-d="'+k+'">'+icono(ENTRENO[k].icon)+' '+n.slice(0,3)+(k===DKEY?' <svg class="i" aria-hidden="true" focusable="false"><use href="#i-target"/></svg>':'')+'</button>').join('');
+    '<button class="'+(k===diaEj?'on':'')+'" data-d="'+k+'">'+icono(ent(k).icon)+' '+n.slice(0,3)+(k===DKEY?' <svg class="i" aria-hidden="true" focusable="false"><use href="#i-target"/></svg>':'')+'</button>').join('');
   document.querySelectorAll('#chipsDias button').forEach(b=>b.onclick=()=>pintarEntreno(b.dataset.d));
 }
 function pintarEntreno(d){
   diaEj=d;pintarChipsEj();
-  const e=ENTRENO[d];
+  const e=ent(d),px=pfx(d),gym=modoEj()==='gym';
   const nombre=DIAS.find(x=>x[0]===d)[1];
   const esHoy=d===DKEY;
-  let h='<div class="card"><span class="tag">'+nombre+' · '+e.tiempo+'</span><h2>'+icono(e.icon)+' '+e.titulo+'</h2><div class="subt">'+e.sub+'</div>';
+  let h='<div class="card ejCard"><div class="modoEj" role="group" aria-label="Dónde entrenas"><button class="'+(gym?'':'on')+'" aria-pressed="'+!gym+'" onclick="setModoEj(\'casa\')">Casa</button><button class="'+(gym?'on':'')+'" aria-pressed="'+gym+'" onclick="setModoEj(\'gym\')">Gym</button></div><span class="tag">'+nombre+' · '+e.tiempo+'</span><h2>'+icono(e.icon)+' '+e.titulo+'</h2><div class="subt">'+e.sub+(gym&&!ENTRENO_GYM[d]&&d!=='dom'?' <b>Este día se queda en casa.</b>':'')+'</div>';
   e.bloques.forEach((bl,bi)=>{
     const dur=bl.d||0;
     h+='<h3>'+icono(bl.icon)+' '+bl.b+(dur?' <span class="h3desc">· descanso '+dur+'s</span>':'')+'</h3>';
     bl.ej.forEach((ej,ei)=>{
-      const id='e_'+d+'_'+bi+'_'+ei;
+      const id=px+'_'+d+'_'+bi+'_'+ei;
       const on=(esHoy&&checks[id])?' hecho':'';
       let extra='';
       if(esHoy){
@@ -1448,7 +1541,7 @@ function pintarEntreno(d){
         }else if(checks[id]){
           extra='';
         }else{
-          const p=parseEj(ej.s,dur);
+          const p=parseEj(ej.s,ej.r||dur);
           let hint=p.sets>1?p.sets+' series':'';
           if(p.work>0)hint+=(hint?' · ':'')+''+(p.workMin<p.work?fmtSeg(p.workMin)+'–'+fmtSeg(p.work):fmtSeg(p.work));
           extra='<button class="btnEj" onclick="empezarEj(\''+id+'\')"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-play"/></svg> Empezar'+(hint?' <small style="opacity:.8;font-weight:600">('+hint+')</small>':'')+'</button>';
@@ -1456,8 +1549,8 @@ function pintarEntreno(d){
       }
       h+='<div class="ej'+on+'" id="'+id+'"><div class="top">'+
          '<div class="ej-info"><div class="ej-title">'+
-         (on?'<div class="okdot">'+icono('check')+'</div>':'')+'<div class="nom">'+ej.n+'</div></div>'+(ej.s?'<div class="ser">'+ej.s+'</div>':'')+'</div></div>'+
-         '<details><summary>Cómo se hace</summary>'+(ej.img?'<img class="ej-ref" src="img/ej/'+ej.img+'.png" alt="Cómo se hace: '+ej.n.replace(/"/g,'')+'" loading="lazy" onerror="this.remove()">':'')+'<p>'+ej.c+'</p></details>'+
+         (on?'<div class="okdot">'+icono('check')+'</div>':'')+'<div class="nom">'+ej.n+'</div></div>'+(ej.s?'<div class="ser">'+ej.s+(ej.r?' <span class="h3desc">· descanso '+(ej.r>=60?(ej.r%60?fmtSeg(ej.r):ej.r/60+' min'):ej.r+' s')+'</span>':'')+'</div>':'')+'</div></div>'+
+         '<details><summary>Cómo se hace</summary>'+[].concat(ej.img||[]).map(x=>'<img class="ej-ref" src="img/ej/'+x+'.jpg" alt="Cómo se hace: '+ej.n.replace(/"/g,'')+'" loading="lazy" onerror="this.remove()">').join('')+'<p>'+ej.c+'</p></details>'+
          (ej.d?'<details class="disco"><summary>Alternativa con disco 25lb</summary><p>'+ej.d+'</p></details>':'')+
          extra+'</div>';
     });
@@ -1485,8 +1578,8 @@ function sesionCero(){limpiarTimer();sesion={id:null,fase:null,set:0,sets:0,work
 function empezarEj(id){
   limpiarTimer();
   const p2=id.split('_'),d=p2[1],bi=+p2[2],ei=+p2[3];
-  const bl=ENTRENO[d].bloques[bi],ej=bl.ej[ei];
-  const p=parseEj(ej.s,bl.d);
+  const bl=ent(d).bloques[bi],ej=bl.ej[ei];
+  const p=parseEj(ej.s,ej.r||bl.d);
   sesion={id:id,fase:null,set:1,sets:p.sets,work:p.work,workMin:p.workMin,rest:p.rest,ini:0,fin:0,unlocked:false,timer:null};
   ensureAudio();pedirWakeLock();
   iniciarTrabajo();
