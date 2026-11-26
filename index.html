@@ -448,6 +448,8 @@ header h1{font-size:34px;font-weight:700;letter-spacing:-.025em;line-height:1.08
 .row-icon:has(use[href="#i-check"]),.card h2>.i:has(use[href="#i-list-checks"]){--tile:#30b0c7}
 .card h2>.i:has(use[href="#i-trending-up"]){--tile:#34c759}
 .card h2>.i:has(use[href="#i-pause"]){--tile:#8e8e93}
+.row-icon:has(.ti){background:none;box-shadow:none;width:36px;min-width:36px;height:36px;border-radius:0}
+.row-icon .ti{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 1px 1.5px rgba(0,0,0,.14))}
 /* botones iOS */
 .btnEj,.btn{border-radius:14px;min-height:50px;font-size:17px;font-weight:600;box-shadow:none;display:flex;align-items:center;justify-content:center;gap:7px}
 .btn{background:var(--fill);border:none;color:var(--azulOsc)}
@@ -796,7 +798,10 @@ PERFORMANCE OF THIS SOFTWARE. -->
 </div>
 
 <script>
-function icono(nombre){return '<svg class="i" aria-hidden="true" focusable="false"><use href="#i-'+nombre+'"/></svg>'}
+const ICON_IMG=new Set(['book-open','zen','pencil','wind','target','utensils','kefir','house','backpack','dumbbell','clock','moon','droplet','check','music','sunrise','ball','shopping-basket','shirt']);
+const ICON_SVG={zen:'wind',kefir:'utensils',backpack:'arrow-right',ball:'target',shirt:'user'};
+function tile(n){return ICON_IMG.has(n)?'<img class="ti" src="img/ic/'+n+'.png" alt="" aria-hidden="true">':icono(n)}
+function icono(nombre){nombre=ICON_SVG[nombre]||nombre;return '<svg class="i" aria-hidden="true" focusable="false"><use href="#i-'+nombre+'"/></svg>'}
 
 /* ================= PALETAS ================= */
 const TEMAS=[
@@ -858,10 +863,10 @@ aplicarTema(localStorage.getItem('midia_tema')||'logo');
 const MAN_LV=[
  ['clock','6:00','Levantarme',360,360],
  ['book-open','6:00–6:10','Leer libro',360,370,'LEER'],
- ['wind','6:10–6:15','Meditar',370,375],
+ ['zen','6:10–6:15','Meditar',370,375],
  ['utensils','6:15–6:30','Desayunar',375,390],
  ['droplet','6:30–6:45','Higiene (lavarme cara, cepillarme, cambiarme, perfume, crema)',390,405],
- ['arrow-right','6:45–7:00','Traslado al colegio',405,420],
+ ['backpack','6:45–7:00','Traslado al colegio',405,420],
  ['book-open','7:00','Llego al colegio',420,450],
  ['book-open','7:30','Empiezo clases',450,855]];
 const TARDE_MJ=[
@@ -869,13 +874,13 @@ const TARDE_MJ=[
  ['utensils','2:30–3:00','Almuerzo',870,900],
  ['pencil','3:00–4:00','Tareas (bloque 1)',900,960],
  ['utensils','4:00–4:10','Snack pre-entreno: yogurt griego + miel',960,970],
- ['user','4:10–4:40','Transición / cambiarme / traslado a la cancha',970,1000],
+ ['shirt','4:10–4:40','Transición / cambiarme / traslado a la cancha',970,1000],
  ['dumbbell','4:40–5:40','Sesión personal de 1 h (ver Ejercicio)',1000,1060],
  ['droplet','5:40–6:30','Transición: hidratación, algo ligero si te hace falta (fruta o dátiles) y alistarte para el club',1060,1110],
- ['target','6:30–8:00','Entreno del club',1110,1200],
+ ['ball','6:30–8:00','Entreno del club',1110,1200],
  ['check','8:00','Termina entreno',1200,1225],
  ['house','8:25','Llego a casa',1225,1225],
- ['utensils','8:25–8:40','Ceno + kéfir',1225,1240],
+ ['kefir','8:25–8:40','Ceno + kéfir',1225,1240],
  ['droplet','8:40–8:55','Me baño',1240,1255],
  ['pencil','8:55–9:10','Termino tarea (bloque 2, si queda algo pendiente)',1255,1270],
  ['moon','9:10–9:25','Rutina mental nocturna (respiración + visualización + registro breve)',1270,1285],
@@ -889,11 +894,11 @@ const TARDE_VIE=[
  ['book-open','4:00–4:30','Tareas adicionales si tienes pendiente',960,990],
  ['music','4:30–5:00','Tocar el bajo',990,1020],
  ['utensils','5:00–5:10','Snack pre-entreno: yogurt griego + miel',1020,1030],
- ['user','5:10–5:30','Transición / cambiarme / traslado a la cancha',1030,1050],
- ['target','5:30–8:00','Entreno',1050,1200],
+ ['shirt','5:10–5:30','Transición / cambiarme / traslado a la cancha',1030,1050],
+ ['ball','5:30–8:00','Entreno',1050,1200],
  ['check','8:00','Termina entreno',1200,1205],
  ['house','8:05','Llego a casa (entrenas en el condominio, el traslado es corto)',1205,1205],
- ['utensils','8:05–8:35','Ceno + kéfir',1205,1235],
+ ['kefir','8:05–8:35','Ceno + kéfir',1205,1235],
  ['droplet','8:40–8:55','Me baño',1240,1255],
  ['moon','8:55–9:10','Rutina mental nocturna (respiración + visualización + registro breve)',1255,1270],
  ['music','9:10–10:00','Leer / tocar el bajo / relajarte — tú eliges',1270,1320],
@@ -901,17 +906,17 @@ const TARDE_VIE=[
 const DIA_SAB=[
  ['clock','6:45','Levantarme',405,405],
  ['utensils','6:45–7:10','Desayunar',405,430],
- ['user','7:10–7:40','Alistarme',430,470],
+ ['shirt','7:10–7:40','Alistarme',430,470],
  ['book-open','7:40–7:50','Leer libro',470,480,'LEER'],
- ['arrow-right','7:50','Salgo a clase de música (llegas en ~5 min)',480,480],
+ ['backpack','7:50','Salgo a clase de música (llegas en ~5 min)',480,480],
  ['music','8:00–10:00','Clase de música',480,600],
- ['arrow-right','10:00–10:30','Traslado a casa',600,630],
+ ['backpack','10:00–10:30','Traslado a casa',600,630],
  ['dumbbell','11:00–11:25','Activación corta: 20 min de movilidad + 3 aceleraciones + ejercicio cognitivo (o descanso total)',660,685],
  ['sunrise','11:25','Empieza la tarde libre',685,685],
  ['utensils','2:30–3:00','Almuerzo',870,900],
  ['music','tarde libre','Tocar el bajo',900,1200],
  ['book-open','tarde libre','Tarea o Progrentis',900,1200],
- ['utensils','8:00–8:20','Ceno + kéfir',1200,1220],
+ ['kefir','8:00–8:20','Ceno + kéfir',1200,1220],
  ['droplet','8:40–8:55','Me baño',1240,1255],
  ['moon','8:55–9:10','Rutina mental nocturna (respiración + visualización + registro breve)',1255,1270],
  ['moon','9:10–10:00','Tiempo libre',1270,1320],
@@ -920,10 +925,10 @@ const DIA_DOM=[
  ['clock','7:00','Levantarme',420,420],
  ['utensils','7:00–7:30','Desayuno con carbohidratos',420,450],
  ['moon','7:30–9:00','Tiempo libre / calentamiento si tienes partido',450,540],
- ['target','9:00–11:00','2 partidos — entre partidos: carbohidratos fáciles, electrolitos y movilidad suave (horario aproximado, ajusta según la liga)',540,660],
+ ['ball','9:00–11:00','2 partidos — entre partidos: carbohidratos fáciles, electrolitos y movilidad suave (horario aproximado, ajusta según la liga)',540,660],
  ['utensils','11:00','Después del 2.º partido: carbohidratos + proteína en las siguientes 1–2 horas',660,660],
- ['user','11:00–12:00','Alistarme',660,720],
- ['arrow-right','12:00–12:30','Traslado a la iglesia',720,750],
+ ['shirt','11:00–12:00','Alistarme',660,720],
+ ['backpack','12:00–12:30','Traslado a la iglesia',720,750],
  ['house','12:30–1:30','Iglesia',750,810],
  ['user','1:30–4:00','Tiempo con la familia (variable) — regresas ~4:00pm',810,960],
  ['utensils','2:30–3:00','Almuerzo',870,900],
@@ -932,7 +937,7 @@ const DIA_DOM=[
  ['book-open','5:00–5:45','Tareas o proyectos pendientes / Progrentis',1020,1065],
  ['dumbbell','5:45–6:15','Movilidad de recuperación (caminata suave, movilidad, respiración)',1065,1095],
  ['moon','6:15–8:00','Descansar / tiempo libre',1095,1200],
- ['utensils','8:00–8:20','Ceno + kéfir',1200,1220],
+ ['kefir','8:00–8:20','Ceno + kéfir',1200,1220],
  ['droplet','8:40–8:55','Me baño',1240,1255],
  ['moon','8:55–9:10','Rutina mental nocturna (respiración + visualización + registro breve)',1255,1270],
  ['moon','9:10–9:30','Tiempo libre',1270,1290],
@@ -1074,11 +1079,11 @@ const COMPRA={
 /* ================= TAREAS IMPORTANTES (lo que mide el progreso) ================= */
 const TAREAS=[
  {id:'LEER',icon:'book-open',label:'Leer',desc:'10 minutos de lectura',t:600},
- {id:'t_medita',icon:'wind',label:'Meditar',desc:'5 min de meditación tranquila',t:300},
+ {id:'t_medita',icon:'zen',label:'Meditar',desc:'5 min de meditación tranquila',t:300},
  {id:'t_respira',icon:'wind',label:'Respiración de caja',desc:'Inhala 4 · sostén 4 · exhala 4 · sostén 4, 3 min',t:180,caja:true},
  {id:'t_visual',icon:'target',label:'Visualización',desc:'5 min visualizando una jugada saliendo perfecta',t:300},
  {id:'t_registro',icon:'pencil',label:'Registro nocturno',desc:'1 cosa que hiciste bien + 1 a mejorar mañana'},
- {id:'t_kefir',icon:'utensils',label:'Tomar kéfir',desc:'Con la cena'},
+ {id:'t_kefir',icon:'kefir',label:'Tomar kéfir',desc:'Con la cena'},
  {id:'t_comer',icon:'utensils',label:'Comer bien hoy',desc:'Desayuno, almuerzo y cena de calidad'},
  {id:'t_agua',icon:'droplet',label:'Tomar agua (8 vasos)',desc:'Regístralos en Comidas',reflect:'agua',goto:'comidas'},
  {id:'t_entreno',icon:'dumbbell',label:'Entreno de hoy',desc:'Completa tu sesión en Ejercicio',reflect:'entreno',goto:'ejercicio'},
@@ -1212,7 +1217,7 @@ function pintarEditT(cont){
   let h='<div class="subt">Apaga las tareas que no quieras medir, cambia nombres o agrega las tuyas. Lo que apagues no cuenta para tu %.</div>';
   TAREAS.forEach(t=>{
     const on=!TCFG.ocultas.includes(t.id);
-    h+='<label class="editRow"><div class="row-icon">'+icono(t.icon)+'</div><span class="nm">'+esc(t.label)+'</span>'+
+    h+='<label class="editRow"><div class="row-icon">'+tile(t.icon)+'</div><span class="nm">'+esc(t.label)+'</span>'+
        '<input type="checkbox" class="sw" data-tid="'+t.id+'"'+(on?' checked':'')+' aria-label="Medir '+esc(t.label)+'"></label>';
   });
   TCFG.extra.forEach(e=>{
@@ -1263,7 +1268,7 @@ function pintarHoy(){
     const hint=esRef?' <small style="color:var(--azulOsc);font-weight:600">· toca para ir →</small>':'';
     h+='<div class="'+cls+'" data-id="'+t.id+'"'+(esRef?' data-goto="'+t.goto+'"':'')+'>'+
        '<div class="tareaBox">'+(done?icono('check'):'')+'</div>'+
-       '<div class="row-icon">'+icono(t.icon)+'</div>'+
+       '<div class="row-icon">'+tile(t.icon)+'</div>'+
        '<div class="tx"><b>'+t.label+'</b><div class="d">'+t.desc+hint+'</div>'+ctrl+'</div></div>';
   });
   cont.innerHTML=h;
@@ -1396,7 +1401,7 @@ function pintarHorario(d){
     h+='<h3>'+icono(s[2])+' '+s[0]+'</h3>';
     s[1].forEach((it)=>{
       const act=esHoy&&typeof it[3]==='number'&&mins>=it[3]&&mins<Math.max(it[4],it[3]+1)?' actual':'';
-      h+='<div class="chk soloVer'+act+'"><div class="row-icon">'+icono(it[0])+'</div><div class="tx"><div class="h">'+it[1]+'</div>'+it[2]+'</div></div>';
+      h+='<div class="chk soloVer'+act+'"><div class="row-icon">'+tile(it[0])+'</div><div class="tx"><div class="h">'+it[1]+'</div>'+it[2]+'</div></div>';
     });
   });
   document.getElementById('contHor').innerHTML=h;
